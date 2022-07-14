@@ -123,9 +123,9 @@ Group project done by:
 - <a href="https://github.com/SamHardiment">Sam Hardiment</a>
 - <a href="https://github.com/GMillerMc">George Miller-Mccall</a>
 
-Project Link: [Client](https://github.com/alihamedali96/Lap-2-Portfolio-Client)
+Project Link: [Client](https://github.com/SamHardiment/budFit----Client)
 
-Project Link: [Server](https://github.com/alihamedali96/Lap-2-Portfolio-Server)
+Project Link: [Server](https://github.com/SamHardiment/budFit----Server)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
