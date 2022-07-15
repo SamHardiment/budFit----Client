@@ -3,9 +3,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export function CreateButton() {
   return (
-    <Button variant="contained" type="submit">
+    <Button variant="contained" type="submit" color="success" size="medium">
       Create
-      <FontAwesomeIcon icon="fa-solid fa-plus" />
     </Button>
   );
 }
