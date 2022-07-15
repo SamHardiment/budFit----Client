@@ -1,9 +1,11 @@
 .input-container {
   margin: 15px 0;
 }
-
+.regform-container {
+  width: 90%;
+}
 form {
-  width: 80%;
+  width: 100%;
 }
 
 .register-form-buttons {

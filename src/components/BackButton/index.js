@@ -1,20 +1,20 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function BackButton() {
   const goTo = useNavigate();
 
   return (
-    <div className="">
+    <div className="backBtn">
       <Button
-        variant="contained"
         id="back-button"
         onClick={() => goTo(-1)}
         style={{ cursor: "pointer" }}
-        size="medium"
+        size="large"
       >
-        Back
+        <FontAwesomeIcon icon="fa-solid fa-angle-left fa-7x" />
       </Button>
     </div>
   );

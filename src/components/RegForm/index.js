@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { TextField, FormHelperText } from "@mui/material";
 
-import { CreateButton, BackButton } from "../";
+import { CreateButton } from "../";
 import "./style.css";
 function RegForm() {
   const [formData, setFormData] = useState({
@@ -109,7 +109,7 @@ function RegForm() {
     }
   };
   return (
-    <div>
+    <div className="regform-container">
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div className="input-container">
           <TextField
@@ -188,7 +188,6 @@ function RegForm() {
           />
         </div>
         <div className="register-form-buttons">
-          <BackButton />
           <CreateButton />
         </div>
       </form>
