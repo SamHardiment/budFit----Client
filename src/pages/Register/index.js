@@ -7,7 +7,6 @@ export const Register = () => {
     <>
       <h1>Register</h1>
       <RegForm />
-      <BackButton />
     </>
   );
 };

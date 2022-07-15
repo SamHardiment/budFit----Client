@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { TextField, Button } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { CreateButton, BackButton } from "../";
+
 // import AddIcon from "@mui/icons-material/Add";
 function RegForm() {
   const [formData, setFormData] = useState({
@@ -47,6 +49,7 @@ function RegForm() {
           variant="filled"
           value={formData.name}
           onChange={onInputChange}
+          fullWidth
           required
         />
         <TextField
@@ -56,6 +59,7 @@ function RegForm() {
           variant="filled"
           value={formData.username}
           onChange={onInputChange}
+          fullWidth
           required
         />
         <TextField
@@ -65,6 +69,7 @@ function RegForm() {
           variant="filled"
           value={formData.email}
           onChange={onInputChange}
+          fullWidth
           required
         />
         <TextField
@@ -74,6 +79,7 @@ function RegForm() {
           variant="filled"
           value={formData.password}
           onChange={onInputChange}
+          fullWidth
           required
         />
         <TextField
@@ -83,12 +89,13 @@ function RegForm() {
           variant="filled"
           value={formData.passwordconfirmation}
           onChange={onPassConfirmationChange}
+          fullWidth
           required
         />
-        <Button variant="contained" type="submit">
-          <FontAwesomeIcon icon="fa-solid fa-plus" />
-          Create
-        </Button>
+        <div>
+          <BackButton />
+          <CreateButton />
+        </div>
       </form>
     </div>
   );
