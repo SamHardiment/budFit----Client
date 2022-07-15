@@ -1,13 +1,13 @@
 import React from "react";
 
+import { Landing } from "./pages";
 import './App.css';
 
 export const App = () => {
   return (
     <div id="app">
-      <main>
-        <h1>budFit</h1>
-      </main>
+      <h1>budFit</h1>
+      <Landing />
     </div>
   );
 };

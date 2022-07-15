@@ -5,10 +5,11 @@ import './index.css';
 
 function Search() {
   return (
-    <div>
+    <>
         <SearchBtns />
-    </div>
+    </>
   )
 }
 
 export default Search
+
