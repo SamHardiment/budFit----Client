@@ -39,10 +39,7 @@ const config = {
         test: /\.html$/,
         use: {
           loader: "html-loader",
-          options: {
-            attrs: [":src"]
-          }
-        }
+        },
       },
     ],
   },
