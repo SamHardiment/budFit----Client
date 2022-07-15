@@ -6,12 +6,16 @@ export function BackButton() {
   const goTo = useNavigate();
 
   return (
-    <Button
-      id="back-button"
-      onClick={() => goTo(-1)}
-      style={{ cursor: "pointer" }}
-    >
-      Back
-    </Button>
+    <div className="">
+      <Button
+        variant="contained"
+        id="back-button"
+        onClick={() => goTo(-1)}
+        style={{ cursor: "pointer" }}
+        size="medium"
+      >
+        Back
+      </Button>
+    </div>
   );
 }

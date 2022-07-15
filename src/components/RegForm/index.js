@@ -3,8 +3,7 @@ import axios from "axios";
 import { TextField, FormHelperText } from "@mui/material";
 
 import { CreateButton, BackButton } from "../";
-
-// import AddIcon from "@mui/icons-material/Add";
+import "./style.css";
 function RegForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -21,12 +20,12 @@ function RegForm() {
   //     passwordConfirmation: false,
   //   });
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [error, setError] = useState("");
   const [nameError, setNameError] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passError, setPassError] = useState(false);
   const [passConError, setPassConError] = useState(false);
+  const [error, setError] = useState("");
 
   // Form data input change
   const onInputChange = (e) => {
@@ -55,12 +54,12 @@ function RegForm() {
     } else {
       setEmailError(false);
     }
-    if (formData.password == "") {
+    if (formData.password == "" || formData.password.length < 6) {
       setPassError(true);
     } else {
       setPassError(false);
     }
-    if (passwordConfirmation == "") {
+    if (passwordConfirmation == "" || formData.password.length < 6) {
       setPassConError(true);
     } else {
       setPassConError(false);
@@ -73,7 +72,10 @@ function RegForm() {
     //   }
     // }
 
-    if (formData.password == passwordConfirmation) {
+    if (
+      formData.password.length >= 6 &&
+      formData.password == passwordConfirmation
+    ) {
       if (
         formData.name &&
         formData.username &&
@@ -87,6 +89,8 @@ function RegForm() {
         setPasswordConfirmation("");
         setFormData({ name: "", username: "", email: "", password: "" });
       }
+    } else {
+      setPassConError(true);
     }
     console.log("end of submit");
   };
@@ -107,69 +111,83 @@ function RegForm() {
   return (
     <div>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <TextField
-          name="name"
-          id="name"
-          label="Name"
-          variant="filled"
-          value={formData.name}
-          onChange={onInputChange}
-          error={nameError}
-          helperText={nameError ? "Please enter your name" : ""}
-          fullWidth
-          required
-        />
-        <TextField
-          name="username"
-          id="username"
-          label="Username"
-          variant="filled"
-          value={formData.username}
-          onChange={onInputChange}
-          error={usernameError}
-          helperText={usernameError ? "Please enter a username" : ""}
-          fullWidth
-          required
-        />
-        <TextField
-          name="email"
-          id="email"
-          label="Email"
-          variant="filled"
-          value={formData.email}
-          onChange={onInputChange}
-          error={emailError}
-          helperText={emailError ? "Please enter a valid email" : ""}
-          fullWidth
-          required
-        />
-        <TextField
-          name="password"
-          id="password"
-          label="Password"
-          variant="filled"
-          value={formData.password}
-          onChange={onInputChange}
-          error={passError}
-          helperText={
-            passError ? "Your password must be atleast 6 characters long" : ""
-          }
-          fullWidth
-          required
-        />
-        <TextField
-          name="passwordconfirmation"
-          id="passwordconfirmation"
-          label="Confirm Your Password"
-          variant="filled"
-          value={passwordConfirmation}
-          onChange={onPassConfirmationChange}
-          error={passConError}
-          helperText={passConError ? "Your passwords must match" : ""}
-          fullWidth
-          required
-        />
-        <div>
+        <div className="input-container">
+          <TextField
+            name="name"
+            id="name"
+            label="Name"
+            variant="filled"
+            value={formData.name}
+            onChange={onInputChange}
+            error={nameError}
+            helperText={nameError ? "Please enter your name" : ""}
+            fullWidth
+            required
+          />
+        </div>
+        <div className="input-container">
+          <TextField
+            name="username"
+            id="username"
+            label="Username"
+            variant="filled"
+            value={formData.username}
+            onChange={onInputChange}
+            error={usernameError}
+            helperText={usernameError ? "Please enter a username" : ""}
+            fullWidth
+            required
+          />
+        </div>
+        <div className="input-container">
+          <TextField
+            name="email"
+            id="email"
+            label="Email"
+            variant="filled"
+            value={formData.email}
+            onChange={onInputChange}
+            error={emailError}
+            helperText={emailError ? "Please enter a valid email" : ""}
+            fullWidth
+            required
+          />
+        </div>
+        <div className="input-container">
+          <TextField
+            name="password"
+            id="password"
+            label="Password"
+            variant="filled"
+            value={formData.password}
+            onChange={onInputChange}
+            error={passError}
+            helperText={
+              passError ? "Your password must be atleast 6 characters long" : ""
+            }
+            fullWidth
+            required
+          />
+        </div>
+        <div className="input-container">
+          <TextField
+            name="passwordconfirmation"
+            id="passwordconfirmation"
+            label="Confirm Your Password"
+            variant="filled"
+            value={passwordConfirmation}
+            onChange={onPassConfirmationChange}
+            error={passConError}
+            helperText={
+              passConError
+                ? "Your passwords must match and be atleast 6 characters long"
+                : ""
+            }
+            fullWidth
+            required
+          />
+        </div>
+        <div className="register-form-buttons">
           <BackButton />
           <CreateButton />
         </div>
