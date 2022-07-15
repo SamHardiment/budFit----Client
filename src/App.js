@@ -1,13 +1,14 @@
 import React from "react";
-
-import { Landing } from "./pages";
-import './App.css';
-
+import * as pages from "./pages";
+import { Routes, Route } from "react-router-dom";
 export const App = () => {
   return (
     <div id="app">
-      <h1>budFit</h1>
-      <Landing />
+      <Routes>
+        <Route path="/" element={<pages.Landing />} />
+        <Route path="/Login" element={<pages.Login />} />
+        <Route path="/Register" element={<pages.Register />} />
+      </Routes>
     </div>
   );
 };

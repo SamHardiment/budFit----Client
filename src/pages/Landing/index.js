@@ -3,7 +3,7 @@ import React from "react";
 export const Landing = () => {
   return (
     <>
-      <h1>Landing</h1>
+      <h1>budFit</h1>
     </>
   );
 };
