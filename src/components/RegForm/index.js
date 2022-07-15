@@ -41,21 +41,30 @@ function RegForm() {
         formData.email &&
         formData.password
       ) {
-        try {
-          const newUser = { ...formData };
-          axios
-            .post("https://budfit.herokuapp.com/auth/register", newUser)
-            .then((response) => {
-              console.log(response);
-            });
-        } catch (err) {
-          setError(err);
-        }
+        const newUser = { ...formData };
+        console.log(newUser);
+
+        addNewUser(newUser);
+        setPasswordConfirmation("");
+        setFormData({ name: "", username: "", email: "", password: "" });
       }
     }
     console.log("end of submit");
   };
 
+  //   Post newUser
+  const addNewUser = async (newUser) => {
+    try {
+      let response = await axios.post(
+        "https://budfit.herokuapp.com/auth/register",
+        newUser
+      );
+      console.log(response);
+    } catch (err) {
+      console.log("error block");
+      setError(err);
+    }
+  };
   return (
     <div>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -108,7 +117,7 @@ function RegForm() {
           id="passwordconfirmation"
           label="Confirm Your Password"
           variant="filled"
-          value={formData.passwordconfirmation}
+          value={passwordConfirmation}
           onChange={onPassConfirmationChange}
           error={formError.passwordConfirmation}
           fullWidth
