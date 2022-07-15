@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TextField, Button } from "@mui/material";
+import { TextField, FormHelperText } from "@mui/material";
 
 import { CreateButton, BackButton } from "../";
 
@@ -12,15 +12,21 @@ function RegForm() {
     email: "",
     password: "",
   });
-  const [formError, setFormError] = useState({
-    name: false,
-    username: false,
-    email: false,
-    password: false,
-    passwordConfirmation: false,
-  });
+
+  //   const [formError, setFormError] = useState({
+  //     name: false,
+  //     username: false,
+  //     email: false,
+  //     password: false,
+  //     passwordConfirmation: false,
+  //   });
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [passConError, setPassConError] = useState(false);
 
   // Form data input change
   const onInputChange = (e) => {
@@ -34,6 +40,39 @@ function RegForm() {
   // Send form submition to database
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.name == "") {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+    if (formData.username == "") {
+      setUsernameError(true);
+    } else {
+      setUsernameError(false);
+    }
+    if (formData.email == "") {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+    if (formData.password == "") {
+      setPassError(true);
+    } else {
+      setPassError(false);
+    }
+    if (passwordConfirmation == "") {
+      setPassConError(true);
+    } else {
+      setPassConError(false);
+    }
+    // for (const key in formData) {
+    //   if (formData[key] == "") {
+    //     setFormError({ ...formData, [[key]]: true });
+    //   } else {
+    //     setFormError({ ...formData, [[key]]: false });
+    //   }
+    // }
+
     if (formData.password == passwordConfirmation) {
       if (
         formData.name &&
@@ -75,7 +114,8 @@ function RegForm() {
           variant="filled"
           value={formData.name}
           onChange={onInputChange}
-          error={formError.name}
+          error={nameError}
+          helperText={nameError ? "Please enter your name" : ""}
           fullWidth
           required
         />
@@ -86,7 +126,8 @@ function RegForm() {
           variant="filled"
           value={formData.username}
           onChange={onInputChange}
-          error={formError.username}
+          error={usernameError}
+          helperText={usernameError ? "Please enter a username" : ""}
           fullWidth
           required
         />
@@ -97,7 +138,8 @@ function RegForm() {
           variant="filled"
           value={formData.email}
           onChange={onInputChange}
-          error={formError.email}
+          error={emailError}
+          helperText={emailError ? "Please enter a valid email" : ""}
           fullWidth
           required
         />
@@ -108,7 +150,10 @@ function RegForm() {
           variant="filled"
           value={formData.password}
           onChange={onInputChange}
-          error={formError.password}
+          error={passError}
+          helperText={
+            passError ? "Your password must be atleast 6 characters long" : ""
+          }
           fullWidth
           required
         />
@@ -119,7 +164,8 @@ function RegForm() {
           variant="filled"
           value={passwordConfirmation}
           onChange={onPassConfirmationChange}
-          error={formError.passwordConfirmation}
+          error={passConError}
+          helperText={passConError ? "Your passwords must match" : ""}
           fullWidth
           required
         />
