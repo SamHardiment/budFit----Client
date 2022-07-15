@@ -1,5 +1,5 @@
 .input-container {
-  margin: 15px 0;
+  margin: 25px 0;
 }
 .regform-container {
   width: 90%;
@@ -9,6 +9,7 @@ form {
 }
 
 .register-form-buttons {
+  margin-top: 30px;
   display: flex;
   justify-content: space-around;
   align-items: center;

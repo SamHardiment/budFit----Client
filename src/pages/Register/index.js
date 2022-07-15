@@ -9,6 +9,12 @@ export const Register = () => {
       <div className="reg-topbar">
         <BackButton />
       </div>
+      <Typography variant="h4" gutterBottom>
+        Register your account
+      </Typography>
+      <Typography variant="subtitle1" color="textSecondary" gutterBottom>
+        Please fill in your details below
+      </Typography>
       <RegForm />
     </div>
   );
