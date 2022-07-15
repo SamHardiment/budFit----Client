@@ -1,9 +1,15 @@
-import React from "react";
+import React from 'react'
 
-export const Search = () => {
+import { SearchBtns } from '../../components'
+import './index.css';
+
+function Search() {
   return (
     <>
-      <h1>Search</h1>
+        <SearchBtns />
     </>
-  );
-};
+  )
+}
+
+export default Search
+
