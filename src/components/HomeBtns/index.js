@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { useNavigate } from 'react-router-dom'
+
 import './index.css';
+import { Button } from "@mui/material";
 
 function HomeBtns() {
     const navigate = useNavigate();
@@ -19,11 +21,12 @@ function HomeBtns() {
     return (
         <>
         <div className='login-button'>
-            <button className='login' onClick={navigateLogin}>login</button>
+            <Button variant="contained"className='login' onClick={navigateLogin}>Login
+            </Button >
         </div>
         
         <div className='register-button'>
-            <button className='register' onClick={navigateRegister}>Register</button>
+            <Button variant="contained" className='register' onClick={navigateRegister}>Register</Button>
         </div>
         
         
