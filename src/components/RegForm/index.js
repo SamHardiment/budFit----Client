@@ -13,6 +13,7 @@ function RegForm() {
     password: "",
   });
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState("");
 
   // Form data input change
   const onInputChange = (e) => {
@@ -33,7 +34,16 @@ function RegForm() {
         formData.email &&
         formData.password
       ) {
-        console.log(formData);
+        try {
+          const newUser = { ...formData };
+          axios
+            .post("https://budfit.herokuapp.com/auth/register", newUser)
+            .then((response) => {
+              console.log(response);
+            });
+        } catch (err) {
+          setError(err);
+        }
       }
     }
     console.log("end of submit");
