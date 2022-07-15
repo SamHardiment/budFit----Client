@@ -13,6 +13,7 @@
 .btn-container {
     position: absolute;
     bottom: 25%;
+    max-width: 350px;
     height: fit-content;
     display: inline-block;
     background-color: red;
