@@ -12,6 +12,13 @@ function RegForm() {
     email: "",
     password: "",
   });
+  const [formError, setFormError] = useState({
+    name: false,
+    username: false,
+    email: false,
+    password: false,
+    passwordConfirmation: false,
+  });
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState("");
 
@@ -59,6 +66,7 @@ function RegForm() {
           variant="filled"
           value={formData.name}
           onChange={onInputChange}
+          error={formError.name}
           fullWidth
           required
         />
@@ -69,6 +77,7 @@ function RegForm() {
           variant="filled"
           value={formData.username}
           onChange={onInputChange}
+          error={formError.username}
           fullWidth
           required
         />
@@ -79,6 +88,7 @@ function RegForm() {
           variant="filled"
           value={formData.email}
           onChange={onInputChange}
+          error={formError.email}
           fullWidth
           required
         />
@@ -89,6 +99,7 @@ function RegForm() {
           variant="filled"
           value={formData.password}
           onChange={onInputChange}
+          error={formError.password}
           fullWidth
           required
         />
@@ -99,6 +110,7 @@ function RegForm() {
           variant="filled"
           value={formData.passwordconfirmation}
           onChange={onPassConfirmationChange}
+          error={formError.passwordConfirmation}
           fullWidth
           required
         />
