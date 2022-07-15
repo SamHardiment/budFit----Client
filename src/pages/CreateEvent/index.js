@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Register = () => {
+export const CreateEvent = () => {
   return (
     <>
-      <h1>Register</h1>
+      <h1>CreateEvent</h1>
     </>
   );
 };
