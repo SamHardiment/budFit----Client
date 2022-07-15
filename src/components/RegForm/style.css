@@ -2,11 +2,16 @@
   margin: 15px 0;
 }
 
-form {
-  width: 80%;
+.regform-container {
+  width: 90%;
+  justify-items: flex-end;
+}
+.reg-form {
+  width: 100%;
 }
 
 .register-form-buttons {
+  margin-top: 30px;
   display: flex;
   justify-content: space-around;
   align-items: center;
