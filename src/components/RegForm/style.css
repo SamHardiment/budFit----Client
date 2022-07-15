@@ -1,11 +1,12 @@
 .input-container {
   margin: 15px 0;
 }
+
 .regform-container {
   width: 90%;
   justify-items: flex-end;
 }
-form {
+.reg-form {
   width: 100%;
 }
 

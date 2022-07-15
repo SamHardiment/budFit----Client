@@ -110,82 +110,91 @@ function RegForm() {
   };
   return (
     <div className="regform-container">
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <div className="input-container">
-          <TextField
-            name="name"
-            id="name"
-            label="Name"
-            variant="filled"
-            value={formData.name}
-            onChange={onInputChange}
-            error={nameError}
-            helperText={nameError ? "Please enter your name" : ""}
-            fullWidth
-            required
-          />
-        </div>
-        <div className="input-container">
-          <TextField
-            name="username"
-            id="username"
-            label="Username"
-            variant="filled"
-            value={formData.username}
-            onChange={onInputChange}
-            error={usernameError}
-            helperText={usernameError ? "Please enter a username" : ""}
-            fullWidth
-            required
-          />
-        </div>
-        <div className="input-container">
-          <TextField
-            name="email"
-            id="email"
-            label="Email"
-            variant="filled"
-            value={formData.email}
-            onChange={onInputChange}
-            error={emailError}
-            helperText={emailError ? "Please enter a valid email" : ""}
-            fullWidth
-            required
-          />
-        </div>
-        <div className="input-container">
-          <TextField
-            name="password"
-            id="password"
-            label="Password"
-            variant="filled"
-            value={formData.password}
-            onChange={onInputChange}
-            error={passError}
-            helperText={
-              passError ? "Your password must be atleast 6 characters long" : ""
-            }
-            fullWidth
-            required
-          />
-        </div>
-        <div className="input-container">
-          <TextField
-            name="passwordconfirmation"
-            id="passwordconfirmation"
-            label="Confirm Your Password"
-            variant="filled"
-            value={passwordConfirmation}
-            onChange={onPassConfirmationChange}
-            error={passConError}
-            helperText={
-              passConError
-                ? "Your passwords must match and be atleast 6 characters long"
-                : ""
-            }
-            fullWidth
-            required
-          />
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        className="reg-form"
+      >
+        <div>
+          <div className="input-container">
+            <TextField
+              name="name"
+              id="name"
+              label="Name"
+              variant="filled"
+              value={formData.name}
+              onChange={onInputChange}
+              error={nameError}
+              helperText={nameError ? "Please enter your name" : ""}
+              fullWidth
+              required
+            />
+          </div>
+          <div className="input-container">
+            <TextField
+              name="username"
+              id="username"
+              label="Username"
+              variant="filled"
+              value={formData.username}
+              onChange={onInputChange}
+              error={usernameError}
+              helperText={usernameError ? "Please enter a username" : ""}
+              fullWidth
+              required
+            />
+          </div>
+          <div className="input-container">
+            <TextField
+              name="email"
+              id="email"
+              label="Email"
+              variant="filled"
+              value={formData.email}
+              onChange={onInputChange}
+              error={emailError}
+              helperText={emailError ? "Please enter a valid email" : ""}
+              fullWidth
+              required
+            />
+          </div>
+          <div className="input-container">
+            <TextField
+              name="password"
+              id="password"
+              label="Password"
+              variant="filled"
+              value={formData.password}
+              onChange={onInputChange}
+              error={passError}
+              helperText={
+                passError
+                  ? "Your password must be atleast 6 characters long"
+                  : ""
+              }
+              fullWidth
+              required
+            />
+          </div>
+          <div className="input-container">
+            <TextField
+              name="passwordconfirmation"
+              id="passwordconfirmation"
+              label="Confirm Your Password"
+              variant="filled"
+              value={passwordConfirmation}
+              onChange={onPassConfirmationChange}
+              error={passConError}
+              helperText={
+                passConError
+                  ? "Your passwords must match and be atleast 6 characters long"
+                  : ""
+              }
+              fullWidth
+              required
+            />
+          </div>
         </div>
         <div className="register-form-buttons">
           <CreateButton />
