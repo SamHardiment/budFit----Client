@@ -11,6 +11,8 @@
 }
 
 .btn-container {
+    position: absolute;
+    bottom: 25%;
     height: fit-content;
     display: inline-block;
     background-color: red;

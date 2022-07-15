@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import './index.css';
@@ -17,7 +17,6 @@ function HomeBtns() {
     navigate('/register');
     };
 
-
     return (
         <>
         <div className='login-button'>
@@ -26,7 +25,8 @@ function HomeBtns() {
         </div>
         
         <div className='register-button'>
-            <Button variant="contained" className='register' onClick={navigateRegister}>Register</Button>
+            <Button variant="contained" className='register' onClick={navigateRegister}>Register
+            </Button>
         </div>
         
         
