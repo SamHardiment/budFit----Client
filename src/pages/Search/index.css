@@ -13,8 +13,8 @@ h2 {
 
 .swipe {
   position: absolute;
-  top:10%;
-  left:5%;
+  top:10vh;
+  left:5vw;
   width: 90vw;
   max-width: 360px;
   height: 70vh;
@@ -33,8 +33,6 @@ h2 {
 }
 
 .card {
-  position: absolute;
-  top: auto;
   background-color: #fff;
   width: 100%;
   height: 100%;
@@ -63,7 +61,6 @@ h2 {
   
   display:grid;
   grid-template-columns: 10% 20% 10% 20% 10% 20% 10%;
-  grid-template-rows: 79.95px;
   grid-template-areas:
     ". rejectButton . undoButton . matchButton .";
 }
@@ -71,7 +68,10 @@ h2 {
 .aSearchButtonContainer{
   display: inline-block;
   position: relative;
-  width: 100%;
+  width: 10vh;
+  height: 10vh;
+  max-width: 80px;
+  max-height: 80px;
 }
 
 #matchButton{
@@ -88,4 +88,27 @@ h2 {
 
 #topBarLogo{
   margin-top: 0.5vh;
+  height: 8vh;
+}
+
+
+@media only screen and (min-width: 401px) {
+  .swipe {
+    left:calc(50vw - 180px);
+  }
+}
+
+@media only screen and (min-height: 801px) {
+  .searchButtonContainer {
+    bottom:calc(100vh + 64px - 800px);
+  }
+
+  .swipe{
+    top:80px;
+  }
+
+  #topBarLogo{
+    height: 64px;
+    margin-top: 4px;
+  }
 }
