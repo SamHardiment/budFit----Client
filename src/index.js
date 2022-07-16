@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-
+import { AuthProvider } from "./auth/index.js";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -24,8 +24,10 @@ library.add(fab, faCheck, faPlus, faXmark, faRotateLeft, faAngleLeft);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+      <AuthProvider>
     <Provider store={store}>
       <App />
     </Provider>
+    </AuthProvider>
   </BrowserRouter>
 );
