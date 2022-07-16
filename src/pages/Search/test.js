@@ -6,20 +6,21 @@ import Search from ".";
 
 describe("Search", () => {
   beforeEach(() => {
-    renderWithReduxProviders(<Search />);
+    const initState = { searchResults: [] };
+    renderWithReduxProviders(<Search />, initState);
   });
 
   it("verify page content for default route", () => {
-    const rejectBtn = screen.getByRole("button", { name: "Reject" });
+    const rejectBtn = screen.getByRole("button", { name: "reject" });
     expect(rejectBtn).toBeInTheDocument();
   });
 
   it("verify page content for default route", () => {
-    const undoBtn = screen.getByRole("button", { name: "Undo" });
+    const undoBtn = screen.getByRole("button", { name: "undo" });
     expect(undoBtn).toBeInTheDocument();
   });
   it("verify page content for default route", () => {
-    const matchBtn = screen.getByRole("button", { name: "Match" });
+    const matchBtn = screen.getByRole("button", { name: "match" });
     expect(matchBtn).toBeInTheDocument();
   });
 });

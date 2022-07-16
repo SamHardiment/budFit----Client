@@ -108,19 +108,19 @@ function Search() {
       <div className="searchButtonContainer">
         <div className="aSearchButtonContainer" id="rejectButton">
           <div className="dummySpacing"></div>
-          <RejectButton onClick={() => swipe("left")} name="reject">
+          <RejectButton onClick={() => swipe("left")} aria-label="reject">
             <FontAwesomeIcon icon="xmark" />
           </RejectButton>
         </div>
         <div className="aSearchButtonContainer" id="undoButton">
           <div className="dummySpacing"></div>
-          <UndoButton onClick={() => goBack()} name="undo">
+          <UndoButton onClick={() => goBack()} aria-label="undo">
             <FontAwesomeIcon icon="rotate-left" />
           </UndoButton>
         </div>
         <div className="aSearchButtonContainer" id="matchButton">
           <div className="dummySpacing"></div>
-          <MatchButton onClick={() => swipe("right")} name="match">
+          <MatchButton onClick={() => swipe("right")} aria-label="match">
             <FontAwesomeIcon icon="check" />
           </MatchButton>
         </div>

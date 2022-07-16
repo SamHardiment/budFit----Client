@@ -13,8 +13,8 @@ import Reducer from "../redux/reducer";
 const WrapProviders = ({ children }) => {
   return <MemoryRouter>{children}</MemoryRouter>;
 };
-const renderWithProviders = (ui1, options1) =>
-  render(ui1, { wrapper: WrapProviders, ...options1 });
+const renderWithProviders = (ui, options) =>
+  render(ui, { wrapper: WrapProviders, ...options });
 
 const reduxProviders = ({ initState }) => {
   initState ||= { searchResults: [] };
@@ -26,8 +26,10 @@ const reduxProviders = ({ initState }) => {
   return ({ children }) => <Provider store={testStore}>{children}</Provider>;
 };
 
-const renderWithReduxProviders = (ui, options) =>
-  render(ui, { wrapper: reduxProviders, ...options });
+const renderWithReduxProviders = (ui, options) => {
+  let TestWrapper = reduxProviders(options);
+  render(ui, { wrapper: TestWrapper, ...options });
+};
 
 global.renderWithProviders = renderWithProviders;
 global.renderWithReduxProviders = renderWithReduxProviders;
