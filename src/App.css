@@ -63,3 +63,9 @@
   border-bottom: 2px solid #ada0b7;
   border-left: 2px solid #8d76a0;
 }
+
+@media only screen and (min-height: 801px) {
+  .navBar {
+    bottom:calc(100vh - 800px);
+  }
+}
