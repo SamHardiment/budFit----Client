@@ -9,7 +9,7 @@ export const Register = () => {
       <div className="reg-topbar">
         <BackButton />
       </div>
-      <div class="reg-text-container">
+      <div className="reg-text-container">
         <Typography variant="h4" gutterBottom>
           Register your account
         </Typography>

@@ -1,48 +1,48 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import axios from 'axios';
-import TinderCard from 'react-tinder-card'
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useMemo, useRef } from "react";
+import axios from "axios";
+import TinderCard from "react-tinder-card";
+import { useSelector } from "react-redux";
 
-import { styled } from '@mui/material/styles';
-import { Alert, Button, IconButton } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { styled } from "@mui/material/styles";
+import { Alert, Button, IconButton } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { TopBar } from '../../components'
-import './index.css';
+import { TopBar } from "../../components";
+import "./index.css";
 
 const MatchButton = styled(IconButton)({
-  color: 'var(--turquoise)',
-  border: '1px solid',
-  borderColor: 'var(--turquoise)',
-  backgroundColor: 'var(--off-white)',
-  width: '100%',
-  height: '100%'
+  color: "var(--turquoise)",
+  border: "1px solid",
+  borderColor: "var(--turquoise)",
+  backgroundColor: "var(--off-white)",
+  width: "100%",
+  height: "100%",
 });
 
 const RejectButton = styled(IconButton)({
-  color: 'var(--mauve)',
-  border: '1px solid',
-  borderColor: 'var(--mauve)',
-  backgroundColor: 'var(--off-white)',
-  width: '100%',
-  height: '100%'
+  color: "var(--mauve)",
+  border: "1px solid",
+  borderColor: "var(--mauve)",
+  backgroundColor: "var(--off-white)",
+  width: "100%",
+  height: "100%",
 });
 
 const UndoButton = styled(IconButton)({
-  color: 'var(--grey)',
-  border: '1px solid',
-  borderColor: 'var(--grey)',
-  backgroundColor: 'var(--off-white)',
-  width: '100%',
-  height: '100%'
+  color: "var(--grey)",
+  border: "1px solid",
+  borderColor: "var(--grey)",
+  backgroundColor: "var(--off-white)",
+  width: "100%",
+  height: "100%",
 });
 
 function Search() {
-  const users = useSelector(state => state.searchResults)
-  const [currentIndex, setCurrentIndex] = useState(users.length - 1)
-  const [lastDirection, setLastDirection] = useState()
+  const users = useSelector((state) => state.searchResults);
+  const [currentIndex, setCurrentIndex] = useState(users.length - 1);
+  const [lastDirection, setLastDirection] = useState();
 
-  const currentIndexRef = useRef(currentIndex)
+  const currentIndexRef = useRef(currentIndex);
 
   const childRefs = useMemo(
     () =>
@@ -50,78 +50,83 @@ function Search() {
         .fill(0)
         .map((i) => React.createRef()),
     []
-  )
+  );
 
   const updateCurrentIndex = (val) => {
-    setCurrentIndex(val)
-    currentIndexRef.current = val
-  }
+    setCurrentIndex(val);
+    currentIndexRef.current = val;
+  };
 
-  const canGoBack = currentIndex < users.length - 1
+  const canGoBack = currentIndex < users.length - 1;
 
-  const canSwipe = currentIndex >= 0
+  const canSwipe = currentIndex >= 0;
 
   const swiped = (direction, nameToDelete, index) => {
-    setLastDirection(direction)
-    updateCurrentIndex(index - 1)
-  }
+    setLastDirection(direction);
+    updateCurrentIndex(index - 1);
+  };
 
   const outOfFrame = (name, idx) => {
-    console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current)
-    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
-  }
+    console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
+    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
+  };
 
   const swipe = async (dir) => {
     if (canSwipe && currentIndex < users.length) {
-      await childRefs[currentIndex].current.swipe(dir)
+      await childRefs[currentIndex].current.swipe(dir);
     }
-  }
+  };
 
   const goBack = async () => {
-    if (!canGoBack) return
-    const newIndex = currentIndex + 1
-    updateCurrentIndex(newIndex)
-    await childRefs[newIndex].current.restoreCard()
-  }
+    if (!canGoBack) return;
+    const newIndex = currentIndex + 1;
+    updateCurrentIndex(newIndex);
+    await childRefs[newIndex].current.restoreCard();
+  };
 
   return (
     <>
       <TopBar />
-      <div className='cardContainer'>
+      <div className="cardContainer">
         {users.map((user, index) => (
           <TinderCard
             ref={childRefs[index]}
-            className='swipe'
+            className="swipe"
             key={index}
             onSwipe={(dir) => swiped(dir, user.name.first, index)}
             onCardLeftScreen={() => outOfFrame(user.name.first, index)}
           >
             <div
-              style={{ backgroundImage: 'url(' + user.picture.large + ')' }}
-              className='card'
+              style={{ backgroundImage: "url(" + user.picture.large + ")" }}
+              className="card"
             >
               <h3>{user.name.first}</h3>
             </div>
           </TinderCard>
         ))}
       </div>
-      <div className='searchButtonContainer'>
-        <div className='aSearchButtonContainer' id="rejectButton">
+      <div className="searchButtonContainer">
+        <div className="aSearchButtonContainer" id="rejectButton">
           <div className="dummySpacing"></div>
-          <RejectButton onClick={() => swipe('left')}><FontAwesomeIcon icon="xmark" /></RejectButton>
+          <RejectButton onClick={() => swipe("left")} name="reject">
+            <FontAwesomeIcon icon="xmark" />
+          </RejectButton>
         </div>
-        <div className='aSearchButtonContainer' id="undoButton">
+        <div className="aSearchButtonContainer" id="undoButton">
           <div className="dummySpacing"></div>
-          <UndoButton onClick={() => goBack()}><FontAwesomeIcon icon="rotate-left" /></UndoButton>
+          <UndoButton onClick={() => goBack()} name="undo">
+            <FontAwesomeIcon icon="rotate-left" />
+          </UndoButton>
         </div>
-        <div className='aSearchButtonContainer' id="matchButton">
+        <div className="aSearchButtonContainer" id="matchButton">
           <div className="dummySpacing"></div>
-          <MatchButton onClick={() => swipe('right')}><FontAwesomeIcon icon="check" /></MatchButton>
+          <MatchButton onClick={() => swipe("right")} name="match">
+            <FontAwesomeIcon icon="check" />
+          </MatchButton>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Search
-
+export default Search;
