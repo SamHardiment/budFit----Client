@@ -26,7 +26,6 @@
     "accountNavLink eventsNavLink searchNavLink chatNavLink";
 
   font-family: Verdana;
-  font-size: 16px;
   margin: 0 auto;
   padding: 0;
   overflow: auto;
@@ -42,9 +41,13 @@
 }
 
 .navBar>a{
+  font-size: 4vw;
   text-decoration: none;
   display: block;
-  padding: 5px 21px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
   background: var(--mauve);
   color: #eee;
   float: left;
@@ -67,5 +70,17 @@
 @media only screen and (min-height: 801px) {
   .navBar {
     bottom:calc(100vh - 800px);
+  }
+  .navBar>a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+@media only screen and (min-width: 401px) {
+  .navBar>a {
+    font-size: 16px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 }
