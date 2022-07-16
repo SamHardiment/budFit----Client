@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TextField, FormHelperText } from "@mui/material";
+import { TextField } from "@mui/material";
 
 import { CreateButton } from "../";
 import "./style.css";
@@ -120,7 +120,7 @@ function RegForm() {
         <div>
           <div className="input-container">
             <TextField
-              aria-role="textfield1"
+              aria-label="textfield1"
               name="name"
               id="name"
               label="Name"
@@ -135,7 +135,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
-              aria-role="textfield"
+              aria-label="textfield"
               name="username"
               id="username"
               label="Username"
@@ -150,7 +150,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
-              aria-role="textfield"
+              aria-label="textfield"
               name="email"
               id="email"
               label="Email"
@@ -165,7 +165,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
-              aria-role="textfield"
+              aria-label="textfield"
               name="password"
               id="password"
               label="Password"
@@ -184,7 +184,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
-              aria-role="textfield"
+              aria-label="textfield"
               name="passwordconfirmation"
               id="passwordconfirmation"
               label="Confirm Your Password"
