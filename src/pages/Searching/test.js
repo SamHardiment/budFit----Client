@@ -12,7 +12,7 @@ describe("Searching", () => {
   });
 
   it("Expect there to be a header on the page", () => {
-    const heading = screen.getByText("Pulling search results");
+    const heading = screen.getByText("Pulling search results.");
     expect(heading).toBeInTheDocument();
   });
 });

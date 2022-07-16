@@ -23,7 +23,11 @@ const reduxProviders = ({ initState }) => {
     applyMiddleware(thunk)
   );
 
-  return ({ children }) => <Provider store={testStore}>{children}</Provider>;
+  return ({ children }) => (
+    <MemoryRouter>
+      <Provider store={testStore}>{children}</Provider>
+    </MemoryRouter>
+  );
 };
 
 const renderWithReduxProviders = (ui, options) => {
