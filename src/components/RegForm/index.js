@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { CreateButton } from "../";
 import "./style.css";
@@ -27,10 +28,12 @@ function RegForm() {
   const [passConError, setPassConError] = useState(false);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   // Form data input change
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value.trim() });
   };
   // To not include passconfirmation in formdata
   const onPassConfirmationChange = (e) =>
@@ -84,7 +87,6 @@ function RegForm() {
       ) {
         const newUser = { ...formData };
         console.log(newUser);
-
         addNewUser(newUser);
         setPasswordConfirmation("");
         setFormData({ name: "", username: "", email: "", password: "" });
@@ -92,8 +94,8 @@ function RegForm() {
     } else {
       setPassConError(true);
     }
-    console.log("end of submit");
   };
+  // checkUser(userData); // Post request to check if user exists
 
   //   Post newUser
   const addNewUser = async (newUser) => {
@@ -103,8 +105,8 @@ function RegForm() {
         newUser
       );
       console.log(response);
+      navigate("/");
     } catch (err) {
-      console.log("error block");
       setError(err);
     }
   };

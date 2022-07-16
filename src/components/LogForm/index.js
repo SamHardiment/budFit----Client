@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axios } from "axios";
+import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 
 import { LoginButton } from "../";
@@ -13,16 +14,25 @@ function LogForm() {
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPassError] = useState(false);
 
+  const navigate = useNavigate();
+
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser({ ...user, [name]: value.trim() });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = { ...user };
-    console.log(userData);
-
+    axios
+      .post(`https://budfit.herokuapp.com/auth/login`, {
+        username: user.username,
+        password: user.password,
+      })
+      .then((res) => {
+        console.log(res, "res");
+        console.log(res.data, "res data");
+        navigate("/");
+      });
     // checkUser(userData); // Post request to check if user exists
     setUser({
       username: "",
