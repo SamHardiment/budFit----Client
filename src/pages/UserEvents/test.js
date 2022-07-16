@@ -7,6 +7,7 @@ import { UserEvents } from ".";
 describe("UserEvents", () => {
   beforeEach(() => {
     renderWithProviders(<UserEvents />);
+    // <UserEvents />;
   });
 
   it("Expect there to be a header on the page", () => {

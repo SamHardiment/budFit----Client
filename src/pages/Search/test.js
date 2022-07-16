@@ -6,7 +6,7 @@ import Search from ".";
 
 describe("Search", () => {
   beforeEach(() => {
-    renderWithProviders(<Search />);
+    renderWithReduxProviders(<Search />);
   });
 
   it("verify page content for default route", () => {
