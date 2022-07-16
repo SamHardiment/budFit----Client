@@ -1,12 +1,11 @@
 import React from 'react'
-import img from './placeholder_logo.png'
+import img from './logo-cropped.svg'
 
 function TopBar() {
   return (
-    <div>
-        <h1 style={{display:'inline', fontSize:'6vh'}}>budFit</h1>
-        <img src={img} alt="logo" style={{height:'8vh'}} />
-    </div>
+    <>
+        <img id='topBarLogo' src={img} alt="logo" style={{height:'8vh'}} />
+    </>
   )
 }
 
