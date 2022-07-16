@@ -1,8 +1,13 @@
 import React from "react";
 import * as pages from "./pages";
 import { Routes, Route } from "react-router-dom";
+
 import { useAuthContext } from "./auth/index.js"
 
+
+
+
+import { NavBar } from "./components";
 
 import './App.css'
 
@@ -23,10 +28,17 @@ export const App = () => {
           <>
         <Route path="/Searching" element={<pages.Searching />} />
         <Route path="/Search" element={<pages.Search />} />
+
         </>
         )}
 
+
+        <Route path="/Account" element={<pages.Account />} />
+        <Route path="/Chat" element={<pages.ChatRoom />} />
+        <Route path="/Events" element={<pages.CreateEvent />} />
+
       </Routes>
+      <NavBar />
     </div>
   );
 };

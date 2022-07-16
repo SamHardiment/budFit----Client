@@ -1,17 +1,17 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-export function CreateButton() {
+export function LoginButton() {
   return (
     <Button
-      aria-label="create-button"
+      aria-label="login-button"
       variant="contained"
       type="submit"
       color="success"
       size="medium"
       fullWidth
     >
-      Create Account
+      Login
     </Button>
   );
 }

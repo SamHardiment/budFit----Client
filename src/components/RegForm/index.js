@@ -1,10 +1,15 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
+
 import { TextField, FormHelperText } from "@mui/material";
 import { useAuthContext } from "../../auth/index.js"
-// import { useNavigate } from "react-router-dom";
+
 
 import jwt_decode from "jwt-decode";
+
+
+import { TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 
 import { CreateButton } from "../";
@@ -31,10 +36,12 @@ function RegForm() {
   const [passConError, setPassConError] = useState(false);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   // Form data input change
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value.trim() });
   };
   // To not include passconfirmation in formdata
   const onPassConfirmationChange = (e) =>
@@ -151,13 +158,13 @@ function RegForm() {
       ) {
         const newUser = { ...formData };
         console.log(newUser);
-
         addNewUser(newUser);
         setPasswordConfirmation("");
         setFormData({ name: "", username: "", email: "", password: "" });
       }
     } else {
       setPassConError(true);
+
       
     } if (regResult === "Registration successful") {
   
@@ -175,6 +182,25 @@ function RegForm() {
 
 
 
+
+// }
+// };
+// // checkUser(userData); // Post request to check if user exists
+
+// //   Post newUser
+// const addNewUser = async (newUser) => {
+//   try {
+//     let response = await axios.post(
+//       "https://budfit.herokuapp.com/auth/register",
+//       newUser
+//     );
+//     console.log(response);
+//     navigate("/");
+//   } catch (err) {
+//     setError(err);
+//   }
+// };
+
   return (
     <div className="regform-container">
       <form
@@ -182,10 +208,12 @@ function RegForm() {
         autoComplete="off"
         onSubmit={handleSubmitt}
         className="reg-form"
+        aria-label="form"
       >
         <div>
           <div className="input-container">
             <TextField
+              aria-label="textfield1"
               name="name"
               id="name"
               label="Name"
@@ -200,6 +228,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
+              aria-label="textfield"
               name="username"
               id="username"
               label="Username"
@@ -214,6 +243,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
+              aria-label="textfield"
               name="email"
               id="email"
               label="Email"
@@ -228,6 +258,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
+              aria-label="textfield"
               name="password"
               id="password"
               label="Password"
@@ -246,6 +277,7 @@ function RegForm() {
           </div>
           {/* <div className="input-container">
             <TextField
+              aria-label="textfield"
               name="passwordconfirmation"
               id="passwordconfirmation"
               label="Confirm Your Password"

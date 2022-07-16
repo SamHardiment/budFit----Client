@@ -1,4 +1,4 @@
-#app{
+#app {
   max-width: 400px;
   max-height: 800px;
   height: 100vh;
@@ -7,4 +7,80 @@
   border-radius: 10px;
   display: grid;
   justify-content: center;
+  justify-items: center;
+}
+
+
+.navBar {
+  position: absolute;
+  bottom: 0;
+  max-width: 400px;
+  width: 100vw;
+  height: fit-content;
+  text-align: center;
+  padding-top: 6vh;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "accountNavLink eventsNavLink searchNavLink chatNavLink";
+
+  font-family: Verdana;
+  margin: 0 auto;
+  padding: 0;
+  overflow: auto;
+
+}
+
+.navBar>a:first-of-type{
+  border-bottom-left-radius: 10px;
+}
+
+.navBar>a:last-of-type{
+  border-bottom-right-radius: 10px;
+}
+
+.navBar>a{
+  font-size: 4vw;
+  text-decoration: none;
+  display: block;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  background: var(--mauve);
+  color: #eee;
+  float: left;
+  text-align: center;
+  border-top: 2px solid #8d76a0;
+  border-right: 2px solid #7a3a69;
+  border-bottom: 2px solid #7a3a69;
+  border-left: 2px solid #8d76a0;
+}
+
+.navBar>a:hover {
+  background: var(--dull-pink);
+  color: #000;
+  border-top: 2px solid #8d76a0;
+  border-right: 2px solid #ada0b7;
+  border-bottom: 2px solid #ada0b7;
+  border-left: 2px solid #8d76a0;
+}
+
+@media only screen and (min-height: 801px) {
+  .navBar {
+    bottom:calc(100vh - 800px);
+  }
+  .navBar>a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+@media only screen and (min-width: 401px) {
+  .navBar>a {
+    font-size: 16px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
 }
