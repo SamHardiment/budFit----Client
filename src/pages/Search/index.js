@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import axios from "axios";
 import TinderCard from "react-tinder-card";
 import { useSelector } from "react-redux";
 
 import { styled } from "@mui/material/styles";
-import { Alert, Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { TopBar } from "../../components";
@@ -61,13 +60,12 @@ function Search() {
 
   const canSwipe = currentIndex >= 0;
 
-  const swiped = (direction, nameToDelete, index) => {
+  const swiped = (direction, index) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
   };
 
   const outOfFrame = (name, idx) => {
-    console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
   };
 
@@ -93,7 +91,7 @@ function Search() {
             ref={childRefs[index]}
             className="swipe"
             key={index}
-            onSwipe={(dir) => swiped(dir, user.name.first, index)}
+            onSwipe={(dir) => swiped(dir, index)}
             onCardLeftScreen={() => outOfFrame(user.name.first, index)}
           >
             <div
