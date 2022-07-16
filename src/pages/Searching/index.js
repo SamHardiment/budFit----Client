@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { Alert, Button } from "@mui/material";
 import { changeSearchResults } from "../../redux/action";
 
 function Searching() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = React.useState([]);
 
   const dispatch = useDispatch();
 
