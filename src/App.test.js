@@ -9,8 +9,13 @@ describe("App", () => {
     renderWithProviders(<App />);
   });
 
-  it("Expect there to be a header on the page", () => {
-    const heading = screen.getByText("budFit");
-    expect(heading).toBeInTheDocument();
+  it("verify page content for default route", () => {
+    const loginBtn = screen.getByRole("button", { name: "Login" });
+    expect(loginBtn).toBeInTheDocument();
+  });
+
+  it("verify page content for default route", () => {
+    const registerBtn = screen.getByRole("button", { name: "Register" });
+    expect(registerBtn).toBeInTheDocument();
   });
 });
