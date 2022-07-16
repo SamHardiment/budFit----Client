@@ -4,6 +4,7 @@ import React from "react";
 export function CreateButton() {
   return (
     <Button
+      aria-label="create-button"
       variant="contained"
       type="submit"
       color="success"
