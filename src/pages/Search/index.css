@@ -85,3 +85,7 @@ h2 {
 #rejectButton{
   grid-area: rejectButton;
 }
+
+#topBarLogo{
+  margin-top: 0.5vh;
+}
