@@ -14,6 +14,8 @@ export function BackButton() {
         style={{ cursor: "pointer" }}
         size="large"
         color="error"
+        aria-label="back-button"
+        name="back-button"
       >
         <FontAwesomeIcon icon="fa-solid fa-angle-left fa-7x" />
       </Button>

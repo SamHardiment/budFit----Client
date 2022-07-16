@@ -115,10 +115,12 @@ function RegForm() {
         autoComplete="off"
         onSubmit={handleSubmit}
         className="reg-form"
+        aria-label="form"
       >
         <div>
           <div className="input-container">
             <TextField
+              aria-role="textfield1"
               name="name"
               id="name"
               label="Name"
@@ -133,6 +135,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
+              aria-role="textfield"
               name="username"
               id="username"
               label="Username"
@@ -147,6 +150,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
+              aria-role="textfield"
               name="email"
               id="email"
               label="Email"
@@ -161,6 +165,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
+              aria-role="textfield"
               name="password"
               id="password"
               label="Password"
@@ -179,6 +184,7 @@ function RegForm() {
           </div>
           <div className="input-container">
             <TextField
+              aria-role="textfield"
               name="passwordconfirmation"
               id="passwordconfirmation"
               label="Confirm Your Password"
