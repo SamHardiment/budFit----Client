@@ -10,7 +10,7 @@ describe("CreateEvent", () => {
   });
 
   it("Expect there to be a header on the page", () => {
-    const heading = screen.getByText("CreateEvent");
+    const heading = screen.getByText("New Event");
     expect(heading).toBeInTheDocument();
   });
 });
