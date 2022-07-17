@@ -1,4 +1,5 @@
 #app {
+  margin-top: 5px;
   max-width: 400px;
   max-height: 800px;
   height: 100vh;
@@ -9,7 +10,6 @@
   justify-content: center;
   justify-items: center;
 }
-
 
 .navBar {
   position: absolute;
@@ -22,25 +22,23 @@
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "accountNavLink eventsNavLink searchNavLink chatNavLink";
+  grid-template-areas: "accountNavLink eventsNavLink searchNavLink chatNavLink";
 
   font-family: Verdana;
   margin: 0 auto;
   padding: 0;
   overflow: auto;
-
 }
 
-.navBar>a:first-of-type{
+.navBar > a:first-of-type {
   border-bottom-left-radius: 10px;
 }
 
-.navBar>a:last-of-type{
+.navBar > a:last-of-type {
   border-bottom-right-radius: 10px;
 }
 
-.navBar>a{
+.navBar > a {
   font-size: 4vw;
   text-decoration: none;
   display: block;
@@ -58,7 +56,7 @@
   border-left: 2px solid #8d76a0;
 }
 
-.navBar>a:hover {
+.navBar > a:hover {
   background: var(--dull-pink);
   color: #000;
   border-top: 2px solid #8d76a0;
@@ -69,16 +67,16 @@
 
 @media only screen and (min-height: 801px) {
   .navBar {
-    bottom:calc(100vh - 800px);
+    bottom: calc(100vh - 800px);
   }
-  .navBar>a {
+  .navBar > a {
     padding-top: 8px;
     padding-bottom: 8px;
   }
 }
 
 @media only screen and (min-width: 401px) {
-  .navBar>a {
+  .navBar > a {
     font-size: 16px;
     padding-right: 20px;
     padding-left: 20px;
