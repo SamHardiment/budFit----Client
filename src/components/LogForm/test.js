@@ -3,8 +3,10 @@
  */
 
 import { screen, fireEvent } from "@testing-library/react";
-
+import axios from "axios";
 import LogForm from ".";
+
+jest.mock("axios");
 
 describe("LogForm", () => {
   beforeEach(() => {

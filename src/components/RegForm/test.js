@@ -6,7 +6,7 @@ import { screen, fireEvent } from "@testing-library/react";
 import RegForm from ".";
 
 describe("RegForm", () => {
-  const onSubmit = jest.fn();
+  const handleSubmitt = jest.fn();
 
   beforeEach(() => {
     renderWithProviders(<RegForm />);
@@ -26,8 +26,8 @@ describe("RegForm", () => {
       })
     );
 
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith({ lazy: true });
+    expect(handleSubmitt).toHaveBeenCalledTimes(1);
+    expect(handleSubmitt).toHaveBeenCalledWith({ lazy: true });
   });
 
   test("it renders a form", () => {
@@ -54,7 +54,7 @@ describe("RegForm", () => {
     expect(Textfield.value).toBe("");
   });
   it("verify password textfield exist", () => {
-    const Textfield = screen.getByRole("input", { name: "Password" });
+    const Textfield = screen.getByRole("textbox", { name: "Password" });
     expect(Textfield).toBeInTheDocument();
     userEvent.type(nameTextfield, "123{enter}");
     expect(Textfield.value).toBe("");
