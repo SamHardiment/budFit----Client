@@ -15,30 +15,36 @@ describe("RegForm", () => {
     expect(form).toBeInTheDocument();
   });
   it("verify name textfield exist", () => {
-    const nameTextfield = screen.getByRole("textbox", { name: "Name" });
-    expect(nameTextfield).toBeInTheDocument();
-    userEvent.type(nameTextfield, "George{enter}");
-    expect(nameTextfield.value).toBe("");
+    const Textfield = screen.getByRole("textbox", { name: "Name" });
+    expect(Textfield).toBeInTheDocument();
+    userEvent.type(Textfield, "George{enter}");
+    expect(Textfield.value).toBe("");
     // expect(getResultMock).toHaveBeenNthCalledWith(1, "George");
   });
   it("verify username textfield exist", () => {
     const Textfield = screen.getByRole("textbox", { name: "Username" });
     expect(Textfield).toBeInTheDocument();
+    userEvent.type(Textfield, "George123{enter}");
+    expect(Textfield.value).toBe("");
   });
   it("verify email textfield exist", () => {
     const Textfield = screen.getByRole("textbox", { name: "Email" });
     expect(Textfield).toBeInTheDocument();
+    userEvent.type(Textfield, "sam@sam.com{enter}");
+    expect(Textfield.value).toBe("");
   });
   it("verify password textfield exist", () => {
-    const Textfield = screen.getByRole("textbox", { name: "Password" });
+    const Textfield = screen.getByLabelText("Password");
     expect(Textfield).toBeInTheDocument();
+    userEvent.type(nameTextfield, "123{enter}");
+    expect(Textfield.value).toBe("");
   });
-  it("verify password confirmation textfield exist", () => {
-    const Textfield = screen.getByRole("textbox", {
-      name: "Confirm Your Password",
-    });
-    expect(Textfield).toBeInTheDocument();
-  });
+  // it("verify password confirmation textfield exist", () => {
+  //   const Textfield = screen.getByRole("textbox", {
+  //     name: "Confirm Your Password",
+  //   });
+  //   expect(Textfield).toBeInTheDocument();
+  // });
 
   it("verify create button submits form", () => {
     const createBtn = screen.getByRole("button", {
