@@ -2,10 +2,14 @@
  * @jest-environment jsdom
  */
 import * as router from "react-router";
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import { BackButton } from ".";
-// mock useNavigate
-const navigate = jest.fn();
+
+const mockedUsedNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedUsedNavigate,
+}));
 
 describe("BackButton", () => {
   beforeEach(() => {
@@ -17,9 +21,11 @@ describe("BackButton", () => {
     const backBtn = screen.getByRole("button", { name: "back-button" });
     expect(backBtn).toBeInTheDocument();
   });
-  it("User navigates to previous page when back button is clicked", () => {
+  it("User navigates to previous page when back button is clicked", async () => {
     const backBtn = screen.getByRole("button", { name: "back-button" });
-    userEvent.click(backBtn);
-    expect(navigate).toHaveBeenCalledTimes(1);
+    await userEvent.click(backBtn);
+    expect(backBtn).toBeInTheDocument();
+    expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
+    expect(mockedUsedNavigate).toHaveBeenCalledWith("-1");
   });
 });

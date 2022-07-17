@@ -9,12 +9,12 @@ describe("Landing", () => {
     renderWithProviders(<Landing />);
   });
 
-  it("verify page content for default route", () => {
+  it("Login Button exists", () => {
     const loginBtn = screen.getByRole("button", { name: "Login" });
     expect(loginBtn).toBeInTheDocument();
   });
 
-  it("verify page content for default route", () => {
+  it("Register Button exists", () => {
     const registerBtn = screen.getByRole("button", { name: "Register" });
     expect(registerBtn).toBeInTheDocument();
   });
