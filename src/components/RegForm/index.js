@@ -2,31 +2,24 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { TextField, FormHelperText } from "@mui/material";
-import { useAuthContext } from "../../auth/index.js"
-
+import { useAuthContext } from "../../auth/index.js";
 
 import jwt_decode from "jwt-decode";
 
-
-import { TextField } from "@mui/material";
+// import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 
 import { CreateButton } from "../";
 import "./style.css";
 
-
 function RegForm() {
-
   const { register, login } = useAuthContext();
   const [formData, setFormData] = useState({
     name: "",
     username: "",
     email: "",
     password: "",
-
   });
-
 
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [nameError, setNameError] = useState(false);
@@ -74,14 +67,14 @@ function RegForm() {
   //     setPassConError(true);
   //   } else {
   //     setPassConError(false);
-    // }
-    // for (const key in formData) {
-    //   if (formData[key] == "") {
-    //     setFormError({ ...formData, [[key]]: true });
-    //   } else {
-    //     setFormError({ ...formData, [[key]]: false });
-    //   }
-    // }
+  // }
+  // for (const key in formData) {
+  //   if (formData[key] == "") {
+  //     setFormError({ ...formData, [[key]]: true });
+  //   } else {
+  //     setFormError({ ...formData, [[key]]: false });
+  //   }
+  // }
 
   //   if (
   //     formData.password.length >= 6 &&
@@ -164,42 +157,35 @@ function RegForm() {
       }
     } else {
       setPassConError(true);
-
-      
-    } if (regResult === "Registration successful") {
-  
-      console.log('it worked')
+    }
+    if (regResult === "Registration successful") {
+      console.log("it worked");
     } else {
       throw new Error("Unsuccessful registration");
-    } }
+    }
+  };
 
+  // console.log("end of submit");
+  // try
+  //  {
 
-    // console.log("end of submit");
-    // try
-    //  {
- 
+  // }
+  // };
+  // // checkUser(userData); // Post request to check if user exists
 
-
-
-
-
-// }
-// };
-// // checkUser(userData); // Post request to check if user exists
-
-// //   Post newUser
-// const addNewUser = async (newUser) => {
-//   try {
-//     let response = await axios.post(
-//       "https://budfit.herokuapp.com/auth/register",
-//       newUser
-//     );
-//     console.log(response);
-//     navigate("/");
-//   } catch (err) {
-//     setError(err);
-//   }
-// };
+  // //   Post newUser
+  // const addNewUser = async (newUser) => {
+  //   try {
+  //     let response = await axios.post(
+  //       "https://budfit.herokuapp.com/auth/register",
+  //       newUser
+  //     );
+  //     console.log(response);
+  //     navigate("/");
+  //   } catch (err) {
+  //     setError(err);
+  //   }
+  // };
 
   return (
     <div className="regform-container">
