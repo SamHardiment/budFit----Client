@@ -259,6 +259,7 @@ function RegForm() {
               }
               fullWidth
               required
+              type="password"
             />
           </div>
           {/* <div className="input-container">
