@@ -4,10 +4,30 @@
 
 import { screen, fireEvent } from "@testing-library/react";
 import RegForm from ".";
-import { useAuthContext } from "../../auth/index.js";
+
 describe("RegForm", () => {
+  const onSubmit = jest.fn();
+
   beforeEach(() => {
     renderWithProviders(<RegForm />);
+  });
+
+  it("onSubmit is called when all fields pass val", async () => {
+    userEvent.type(screen.getByRole("textbox", { name: "Name" }), "George");
+    userEvent.type(screen.getByRole("textbox", { name: "Username" }), "George");
+    userEvent.type(
+      screen.getByRole("textbox", { name: "Email" }),
+      "George@George.com"
+    );
+    // userEvent.type(screen.getByRole("textbox", { name: "Password" }), "George");
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: "create-button",
+      })
+    );
+
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit).toHaveBeenCalledWith({ lazy: true });
   });
 
   test("it renders a form", () => {
@@ -34,17 +54,11 @@ describe("RegForm", () => {
     expect(Textfield.value).toBe("");
   });
   it("verify password textfield exist", () => {
-    const Textfield = screen.getByLabelText("Password");
+    const Textfield = screen.getByRole("input", { name: "Password" });
     expect(Textfield).toBeInTheDocument();
     userEvent.type(nameTextfield, "123{enter}");
     expect(Textfield.value).toBe("");
   });
-  // it("verify password confirmation textfield exist", () => {
-  //   const Textfield = screen.getByRole("textbox", {
-  //     name: "Confirm Your Password",
-  //   });
-  //   expect(Textfield).toBeInTheDocument();
-  // });
 
   it("verify create button submits form", () => {
     const createBtn = screen.getByRole("button", {
