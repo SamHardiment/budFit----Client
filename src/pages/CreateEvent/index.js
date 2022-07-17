@@ -1,13 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Box } from '@mui/system';
 import { Button } from "@mui/material";
 
 import { FormField, TopBar, LocationFormField } from "../../components";
 
 export const CreateEvent = () => {
+  const navigate = useNavigate();
+  
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e);
+
+    // post it
+
+    navigate("/success");
   }
 
   const Categories = [

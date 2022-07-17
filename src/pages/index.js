@@ -1,6 +1,7 @@
 export { Account } from "./Account";
 export { ChatRoom } from "./ChatRoom";
 export { CreateEvent } from "./CreateEvent";
+export {default as CreateEventSuccess} from './CreateEventSuccess'
 export { Landing } from "./Landing";
 export { Login } from "./Login";
 export { Register } from "./Register";
