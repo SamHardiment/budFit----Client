@@ -64,9 +64,4 @@ describe("Search", () => {
     const logo = screen.getByAltText("logo");
     expect(logo).toBeInTheDocument();
   });
-  
-  it( "logo1 renders", ()=>{
-    const logo = screen.getByText("logo");
-    expect(logo).toBeInTheDocument();
-  });
 });
