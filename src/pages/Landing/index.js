@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import { HomeBtns } from "../../components";
+import { HomeBtns, TopBar } from "../../components";
 import image from "../../assets/images/bgbball.jpg";
 
 export const Landing = () => {
@@ -14,6 +14,9 @@ export const Landing = () => {
           backgroundSize: "cover",
         }}
       >
+        <div className="logo-container">
+          <TopBar />
+        </div>
         <div className="btn-container">
           <HomeBtns />
         </div>
