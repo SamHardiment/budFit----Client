@@ -4,7 +4,7 @@
 
 import { screen, fireEvent } from "@testing-library/react";
 import RegForm from ".";
-
+import { useAuthContext } from "../../auth/index.js";
 describe("RegForm", () => {
   beforeEach(() => {
     renderWithProviders(<RegForm />);

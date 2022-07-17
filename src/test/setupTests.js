@@ -7,11 +7,15 @@ import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-
+import { AuthProvider } from "../auth";
 import Reducer from "../redux/reducer";
 
 const WrapProviders = ({ children }) => {
-  return <MemoryRouter>{children}</MemoryRouter>;
+  return (
+    <MemoryRouter>
+      <AuthProvider>{children}</AuthProvider>
+    </MemoryRouter>
+  );
 };
 const renderWithProviders = (ui, options) =>
   render(ui, { wrapper: WrapProviders, ...options });
