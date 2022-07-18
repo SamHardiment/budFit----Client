@@ -13,7 +13,7 @@ const theme = createTheme({
           props: { variant: "text" },
           style: {
             textTransform: "none",
-            color: purple[900],
+            color: grey[200],
             fontSize: "1.1rem",
             border: `2px none ${purple[500]}`,
             "&:hover": {
