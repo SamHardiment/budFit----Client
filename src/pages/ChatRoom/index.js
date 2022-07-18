@@ -2,25 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../../auth/index";
 
 import io from "socket.io-client";
-// export const socket = io("http://localhost:5000");
 
 // connect to socket server
 let endPoint = "http://localhost:5000";
-var socket = io.connect("http://localhost:5000");
+// var socket = io.connect("http://localhost:5000");
 // let socket = io();
 // socket.on("connect", function () {
 //   socket.emit("me event", { data: "I'm connected!" });
 // });
-// let socket = io.connect(`${endPoint}`, {
-//   transports: ["websocket", "polling"],
-// });
+let socket = io.connect(`${endPoint}`);
 
 export const ChatRoom = () => {
   const [messages, setMessages] = useState(["Hello"]);
   const [message, setMessage] = useState("");
 
   const { logout } = useAuthContext();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logout();

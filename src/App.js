@@ -4,8 +4,8 @@ import { Routes, Route } from "react-router-dom";
 
 import { useAuthContext } from "./auth/index.js";
 
-import { io } from "socket.io-client";
-export const socket = io("http://localhost:5000");
+// import { io } from "socket.io-client";
+// export const socket = io("http://localhost:5000");
 
 import { NavBar } from "./components";
 
@@ -18,7 +18,7 @@ export const App = () => {
     <div id="app">
       <Routes>
         <Route path="/" element={<pages.Landing />} />
-        {/* 
+        {/*
         {!user ? (
           <> */}
         <Route path="/Login" element={<pages.Login />} />
@@ -41,3 +41,58 @@ export const App = () => {
     </div>
   );
 };
+// import React, { useState, useEffect } from "react";
+// import io from "socket.io-client";
+
+// let endPoint = "http://localhost:5000";
+// let socket = io.connect(`${endPoint}`);
+
+// function App() {
+//   const [messages, setMessages] = useState(["Hello and welcome"]);
+//   const [message, setMessage] = useState("");
+
+//   useEffect(() => {
+//     const getMessages = () => {
+//       socket.on("message", (msg) => {
+//         //   let allMessages = messages;
+//         //   allMessages.push(msg);
+//         //   setMessages(allMessages);
+//         setMessages([...messages, msg]);
+//       });
+//     };
+
+//     getMessages();
+//   }, [messages]);
+
+//   const onChange = (e) => setMessage(e.target.value);
+
+//   // On Click
+//   const onClick = () => {
+//     if (message !== "") {
+//       socket.emit("message", message);
+//       setMessage("");
+//     } else {
+//       alert("Please Add A Message");
+//     }
+//   };
+
+//   console.log(messages);
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <div>
+//           {messages.length > 0 &&
+//             messages.map((msg) => (
+//               <div>
+//                 <p>{msg}</p>
+//               </div>
+//             ))}
+//           <input value={message} name="message" onChange={(e) => onChange(e)} />
+//           <button onClick={() => onClick()}>Send Message</button>
+//         </div>
+//       </header>
+//     </div>
+//   );
+// }
+
+// export default App;

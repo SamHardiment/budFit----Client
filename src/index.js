@@ -24,10 +24,10 @@ library.add(fab, faCheck, faPlus, faXmark, faRotateLeft, faAngleLeft);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-      <AuthProvider>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AuthProvider>
   </BrowserRouter>
 );
