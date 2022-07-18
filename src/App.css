@@ -20,8 +20,8 @@
   padding-top: 6vh;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-areas: "accountNavLink eventsNavLink searchNavLink chatNavLink";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "accountNavLink searchNavLink eventsNavLink";
 
   font-family: Verdana;
   margin: 0 auto;

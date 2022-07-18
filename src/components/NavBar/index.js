@@ -12,9 +12,8 @@ function NavBar() {
         return (
             <nav className='navBar' aria-label="navBar" >
                 <NavLink className="accountNavLink" activeclassname="active" to="/account">Account</NavLink>
-                <NavLink className="eventsNavLink" activeclassname="active" to="/events">Events</NavLink>
                 <NavLink className="searchNavLink" activeclassname="active" to="/searching">Search</NavLink>
-                <NavLink className="chatNavLink" activeclassname="active" to="/chat">Chat</NavLink>
+                <NavLink className="eventsNavLink" activeclassname="active" to="/events">Events</NavLink>
             </nav>
         )
     }
