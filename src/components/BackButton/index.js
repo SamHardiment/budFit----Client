@@ -16,7 +16,7 @@ export function BackButton() {
         color="error"
         aria-label="back-button"
         name="back-button"
-        variant="outlined"
+        variant="contained"
       >
         <FontAwesomeIcon icon="fa-solid fa-angle-left fa-7x" />
       </Button>

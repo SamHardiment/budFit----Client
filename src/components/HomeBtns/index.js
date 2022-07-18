@@ -5,7 +5,7 @@ import "./index.css";
 import { Button, ThemeProvider, createTheme } from "@mui/material";
 import { purple, grey } from "@mui/material/colors";
 
-const theme = createTheme({
+export const theme = createTheme({
   components: {
     MuiButton: {
       variants: [
