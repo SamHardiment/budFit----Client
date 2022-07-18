@@ -87,88 +87,86 @@ function RegForm() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="regform-container">
-        <form
-          noValidate
-          autoComplete="off"
-          onSubmit={handleSubmitt}
-          className="reg-form"
-          aria-label="form"
-        >
-          <div>
-            <div className="input-container">
-              <TextField
-                aria-label="textfield1"
-                name="name"
-                id="name"
-                label="Name"
-                variant="filled"
-                value={formData.name}
-                onChange={onInputChange}
-                error={nameError}
-                helperText={nameError ? "Please enter your name" : ""}
-                fullWidth
-                required
-              />
-            </div>
-            <div className="input-container">
-              <TextField
-                aria-label="textfield"
-                name="username"
-                id="username"
-                label="Username"
-                variant="filled"
-                value={formData.username}
-                onChange={onInputChange}
-                error={usernameError}
-                helperText={usernameError ? "Please enter a username" : ""}
-                fullWidth
-                required
-              />
-            </div>
-            <div className="input-container">
-              <TextField
-                aria-label="textfield"
-                name="email"
-                id="email"
-                label="Email"
-                variant="filled"
-                value={formData.email}
-                onChange={onInputChange}
-                error={emailError}
-                helperText={emailError ? "Please enter a valid email" : ""}
-                fullWidth
-                required
-              />
-            </div>
-            <div className="input-container">
-              <TextField
-                aria-label="textfield"
-                name="password"
-                id="password"
-                label="Password"
-                variant="filled"
-                value={formData.password}
-                onChange={onInputChange}
-                error={passError}
-                helperText={
-                  passError
-                    ? "Your password must be atleast 6 characters long"
-                    : ""
-                }
-                fullWidth
-                required
-                type="password"
-              />
-            </div>
+    <div className="regform-container">
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmitt}
+        className="reg-form"
+        aria-label="form"
+      >
+        <div>
+          <div className="input-container">
+            <TextField
+              aria-label="textfield1"
+              name="name"
+              id="name"
+              label="Name"
+              variant="filled"
+              value={formData.name}
+              onChange={onInputChange}
+              error={nameError}
+              helperText={nameError ? "Please enter your name" : ""}
+              fullWidth
+              required
+            />
           </div>
-          <div className="register-form-buttons">
-            <CreateButton />
+          <div className="input-container">
+            <TextField
+              aria-label="textfield"
+              name="username"
+              id="username"
+              label="Username"
+              variant="filled"
+              value={formData.username}
+              onChange={onInputChange}
+              error={usernameError}
+              helperText={usernameError ? "Please enter a username" : ""}
+              fullWidth
+              required
+            />
           </div>
-        </form>
-      </div>
-    </ThemeProvider>
+          <div className="input-container">
+            <TextField
+              aria-label="textfield"
+              name="email"
+              id="email"
+              label="Email"
+              variant="filled"
+              value={formData.email}
+              onChange={onInputChange}
+              error={emailError}
+              helperText={emailError ? "Please enter a valid email" : ""}
+              fullWidth
+              required
+            />
+          </div>
+          <div className="input-container">
+            <TextField
+              aria-label="textfield"
+              name="password"
+              id="password"
+              label="Password"
+              variant="filled"
+              value={formData.password}
+              onChange={onInputChange}
+              error={passError}
+              helperText={
+                passError
+                  ? "Your password must be atleast 6 characters long"
+                  : ""
+              }
+              fullWidth
+              required
+              type="password"
+            />
+          </div>
+        </div>
+        <div className="register-form-buttons">
+          <CreateButton />
+        </div>
+      </form>
+    </div>
   );
 }
 

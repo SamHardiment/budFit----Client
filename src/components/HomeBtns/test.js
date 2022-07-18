@@ -29,7 +29,7 @@ describe("HomeBtns", () => {
     const logbtn = screen.getByRole("button", { name: "Login" });
     await userEvent.click(logbtn);
     expect(logbtn).toBeInTheDocument();
-    expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
+    expect(mockedUsedNavigate).toHaveBeenCalledTimes(2);
     expect(mockedUsedNavigate).toHaveBeenCalledWith("/login");
   });
 });
