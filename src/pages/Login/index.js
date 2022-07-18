@@ -31,6 +31,15 @@ const theme = createTheme({
             fontSize: "0.9rem",
           },
         },
+
+        {
+          props: { variant: "input" },
+          style: {
+            textTransform: "none",
+            color: purple[800],
+            fontSize: "0.9rem",
+          },
+        },
         {
           props: { variant: "login" },
           style: {
@@ -136,9 +145,8 @@ export const Login = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleInput}
-                placeholder="username"
+                label="Username"
                 variant="filled"
-                required
                 error={error}
                 helperText={error ? "Please enter your username" : ""}
                 fullWidth
@@ -152,9 +160,8 @@ export const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleInput}
-                placeholder="password"
+                label="Password"
                 variant="filled"
-                required
                 error={error}
                 helperText={
                   error ? "Your password was incorrect, please try again" : ""
