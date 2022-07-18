@@ -53,12 +53,12 @@ describe("RegForm", () => {
     userEvent.type(Textfield, "sam@sam.com{enter}");
     expect(Textfield.value).toBe("");
   });
-  it("verify password textfield exist", () => {
-    const Textfield = screen.getByRole("textbox", { name: "Password" });
-    expect(Textfield).toBeInTheDocument();
-    userEvent.type(nameTextfield, "123{enter}");
-    expect(Textfield.value).toBe("");
-  });
+  // it("verify password textfield exist", () => {
+  //   const Textfield = screen.getByRole("textbox", { name: "Password" });
+  //   expect(Textfield).toBeInTheDocument();
+  //   userEvent.type(nameTextfield, "123{enter}");
+  //   expect(Textfield.value).toBe("");
+  // });
 
   it("verify create button submits form", () => {
     const createBtn = screen.getByRole("button", {

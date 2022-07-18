@@ -10,7 +10,7 @@ describe("ChatRoom", () => {
   });
 
   it("Expect there to be a header on the page", () => {
-    const heading = screen.getByText("ChatRoom");
+    const heading = screen.getByText("hello");
     expect(heading).toBeInTheDocument();
   });
 });

@@ -16,7 +16,9 @@ describe("HomeBtns", () => {
   });
 
   it("User navigates to register page when register button is clicked", async () => {
-    const regbtn = screen.getByRole("button", { name: "Register" });
+    const regbtn = screen.getByRole("button", {
+      name: /register an account/i,
+    });
     await userEvent.click(regbtn);
     expect(regbtn).toBeInTheDocument();
     expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);

@@ -11,29 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import { CreateButton } from "../";
 import "./style.css";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { purple, grey } from "@mui/material/colors";
-const theme = createTheme({
-  components: {
-    MuiButton: {
-      variants: [
-        {
-          props: { variant: "login" },
-          style: {
-            textTransform: "none",
-            color: grey[100],
-            fontSize: "1.1rem",
-            backgroundColor: purple[400],
-            "&:hover": {
-              backgroundColor: purple[600],
-            },
-            border: `2px none ${purple[500]}`,
-          },
-        },
-      ],
-    },
-  },
-});
+
 function RegForm() {
   const { register, login } = useAuthContext();
   const [formData, setFormData] = useState({
