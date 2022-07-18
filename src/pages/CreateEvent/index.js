@@ -37,13 +37,13 @@ export const CreateEvent = () => {
         >
         <h1>New Event</h1>
         <FormField label='Event Title' />
-        <FormField label='Event Description' myFieldType='multiline' />
-        <FormField label='Event Description' myFieldType='date' />
-        <FormField label='Event Category' myFieldType='dropdown' options={Categories} />
+        <FormField label='Description' myFieldType='multiline' />
+        <FormField label='Start Time' myFieldType='date' />
+        <FormField label='Category' myFieldType='dropdown' options={Categories} />
         <LocationFormField />
         <FormField label='Spaces' myFieldType='number'/>
         <Box mt={3}>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" data-testid="postBtn">
             Post Event
           </Button>
         </Box>

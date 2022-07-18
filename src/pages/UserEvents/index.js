@@ -33,10 +33,10 @@ export const UserEvents = () => {
           ))}
         </div>
         <Fab color="secondary" aria-label="newEvent" onClick={handleCreateClick}>
-          <Add />
+          <Add data-testid="newBtn"/>
         </Fab>
-        <Fab color="warning" aria-label="newEvent" onClick={handleSafetyClick}>
-          <Warning />
+        <Fab color="warning" aria-label="safetyAdvice" onClick={handleSafetyClick}>
+          <Warning data-testid="warnBtn"/>
         </Fab>
       </div>
     </>
