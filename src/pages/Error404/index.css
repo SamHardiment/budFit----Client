@@ -1,0 +1,9 @@
+.errorPageContainer>*{
+    margin-bottom: 25px;
+  }
+  
+  .errorPageContainer>p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+  }
+  

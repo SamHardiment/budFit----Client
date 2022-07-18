@@ -54,10 +54,26 @@
     width: 64px;
 }
 
-#chatsPageContainer>button {
+#chatsPageContainer>button:first-of-type {
     position: absolute;
     bottom:25px;
     right: 25px;
+}
+#chatsPageContainer>button:nth-of-type(2) {
+    position: absolute;
+    bottom:25px;
+    left: 25px;
+}
+
+h4{
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#chatsPageContainer>p {
+    margin-top: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
 }
 
 @media only screen and (min-width: 401px) {
