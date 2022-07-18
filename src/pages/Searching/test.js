@@ -10,6 +10,10 @@ import { App } from "../../App";
 import Searching from ".";
 
 const mockedUsedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ... jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUsedNavigate,
+}));
 
 describe("Searching", () => {
   beforeEach(() => {
@@ -18,11 +22,6 @@ describe("Searching", () => {
     
     jest.useFakeTimers();
     jest.spyOn(global, 'setTimeout');
-
-    jest.mock('react-router-dom', () => ({
-      ... jest.requireActual('react-router-dom'),
-      useNavigate: () => mockedUsedNavigate,
-    }));
   });
 
   afterEach(() => {

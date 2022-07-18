@@ -18,7 +18,6 @@ function Searching() {
       const { data } = await axios.get("https://randomuser.me/api/?results=50");
       setUsers(data.results);
     } catch (error) {
-      console.log(error);
       <Alert
         severity="error"
         action={
