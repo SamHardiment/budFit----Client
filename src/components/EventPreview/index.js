@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function EventPreview(props) {
-    const { activity } = props
+    const { activity, dateTime, lastMessage } = props
     const icons = [{name:"Running", component:<FontAwesomeIcon icon="fa-person-running" />},
         {name:"Cycling", component:<FontAwesomeIcon icon="fa-bicycle" />},
         {name:"Football", component:<FontAwesomeIcon icon="fa-futbol-ball" />},
@@ -18,6 +18,8 @@ function EventPreview(props) {
     return (
         <div className='eventPreview'>
             <a href="#">{icons.filter(icon=>icon.name==activity).map(ele=>ele.component)}</a>
+            <p className='eventPreviewDateTime'>{dateTime}</p>
+            <p className='eventPreviewLastMessage'>{lastMessage}</p>
         </div>
     )
 }
