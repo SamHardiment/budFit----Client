@@ -15,7 +15,9 @@ describe("Landing", () => {
   });
 
   it("Register Button exists", () => {
-    const registerBtn = screen.getByRole("button", { name: "Register" });
+    const registerBtn = screen.getByRole("button", {
+      name: /register an account/i,
+    });
     expect(registerBtn).toBeInTheDocument();
   });
 });
