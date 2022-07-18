@@ -39,6 +39,9 @@ export const App = () => {
         <Route path="/Create" element={<pages.CreateEvent />} />
         <Route path="/Safety" element={<pages.UserSafety />} />
         <Route path="/Success" element={<pages.CreateEventSuccess />} />
+        
+        <Route path="*" element={<pages.Error404 />} />
+
 
       </Routes>
       <NavBar />
