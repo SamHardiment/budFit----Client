@@ -1,19 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import '@testing-library/jest-dom/extend-expect';
 import axios from 'axios';
-import { Route, MemoryRouter } from 'react-router-dom'
 
-import { App } from "../../App";
 import Searching from ".";
-
-const mockedUsedNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ... jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedUsedNavigate,
-}));
 
 describe("Searching", () => {
   beforeEach(() => {
@@ -43,11 +35,18 @@ describe("Searching", () => {
     expect(axios).toHaveBeenCalled;
   });
 
-  test('navigate after timer', async () => {
-    expect(mockedUsedNavigate).not.toBeCalled();
+  test('should set state', async () => {
+    const setState = jest.fn();
+    const useStateSpy = jest.spyOn(React, 'useState');
+    useStateSpy.mockImplementation((init) => [init, setState]);
+    
+    const res = {
+      "results": [
+        { category: 'smart', joke: 'sam' }
+      ]
+    };
+    jest.spyOn(axios, 'get').mockResolvedValueOnce(res);
 
-    jest.runAllTimers();
-
-    expect(mockedUsedNavigate).toHaveBeenCalled;
+    expect(setState).toHaveBeenCalled;
   });
 });
