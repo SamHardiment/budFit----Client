@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 function NavBar() {
     let location = useLocation();
-    console.log();
+
     if(location.pathname=='/'||location.pathname=='/login'||location.pathname=='/register'||location.pathname=='/searching'){
         return (
             null

@@ -35,7 +35,8 @@ export const App = () => {
 
         <Route path="/Account" element={<pages.Account />} />
         <Route path="/Chat" element={<pages.ChatRoom />} />
-        <Route path="/Events" element={<pages.CreateEvent />} />
+        <Route path="/Events" element={<pages.UserEvents />} />
+        <Route path="/Create" element={<pages.CreateEvent />} />
         <Route path="/Success" element={<pages.CreateEventSuccess />} />
 
       </Routes>
