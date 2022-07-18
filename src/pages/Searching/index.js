@@ -5,6 +5,7 @@ import axios from "axios";
 import { Alert, Button } from "@mui/material";
 
 import { changeSearchResults } from "../../redux/action";
+import './index.css'
 
 function Searching() {
   const [users, setUsers] = React.useState([]);
@@ -44,7 +45,8 @@ function Searching() {
 
   return (
     <>
-      <h4>Pulling search results.</h4>
+      <h4 id="searchingH4">Pulling search results.</h4>
+      <div className="rays" />
     </>
   );
 }

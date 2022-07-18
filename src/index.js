@@ -11,7 +11,16 @@ import {
   faXmark,
   faRotateLeft,
   faAngleLeft,
+  faBasketball,
+  faBicycle,
+  faDumbbell,
+  faFutbolBall,
+  faGolfBallTee,
+  faPersonHiking,
+  faPersonRunning
+  
 } from "@fortawesome/free-solid-svg-icons";
+
 // Put the names of icons you want to import in this last import bracket
 
 import "./index.css";
@@ -19,7 +28,7 @@ import { App } from "./App";
 
 import { default as store } from "./store.js";
 
-library.add(fab, faCheck, faPlus, faXmark, faRotateLeft, faAngleLeft);
+library.add(fab, faCheck, faPlus, faXmark, faRotateLeft, faAngleLeft,faBasketball, faBicycle, faDumbbell, faFutbolBall, faGolfBallTee, faPersonHiking, faPersonRunning );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -11,7 +11,7 @@ describe("UserEvents", () => {
   });
 
   it("Expect there to be a header on the page", () => {
-    const heading = screen.getByText("UserEvents");
+    const heading = screen.getByText("Events");
     expect(heading).toBeInTheDocument();
   });
 });

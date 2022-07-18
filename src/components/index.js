@@ -3,6 +3,7 @@ export { default as NavBar } from "./NavBar";
 export { default as RegForm } from "./RegForm";
 export { default as LogForm } from "./LogForm";
 export { default as LocationFormField } from "./LocationFormField";
+export { default as EventPreview } from "./EventPreview";
 export { BackButton } from "./BackButton";
 export { FormField } from "./FormField";
 export { LoginButton } from "./LoginButton";

@@ -20,7 +20,11 @@ export const CreateEvent = () => {
     { name: 'Running' },
     { name: 'Cycling' },
     { name: 'Football' },
-    { name: 'Cricket' }
+    { name: 'Cricket' },
+    { name: 'Gym' },
+    { name: 'Golf' },
+    { name: 'Hiking' },
+    { name: 'Basketball' }
   ]
 
   return (
