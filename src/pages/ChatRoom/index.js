@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../../auth/index";
 
 import io from "socket.io-client";
+// export const socket = io("http://localhost:5000");
 
 // connect to socket server
-// let endPoint = "http://localhost:5000";
-// let socket = io.connect(`${endPoint}`);
+let endPoint = "http://localhost:5000";
+var socket = io.connect("http://localhost:5000");
+// let socket = io();
+// socket.on("connect", function () {
+//   socket.emit("me event", { data: "I'm connected!" });
+// });
+// let socket = io.connect(`${endPoint}`, {
+//   transports: ["websocket", "polling"],
+// });
 
 export const ChatRoom = () => {
   const [messages, setMessages] = useState(["Hello"]);
@@ -25,9 +33,9 @@ export const ChatRoom = () => {
   }, [messages.length]);
 
   const getMessages = () => {
-    // socket.on("message", (msg) => {
-    //   setMessages([...messages, msg]);
-    // });
+    socket.on("message", (msg) => {
+      setMessages([...messages, msg]);
+    });
   };
 
   const onChange = (e) => {
@@ -35,12 +43,12 @@ export const ChatRoom = () => {
   };
 
   const onClick = () => {
-    // if (message !== "") {
-    //   socket.emit("message", message);
-    //   setMessage("");
-    // } else {
-    //   alert("Please add a message");
-    // }
+    if (message !== "") {
+      socket.emit("message", message);
+      setMessage("");
+    } else {
+      alert("Please add a message");
+    }
   };
 
   return (

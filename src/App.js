@@ -2,14 +2,14 @@ import React from "react";
 import * as pages from "./pages";
 import { Routes, Route } from "react-router-dom";
 
-import { useAuthContext } from "./auth/index.js"
+import { useAuthContext } from "./auth/index.js";
 
-
-
+import { io } from "socket.io-client";
+export const socket = io("http://localhost:5000");
 
 import { NavBar } from "./components";
 
-import './App.css'
+import "./App.css";
 
 export const App = () => {
   const { user } = useAuthContext();
@@ -18,7 +18,7 @@ export const App = () => {
     <div id="app">
       <Routes>
         <Route path="/" element={<pages.Landing />} />
-{/* 
+        {/* 
         {!user ? (
           <> */}
         <Route path="/Login" element={<pages.Login />} />
@@ -32,12 +32,10 @@ export const App = () => {
         {/* </>
         )} */}
 
-
         <Route path="/Account" element={<pages.Account />} />
         <Route path="/Chat" element={<pages.ChatRoom />} />
         <Route path="/Events" element={<pages.CreateEvent />} />
         <Route path="/Success" element={<pages.CreateEventSuccess />} />
-
       </Routes>
       <NavBar />
     </div>
