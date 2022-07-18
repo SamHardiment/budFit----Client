@@ -16,7 +16,9 @@ describe("HomeBtns", () => {
   });
 
   it("User navigates to register page when register button is clicked", async () => {
-    const regbtn = screen.getByRole("button", { name: "Register" });
+    const regbtn = screen.getByRole("button", {
+      name: /register an account/i,
+    });
     await userEvent.click(regbtn);
     expect(regbtn).toBeInTheDocument();
     expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
@@ -27,7 +29,7 @@ describe("HomeBtns", () => {
     const logbtn = screen.getByRole("button", { name: "Login" });
     await userEvent.click(logbtn);
     expect(logbtn).toBeInTheDocument();
-    expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
+    expect(mockedUsedNavigate).toHaveBeenCalledTimes(2);
     expect(mockedUsedNavigate).toHaveBeenCalledWith("/login");
   });
 });

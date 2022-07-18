@@ -15,7 +15,9 @@ describe("App", () => {
   });
 
   it("verify page content for default route", () => {
-    const registerBtn = screen.getByRole("button", { name: "Register" });
+    const registerBtn = screen.getByRole("button", {
+      name: /register an account/i,
+    });
     expect(registerBtn).toBeInTheDocument();
   });
 });
