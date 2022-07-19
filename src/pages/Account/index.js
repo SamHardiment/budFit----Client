@@ -53,10 +53,10 @@ export const Account = () => {
         const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
         const { data } = await axios.get(URL);
         setUser(data[0]);
-        setLoading(false);
+        setLoading(true);
       } catch (err) {
         setError(err);
-        setLoading(false);
+        setLoading(true);
       }
     }
     fetchUserDetails("1");
@@ -64,7 +64,7 @@ export const Account = () => {
 
   useEffect(() => {
     setTimeout(function () {
-      setLoading(true);
+      setLoading(false);
     }, 2000);
     console.log(user);
   }, [user]);
@@ -72,6 +72,32 @@ export const Account = () => {
   return (
     <>
       {loading ? (
+        <div>
+          {error ? (
+            ""
+          ) : (
+            <div className="account-container">
+              <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                  sx={{
+                    marginTop: 4,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <h4 className="heading4" id="searchingH4">
+                    Loading Account
+                  </h4>
+
+                  <div className="rays" />
+                </Box>
+              </Container>
+            </div>
+          )}
+        </div>
+      ) : (
         <ThemeProvider theme={theme}>
           <div className="account-container">
             <div className="account-top">
@@ -154,69 +180,7 @@ export const Account = () => {
             </Container>
           </div>
         </ThemeProvider>
-      ) : (
-        <div>
-          {error ? (
-            ""
-          ) : (
-            <div className="account-container">
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                  sx={{
-                    marginTop: 4,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <h4 className="heading4" id="searchingH4">
-                    Loading Account
-                  </h4>
-
-                  <div className="rays" />
-                </Box>
-              </Container>
-            </div>
-          )}
-        </div>
       )}
     </>
   );
 };
-
-// {loading ? (
-//   <ThemeProvider theme={theme}>
-//     <BackButton />
-//     <h1>Account</h1>
-//     <Container component="main" maxWidth="xs">
-//       <CssBaseline />
-//       <Box
-//         sx={{
-//           marginTop: 8,
-//           display: "flex",
-//           flexDirection: "column",
-//           alignItems: "center",
-//         }}
-//       >
-//         <Avatar sx={{ p: 4, m: 1, bgcolor: "pink" }}>
-//           <img src="" alt="logo" />
-//         </Avatar>
-//         <Typography component="h1" variant="h5">
-//           Username
-//         </Typography>
-//       </Box>
-//     </Container>
-//   </ThemeProvider>
-// ) : (
-//   <div>
-//     {error ? (
-//       <h1>error</h1>
-//     ) : (
-//       <div>
-//         <BackButton />
-//         <div className="rays" />
-//       </div>
-//     )}
-//   </div>
-// )}
