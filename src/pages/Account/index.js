@@ -159,21 +159,21 @@ export const Account = () => {
           {error ? (
             ""
           ) : (
-            <div>
-              <div className="account-top">
-                <BackButton />
-                <Typography variant="h6">Account</Typography>
-              </div>
+            <div className="account-container">
               <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
                   sx={{
-                    marginTop: 2,
+                    marginTop: 4,
                     display: "flex",
-                    flexDirection: "column",
+                    justifyContent: "center",
                     alignItems: "center",
                   }}
                 >
+                  <h4 className="heading4" id="searchingH4">
+                    Loading Account
+                  </h4>
+
                   <div className="rays" />
                 </Box>
               </Container>
