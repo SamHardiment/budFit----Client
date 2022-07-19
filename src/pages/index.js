@@ -6,6 +6,7 @@ export { Landing } from "./Landing";
 export { Login } from "./Login";
 export { Register } from "./Register";
 export {default as UserSafety} from './UserSafety'
+export {default as UserDetails} from './UserDetails'
 export {default as Search} from './Search'
 export {default as Searching} from './Searching'
 export {default as Error404} from './Error404'

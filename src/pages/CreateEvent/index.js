@@ -10,10 +10,10 @@ export const CreateEvent = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    console.log(e);
     // post it
 
-    navigate("/success");
+    // navigate("/success");
   }
 
   const Categories = [

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-import { useAuthContext } from "../../auth/index.js";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
@@ -13,12 +11,18 @@ import {
   Avatar,
 } from "@mui/material";
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { purple, grey } from "@mui/material/colors";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
+import { useAuthContext } from "../../auth/index.js";
+import { changeCurrentUser } from "../../redux/action";
 import { BackButton } from "../../components";
 import { TopBar } from "../../components";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import image from "../../components/TopBar/logo-cropped.svg";
 import "./style.css";
-import { purple, grey } from "@mui/material/colors";
+
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -58,6 +62,8 @@ const theme = createTheme({
   },
 });
 export const Login = () => {
+  const dispatch = useDispatch();
+
   const { login } = useAuthContext();
   // const navigate = useNavigate();
   const navigate = useNavigate();
@@ -83,10 +89,17 @@ export const Login = () => {
     Object.values(formData).some((value) => !value);
   };
 
+  const getUserData = async () => {
+    const { data } = await axios.get(`https://budfit.herokuapp.com/users/${formData.username}/`);
+    console.log(data);
+    dispatch(changeCurrentUser(data[0]));
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
+      getUserData();
       const loginResult = await login(formData);
       if (loginResult === "Login successful") {
         navigate("/searching");

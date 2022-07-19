@@ -58,6 +58,7 @@ const images = [
 
 function Search() {
   const users = useSelector((state) => state.searchResults);
+  const currentUser = useSelector((state) => state.currentUser);
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
 
@@ -105,6 +106,7 @@ function Search() {
   return (
     <>
       <TopBar />
+      <p>Welcome, {currentUser.name}!</p>
       <div className="cardContainer">
         {users.map((user, index) => (
           <TinderCard

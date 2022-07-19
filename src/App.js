@@ -39,7 +39,8 @@ export const App = () => {
         <Route path="/Create" element={<pages.CreateEvent />} />
         <Route path="/Safety" element={<pages.UserSafety />} />
         <Route path="/Success" element={<pages.CreateEventSuccess />} />
-        
+        <Route path="/u/:id" element={<pages.UserDetails />} />
+
         <Route path="*" element={<pages.Error404 />} />
 
 
