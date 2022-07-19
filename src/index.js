@@ -17,8 +17,13 @@ import {
   faFutbolBall,
   faGolfBallTee,
   faPersonHiking,
-  faPersonRunning
-  
+  faPersonRunning,
+  faSignature,
+  faDiceD6,
+  faEnvelope,
+  faListNumeric,
+  faRunning,
+  faImage,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Put the names of icons you want to import in this last import bracket
@@ -28,15 +33,35 @@ import { App } from "./App";
 
 import { default as store } from "./store.js";
 
-library.add(fab, faCheck, faPlus, faXmark, faRotateLeft, faAngleLeft,faBasketball, faBicycle, faDumbbell, faFutbolBall, faGolfBallTee, faPersonHiking, faPersonRunning );
+library.add(
+  fab,
+  faCheck,
+  faPlus,
+  faXmark,
+  faRotateLeft,
+  faAngleLeft,
+  faBasketball,
+  faBicycle,
+  faDumbbell,
+  faFutbolBall,
+  faGolfBallTee,
+  faPersonHiking,
+  faPersonRunning,
+  faSignature,
+  faDiceD6,
+  faEnvelope,
+  faListNumeric,
+  faRunning,
+  faImage
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-      <AuthProvider>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AuthProvider>
   </BrowserRouter>
 );
