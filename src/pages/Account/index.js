@@ -110,6 +110,8 @@ export const Account = () => {
       setInputErr(false);
       return;
     } else {
+      console.log(formData);
+
       setInputErr(false);
       setOpen(false);
     }
@@ -233,6 +235,7 @@ export const Account = () => {
                           variant="filled"
                           value={formData.email}
                           onChange={onInputChange}
+                          type="email"
                           // error={emailError}
                           // helperText={
                           //   emailError ? "Please enter a valid email" : ""
@@ -265,7 +268,7 @@ export const Account = () => {
                           id="preferences"
                           label="Location"
                           variant="filled"
-                          value={formData.preferences}
+                          value={formData.preference}
                           onChange={onInputChange}
                           // error={passError}
                           // helperText={
