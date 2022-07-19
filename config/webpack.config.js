@@ -35,6 +35,12 @@ const config = {
         test: /\.(png|svg|jpg|gif|pdf)$/,
         use: ["file-loader"],
       },
+      {
+        test: /\.html$/,
+        use: {
+          loader: "html-loader",
+        },
+      },
     ],
   },
 };

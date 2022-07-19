@@ -1,0 +1,18 @@
+.input-container {
+  margin: 15px 0;
+}
+
+.logform-container {
+  width: 90%;
+  justify-items: flex-end;
+}
+.log-form {
+  width: 100%;
+}
+
+.log-form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

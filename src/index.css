@@ -1,0 +1,31 @@
+:root {
+  /* Placeholders to be updated */
+  --off-white: #fffcf9;
+  --grey: #a1a5a7; 
+  --dark-green: #273820;
+  --turquoise: #4BC6B9; 
+  --blue-green: #73C1C6; 
+  --sky-blue: #96C3CE;
+  --dull-pink: #A79AB2;
+  --mauve: #B57BA6;
+  --large-font: 30px;
+}
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+#root{
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  justify-content: center;
+}
