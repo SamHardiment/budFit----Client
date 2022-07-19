@@ -88,11 +88,11 @@ export const Account = () => {
 
     const updateObj = {
       name: e.target[0].value,
-      email: e.target[4].value,
       username: e.target[2].value,
+      email: e.target[4].value,
       dob: e.target[6].value,
       preferences: e.target[10].value,
-      picture: "",
+      picture: "test",
     };
     if (
       (updateObj.name == "" || updateObj.username == "",
@@ -106,7 +106,7 @@ export const Account = () => {
       console.log(updateObj);
       updateUser(currentUser.user_id, updateObj);
       setInputErr(false);
-      setOpen(false);
+      // setOpen(false);
     }
   };
 
