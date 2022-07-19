@@ -24,6 +24,7 @@ import {
   faListNumeric,
   faRunning,
   faImage,
+  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Put the names of icons you want to import in this last import bracket
@@ -52,7 +53,8 @@ library.add(
   faEnvelope,
   faListNumeric,
   faRunning,
-  faImage
+  faImage,
+  faLocationDot
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

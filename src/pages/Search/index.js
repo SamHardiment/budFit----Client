@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import { useSelector } from "react-redux";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import basketball from './EventImages/basketball.jpg'
 import cricket from './EventImages/cricket.jpg'
@@ -20,6 +21,17 @@ import running from './EventImages/running.jpg'
 // import golf from './EventImages/golf.png'
 // import hiking from './EventImages/hiking.png'
 // import running from './EventImages/running.png'
+>>>>>>> Dev/sam
+=======
+
+// import basketball from './EventImages/basketball.jpg'
+// import cricket from './EventImages/cricket.jpg'
+// import cycling from './EventImages/cycling.jpg'
+// import football from './EventImages/football.jpg'
+// import golf from './EventImages/golf.jpg'
+// // import gym from './EventImages/gym.jpg'
+// import hiking from './EventImages/hiking.jpg'
+// import running from './EventImages/running.jpg'
 >>>>>>> Dev/sam
 
 import { styled } from "@mui/material/styles";
@@ -57,6 +69,7 @@ const UndoButton = styled(IconButton)({
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const images = [{ name: "Running", img: running },
 { name: "Cycling", img: cycling },
 { name: "Football", img: football },
@@ -77,6 +90,17 @@ const images = [{ name: "Running", img: running },
 //   { name: "Hiking", img: hiking },
 //   { name: "Basketball", img: basketball },
 // ];
+>>>>>>> Dev/sam
+=======
+// const images = [{ name: "Running", img: running },
+// { name: "Cycling", img: cycling },
+// { name: "Football", img: football },
+// { name: "Cricket", img: cricket },
+// // { name: "Gym", img: gym },
+// { name: "Golf", img: golf },
+// { name: "Hiking", img: hiking },
+// { name: "Basketball", img: basketball }
+// ]
 >>>>>>> Dev/sam
 
 function Search() {

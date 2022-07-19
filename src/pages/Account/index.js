@@ -135,8 +135,8 @@ export const Account = () => {
                     <Typography variant="subTitle2">{user.dob}</Typography>
                   </div>
                   <div className="detail-box">
-                    <FontAwesomeIcon icon="fa-solid fa-person-running" />
-                    <Typography variant="subTitle2">Interested in:</Typography>
+                    <FontAwesomeIcon icon="fa-solid fa-location-dot" />
+                    <Typography variant="subTitle2">Location:</Typography>
                     <Typography variant="subTitle2">
                       {user.preferences}
                     </Typography>
