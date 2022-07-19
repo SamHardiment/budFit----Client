@@ -1,0 +1,17 @@
+.account-top {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 20px;
+  align-items: center;
+  border-bottom: 2px solid #bbb;
+  height: 50px;
+}
+
+.account-container {
+  width: 100%;
+}
+
+.avatar {
+  object-fit: contain;
+}
