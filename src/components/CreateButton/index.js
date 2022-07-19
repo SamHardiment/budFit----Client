@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { purple, grey } from "@mui/material/colors";
+
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -25,16 +26,18 @@ const theme = createTheme({
 });
 export function CreateButton() {
   return (
-    <Button
-      aria-label="create-button"
-      variant="login"
-      className="register"
-      type="submit"
-      color="success"
-      size="medium"
-      fullWidth
-    >
-      Create Account
-    </Button>
+    <ThemeProvider theme={theme}>
+      <Button
+        aria-label="create-button"
+        variant="login"
+        className="register"
+        type="submit"
+        color="success"
+        size="medium"
+        fullWidth
+      >
+        Create Account
+      </Button>
+    </ThemeProvider>
   );
 }
