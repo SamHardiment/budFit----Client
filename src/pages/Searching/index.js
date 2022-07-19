@@ -38,9 +38,9 @@ function Searching() {
 
   useEffect(() => {
     dispatch(changeSearchResults(users));
-    // setTimeout(function () {
-    //   navigate("/search");
-    // }, 3000);
+    setTimeout(function () {
+      navigate("/search");
+    }, 3000);
   }, [users]);
 
   return (
