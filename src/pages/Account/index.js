@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   Avatar,
   Box,
   Button,
   Alert,
-  Checkbox,
   Container,
   CssBaseline,
-  FormControlLabel,
-  TextField,
   Typography,
 } from "@mui/material";
 import { purple, grey } from "@mui/material/colors";
@@ -41,6 +39,7 @@ const theme = createTheme({
   },
 });
 export const Account = () => {
+  const currentUser = useSelector((state) => state.currentUser);
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -56,30 +55,31 @@ export const Account = () => {
     setOpen(false);
   };
 
+  console.log(currentUser);
+
   // Fetch User data
-  useEffect(() => {
-    async function fetchUserDetails(user_id) {
-      user_id ||= "1";
-      try {
-        setError("");
-        const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
-        const { data } = await axios.get(URL);
-        setUser(data[0]);
-        setLoading(true);
-      } catch (err) {
-        setError(err);
-        setLoading(true);
-      }
-    }
-    fetchUserDetails("1");
-  }, []);
+  // useEffect(() => {
+  //   async function fetchUserDetails(user_id) {
+  //     user_id ||= "1";
+  //     try {
+  //       setError("");
+  //       const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
+  //       const { data } = await axios.get(URL);
+  //       setUser(data[0]);
+  //       setLoading(true);
+  //     } catch (err) {
+  //       setError(err);
+  //       setLoading(true);
+  //     }
+  //   }
+  //   fetchUserDetails("1");
+  // }, []);
 
   useEffect(() => {
     setTimeout(function () {
       setLoading(false);
     }, 2000);
-    console.log(user);
-  }, [user]);
+  }, []);
 
   //Handle form submit
   const handleSubmit = (e) => {
@@ -104,31 +104,22 @@ export const Account = () => {
       return;
     } else {
       console.log(updateObj);
-      updateUser();
+      updateUser(currentUser.user_id, updateObj);
       setInputErr(false);
       setOpen(false);
     }
   };
 
   // Handle Patch request
-  async function updateUser() {
+  async function updateUser(id, obj) {
     try {
       const res = await axios.patch(
-        "https://budfit.herokuapp.com/users/1/",
-        updateObj
+        `https://budfit.herokuapp.com/users/${id}/`,
+        obj
       );
       console.log(res);
     } catch (error) {
-      <Alert
-        severity="error"
-        action={
-          <Button color="inherit" size="small" onClick={updateUser()}>
-            Retry
-          </Button>
-        }
-      >
-        {error}
-      </Alert>;
+      console.log(error);
     }
   }
 
@@ -191,7 +182,7 @@ export const Account = () => {
                   <img className="avatar" src={testimage} alt="logo" />
                 </Avatar>
                 <Typography variant="h5">
-                  {user.name} || {user.username}
+                  {currentUser.name} || {currentUser.username}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -320,32 +311,36 @@ export const Account = () => {
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-signature" />
                       <Typography variant="subTitle2">Name:</Typography>
-                      <Typography variant="subTitle2">{user.name}</Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.name}
+                      </Typography>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-dice-d6" />
                       <Typography variant="subTitle2">Username:</Typography>
                       <Typography variant="subTitle2">
-                        {user.username}
+                        {currentUser.username}
                       </Typography>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-envelope" />
+                      <Typography variant="subTitle2">Email:</Typography>
                       <Typography variant="subTitle2">
-                        Email Address:
+                        {currentUser.email}
                       </Typography>
-                      <Typography variant="subTitle2">{user.email}</Typography>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-list-ol" />
                       <Typography variant="subTitle2">Age:</Typography>
-                      <Typography variant="subTitle2">{user.dob}</Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.dob}
+                      </Typography>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-location-dot" />
                       <Typography variant="subTitle2">Location:</Typography>
                       <Typography variant="subTitle2">
-                        {user.preferences}
+                        {currentUser.preferences}
                       </Typography>
                     </div>
                     <div className="detail-box">
@@ -355,7 +350,7 @@ export const Account = () => {
                         Profile Picture:
                       </Typography>
                       <Typography variant="subTitle2">
-                        {user.picture}
+                        {currentUser.picture}
                       </Typography>
                     </div>
                   </div>
