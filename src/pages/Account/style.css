@@ -10,8 +10,33 @@
 
 .account-container {
   width: 100%;
+  margin-top: 10px;
 }
 
 .avatar {
   object-fit: contain;
+}
+
+.detail-box {
+  width: 300px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70px;
+  border-radius: "5px";
+  border-bottom: solid 1px rgb(239, 186, 239);
+}
+
+.detail-box:nth-child(1) {
+  border-top: solid 1px rgb(239, 186, 239);
+}
+
+.account-details {
+  margin-top: 25px;
+}
+
+.detail-box > svg {
+  margin-right: 14px;
+  width: 26px;
+  height: 26px;
 }

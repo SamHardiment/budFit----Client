@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BackButton } from "../../components";
 import testimage from "../../assets/images/bgbball.jpg";
 import "./style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -40,7 +41,7 @@ const theme = createTheme({
   },
 });
 export const Account = () => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -49,9 +50,9 @@ export const Account = () => {
       user_id ||= "1";
       try {
         setError("");
-        const URL = `https://budfit.herokuapp.com/users`;
+        const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
         const { data } = await axios.get(URL);
-        setUser(data);
+        setUser(data[0]);
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -75,13 +76,14 @@ export const Account = () => {
           <div className="account-container">
             <div className="account-top">
               <BackButton />
+
               <Typography variant="h6">Account</Typography>
             </div>
             <Container component="main" maxWidth="xs">
               <CssBaseline />
               <Box
                 sx={{
-                  marginTop: 8,
+                  marginTop: 6,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -99,7 +101,9 @@ export const Account = () => {
                 >
                   <img className="avatar" src={testimage} alt="logo" />
                 </Avatar>
-                <Typography variant="h5">Users Account</Typography>
+                <Typography variant="h5">
+                  {user.name} || {user.username}
+                </Typography>
                 <Typography
                   variant="subtitle1"
                   color="textSecondary"
@@ -108,18 +112,71 @@ export const Account = () => {
                   Review or adjust your details
                 </Typography>
               </Box>
-              <div className="account-details"></div>
+              <div className="account-details">
+                <div className="detail-container">
+                  <div className="detail-box">
+                    <FontAwesomeIcon icon="fa-solid fa-signature" />
+                    <Typography variant="subTitle2">Name:</Typography>
+                    <Typography variant="subTitle2">{user.name}</Typography>
+                  </div>
+                  <div className="detail-box">
+                    <FontAwesomeIcon icon="fa-solid fa-dice-d6" />
+                    <Typography variant="subTitle2">Username:</Typography>
+                    <Typography variant="subTitle2">{user.username}</Typography>
+                  </div>
+                  <div className="detail-box">
+                    <FontAwesomeIcon icon="fa-solid fa-envelope" />
+                    <Typography variant="subTitle2">Email Address:</Typography>
+                    <Typography variant="subTitle2">{user.email}</Typography>
+                  </div>
+                  <div className="detail-box">
+                    <FontAwesomeIcon icon="fa-solid fa-list-ol" />
+                    <Typography variant="subTitle2">Age:</Typography>
+                    <Typography variant="subTitle2">{user.dob}</Typography>
+                  </div>
+                  <div className="detail-box">
+                    <FontAwesomeIcon icon="fa-solid fa-person-running" />
+                    <Typography variant="subTitle2">Interested in:</Typography>
+                    <Typography variant="subTitle2">
+                      {user.preferences}
+                    </Typography>
+                  </div>
+                  <div className="detail-box">
+                    <FontAwesomeIcon icon="fa-solid fa-image" />
+
+                    <Typography variant="subTitle2">
+                      Profile Picture:
+                    </Typography>
+                    <Typography variant="subTitle2">{user.picture}</Typography>
+                  </div>
+                </div>
+              </div>
             </Container>
           </div>
         </ThemeProvider>
       ) : (
         <div>
           {error ? (
-            <h1>error</h1>
+            ""
           ) : (
             <div>
-              <BackButton />
-              <div className="rays" />
+              <div className="account-top">
+                <BackButton />
+                <Typography variant="h6">Account</Typography>
+              </div>
+              <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                  sx={{
+                    marginTop: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div className="rays" />
+                </Box>
+              </Container>
             </div>
           )}
         </div>
