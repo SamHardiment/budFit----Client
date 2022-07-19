@@ -110,6 +110,8 @@ export const Account = () => {
       setInputErr(false);
       return;
     } else {
+      console.log(formData);
+
       setInputErr(false);
       setOpen(false);
     }
@@ -266,7 +268,7 @@ export const Account = () => {
                           id="preferences"
                           label="Location"
                           variant="filled"
-                          value={formData.preferences}
+                          value={formData.preference}
                           onChange={onInputChange}
                           // error={passError}
                           // helperText={
