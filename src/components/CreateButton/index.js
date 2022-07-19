@@ -25,16 +25,18 @@ const theme = createTheme({
 });
 export function CreateButton() {
   return (
-    <Button
-      aria-label="create-button"
-      variant="login"
-      className="register"
-      type="submit"
-      color="success"
-      size="medium"
-      fullWidth
-    >
-      Create Account
-    </Button>
+    <ThemeProvider theme={theme}>
+      <Button
+        aria-label="create-button"
+        variant="login"
+        className="register"
+        type="submit"
+        color="success"
+        size="medium"
+        fullWidth
+      >
+        Create Account
+      </Button>
+    </ThemeProvider>
   );
 }
