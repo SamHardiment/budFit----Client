@@ -4,20 +4,18 @@ import {
   Avatar,
   Box,
   Button,
+  Alert,
   Checkbox,
   Container,
   CssBaseline,
   FormControlLabel,
-  Grid,
-  Link,
   TextField,
   Typography,
-  Modal,
 } from "@mui/material";
 import { purple, grey } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { BackButton } from "../../components";
-import { CreateButton } from "../../components";
+import { BackButton, LocationFormField, FormField } from "../../components";
+
 import testimage from "../../assets/images/bgbball.jpg";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,14 +46,6 @@ export const Account = () => {
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const [inputErr, setInputErr] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    username: "",
-    email: "",
-    dob: "",
-    preference: "",
-    picture: "",
-  });
 
   // handle form open and close
   const handleFormOpen = () => {
@@ -91,31 +81,56 @@ export const Account = () => {
     console.log(user);
   }, [user]);
 
-  // Form logic
-  // Form data input change
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value.trim() });
-  };
-  // Handle Patch request
+  //Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(e.target);
+
+    const updateObj = {
+      name: e.target[0].value,
+      email: e.target[4].value,
+      username: e.target[2].value,
+      dob: e.target[6].value,
+      preferences: e.target[10].value,
+      picture: "",
+    };
     if (
-      (formData.name == "" || formData.username == "",
-      formData.email == "",
-      formData.dob == "",
-      formData.preference == "",
-      formData.picture == "")
+      (updateObj.name == "" || updateObj.username == "",
+      updateObj.email == "",
+      updateObj.dob == "",
+      updateObj.preferences == "")
     ) {
       setInputErr(false);
       return;
     } else {
-      console.log(formData);
-
+      console.log(updateObj);
+      updateUser();
       setInputErr(false);
       setOpen(false);
     }
   };
+
+  // Handle Patch request
+  async function updateUser() {
+    try {
+      const res = await axios.patch(
+        "https://budfit.herokuapp.com/users/1/",
+        updateObj
+      );
+      console.log(res);
+    } catch (error) {
+      <Alert
+        severity="error"
+        action={
+          <Button color="inherit" size="small" onClick={updateUser()}>
+            Retry
+          </Button>
+        }
+      >
+        {error}
+      </Alert>;
+    }
+  }
 
   return (
     <>
@@ -197,7 +212,8 @@ export const Account = () => {
                   >
                     <div className="scrollable-form">
                       <div className="input-container">
-                        <TextField
+                        <FormField label="Name" />
+                        {/* <TextField
                           aria-label="name textfield"
                           name="name"
                           id="name"
@@ -208,10 +224,11 @@ export const Account = () => {
                           error={inputErr}
                           helperText={inputErr ? "All fields are required" : ""}
                           fullWidth
-                        />
+                        /> */}
                       </div>
                       <div className="input-container">
-                        <TextField
+                        <FormField label="Username" />
+                        {/* <TextField
                           aria-label="textfield"
                           name="username"
                           id="username"
@@ -219,15 +236,12 @@ export const Account = () => {
                           variant="filled"
                           value={formData.username}
                           onChange={onInputChange}
-                          // error={usernameError}
-                          // helperText={
-                          //   usernameError ? "Please enter a username" : ""
-                          // }
                           fullWidth
-                        />
+                        /> */}
                       </div>
                       <div className="input-container">
-                        <TextField
+                        <FormField label="Email" />
+                        {/* <TextField
                           aria-label="textfield"
                           name="email"
                           id="email"
@@ -236,15 +250,12 @@ export const Account = () => {
                           value={formData.email}
                           onChange={onInputChange}
                           type="email"
-                          // error={emailError}
-                          // helperText={
-                          //   emailError ? "Please enter a valid email" : ""
-                          // }
                           fullWidth
-                        />
+                        /> */}
                       </div>
                       <div className="input-container">
-                        <TextField
+                        <FormField label="Start Time" myFieldType="date" />
+                        {/* <TextField
                           aria-label="textfield"
                           name="dob"
                           id="dob"
@@ -252,17 +263,12 @@ export const Account = () => {
                           variant="filled"
                           value={formData.dob}
                           onChange={onInputChange}
-                          // error={passError}
-                          // helperText={
-                          //   passError
-                          //     ? "Your password must be atleast 6 characters long"
-                          //     : ""
-                          // }
                           fullWidth
-                        />
+                        /> */}
                       </div>
+
                       <div className="input-container">
-                        <TextField
+                        {/* <TextField
                           aria-label="textfield"
                           name="preferences"
                           id="preferences"
@@ -270,17 +276,13 @@ export const Account = () => {
                           variant="filled"
                           value={formData.preference}
                           onChange={onInputChange}
-                          // error={passError}
-                          // helperText={
-                          //   passError
-                          //     ? "Your password must be atleast 6 characters long"
-                          //     : ""
-                          // }
                           fullWidth
-                        />
+                        /> */}
+                        <LocationFormField />
                       </div>
                       <div className="input-container">
-                        <TextField
+                        <FormField label="Picture" />
+                        {/* <TextField
                           aria-label="textfield"
                           name="picture"
                           id="picture"
@@ -295,7 +297,7 @@ export const Account = () => {
                           //     : ""
                           // }
                           fullWidth
-                        />
+                        /> */}
                       </div>
                     </div>
                     <div className="register-form-buttons">
