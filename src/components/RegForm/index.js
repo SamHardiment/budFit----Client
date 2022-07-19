@@ -26,8 +26,6 @@ function RegForm() {
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passError, setPassError] = useState(false);
-  const [passConError, setPassConError] = useState(false);
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -60,27 +58,11 @@ function RegForm() {
     } else {
       setPassError(false);
     }
-    if (
-      formData.password.length >= 6 &&
-      formData.password == passwordConfirmation
-    ) {
-      if (
-        formData.name &&
-        formData.username &&
-        formData.email &&
-        formData.password
-      ) {
-        const newUser = { ...formData };
-        console.log(newUser);
-        addNewUser(newUser);
-        setPasswordConfirmation("");
-        setFormData({ name: "", username: "", email: "", password: "" });
-      }
-    } else {
-      setPassConError(true);
-    }
+
     if (regResult === "Registration successful") {
       console.log("it worked");
+      setFormData({ name: "", username: "", email: "", password: "" });
+      navigate("/searching");
     } else {
       throw new Error("Unsuccessful registration");
     }
@@ -137,6 +119,7 @@ function RegForm() {
               onChange={onInputChange}
               error={emailError}
               helperText={emailError ? "Please enter a valid email" : ""}
+              type="email"
               fullWidth
               required
             />

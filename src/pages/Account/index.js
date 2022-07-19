@@ -233,6 +233,7 @@ export const Account = () => {
                           variant="filled"
                           value={formData.email}
                           onChange={onInputChange}
+                          type="email"
                           // error={emailError}
                           // helperText={
                           //   emailError ? "Please enter a valid email" : ""
