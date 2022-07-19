@@ -45,14 +45,15 @@ const UndoButton = styled(IconButton)({
   height: "100%",
 });
 
-const images = [{ name: "Running", img: running },
-{ name: "Cycling", img: cycling },
-{ name: "Football", img: football },
-{ name: "Cricket", img: cricket },
-// { name: "Gym", img: gym },
-{ name: "Golf", img: golf },
-{ name: "Hiking", img: hiking },
-{ name: "Basketball", img: basketball }
+const images = [
+  { name: "Running", img: running },
+  { name: "Cycling", img: cycling },
+  { name: "Football", img: football },
+  { name: "Cricket", img: cricket },
+  // { name: "Gym", img: gym },
+  { name: "Golf", img: golf },
+  { name: "Hiking", img: hiking },
+  { name: "Basketball", img: basketball }
 ]
 
 function Search() {
