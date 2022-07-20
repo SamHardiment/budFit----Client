@@ -73,10 +73,12 @@ function EventDetails() {
               {event.map((event) => (
                 <EventView
                   key={Math.random()}
-                  event_id={event.event_id}
                   dateTime={event.date}
                   title={event.title}
                   activity={event.activity}
+                  description={event.descr}
+                  location={event.location}
+                  spaces={event.spaces}
                 />
               ))}
             </div>
