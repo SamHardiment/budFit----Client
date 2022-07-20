@@ -121,7 +121,7 @@ export const Account = () => {
   // Handle Patch request
   async function updateUser(id, obj) {
     try {
-      fetch(`http://localhost:5000/users/${id}`, {
+      fetch(`https://budfit.herokuapp.com/users/${id}/`, {
         method: 'PATCH',
         body: JSON.stringify({
           name: obj.name,

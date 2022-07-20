@@ -66,8 +66,19 @@ function Search() {
     updateCurrentIndex(index - 1);
   };
 
-  const outOfFrame = (name, idx) => {
+  const match = async (event_id) => {
+    if (lastDirection == "right") {
+      let resp = await axios.post("https://budfit.herokuapp.com/matches", {
+        user_id: currentUser.user_id,
+        event_id: event_id
+      });
+      console.log(resp);
+    }
+  }
+
+  const outOfFrame = (id, idx) => {
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
+    match(id)
   };
 
   const swipe = async (dir) => {
@@ -87,24 +98,28 @@ function Search() {
     <>
       <TopBar />
       <div className="cardContainer">
+        <h4>No more events!</h4>
+        <br />
+        <br />
+        <h4>Search again by clicking<br /> search at the bottom.</h4>
         {users.map((thisEvent, index) => (
           <TinderCard
             ref={childRefs[index]}
             className="swipe"
             key={index}
             onSwipe={(dir) => swiped(dir, index)}
-            onCardLeftScreen={() => outOfFrame(thisEvent.title, index)}
+            onCardLeftScreen={() => outOfFrame(thisEvent.event_id, index)}
           >
-              <div
+            <div
               style={{ backgroundImage: 'url(' + thisEvent.img + ')' }}
               className="card">
-                <div className="innerCardContainer">
-                  <h3>{thisEvent.title}</h3>
-                  <p>{thisEvent.descr}</p>
-                  <p>Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}</p>
-                </div>
+              <div className="innerCardContainer">
+                <h3>{thisEvent.title}</h3>
+                <p>{thisEvent.descr}</p>
+                <p>Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}</p>
               </div>
-              
+            </div>
+
           </TinderCard>
         ))}
       </div>
