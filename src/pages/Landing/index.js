@@ -10,7 +10,6 @@ export const Landing = () => {
       <div
         className="bg-container"
         style={{
-          // backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8, url(${image}))`,
           backgroundImage: `url(${image})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
