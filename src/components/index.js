@@ -4,6 +4,7 @@ export { default as RegForm } from "./RegForm";
 export { default as LogForm } from "./LogForm";
 export { default as LocationFormField } from "./LocationFormField";
 export { default as EventPreview } from "./EventPreview";
+export { default as EventView } from "./EventView";
 export { BackButton } from "./BackButton";
 export { FormField } from "./FormField";
 export { LoginButton } from "./LoginButton";

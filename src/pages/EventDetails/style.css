@@ -1,0 +1,15 @@
+.eventPage {
+  width: 100vw;
+  padding: 10px 15px;
+  max-width: 400px;
+}
+
+.event-container {
+  margin: 10px 20px;
+}
+
+.event-details {
+  margin-top: 40px;
+  padding: 0 20px;
+  height: 500px;
+}
