@@ -12,7 +12,7 @@ describe("Register", () => {
   });
 
   it("Expect there to be a header on the page", () => {
-    const heading = screen.getByText("Register your account");
+    const heading = screen.getByText("Register an account");
     expect(heading).toBeInTheDocument();
   });
   it("Expect there to be a header on the page", () => {

@@ -4,8 +4,10 @@
 
 import { screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { AuthProvider } from "../../auth";
+import { Provider } from "react-redux";
 
+import { AuthProvider } from "../../auth";
+import { default as store } from "../../store.js";
 import { App } from "../../App";
 
 describe("RegForm", () => {
@@ -14,7 +16,9 @@ describe("RegForm", () => {
       render(
         <MemoryRouter initialEntries={["/account"]}>
           <AuthProvider>
-            <App />
+            <Provider store={store}>
+              <App />
+            </Provider>
           </AuthProvider>
         </MemoryRouter>
       );

@@ -6,17 +6,22 @@ import axios from "axios";
 
 import { FormField, TopBar, LocationFormField } from "../../components";
 
+const Categories = [
+  { name: "Running" },
+  { name: "Cycling" },
+  { name: "Football" },
+  { name: "Cricket" },
+  { name: "Gym" },
+  { name: "Golf" },
+  { name: "Hiking" },
+  { name: "Basketball" },
+];
+
 export const CreateEvent = () => {
   const navigate = useNavigate();
 
   const handleEventSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(e);
-    console.log(e.target[12]);
-    console.log(e.target);
-    console.log(e.target[11]);
-    console.log(e.target[13]);
 
     let req = {
       title: e.target[0].value,
@@ -27,38 +32,9 @@ export const CreateEvent = () => {
       spaces: e.target[13].value,
     };
 
-    console.log(req);
-
-    //   const { data } = await axios.post(
-    //     `https://budfit.herokuapp.com/events`,
-    //     req
-    //   );
-    //   if (data.err) {
-    //     throw Error(data.err);
-    //   }
-    // } catch (err) {
-    //   return err.message;
-    // }
-
-    let resp = await axios.post(
-    "https://budfit.herokuapp.com/events",
-      req
-    );
-    console.log(resp);
+    await axios.post("https://budfit.herokuapp.com/events", req);
     navigate("/success");
-
   };
-
-  const Categories = [
-    { name: "Running" },
-    { name: "Cycling" },
-    { name: "Football" },
-    { name: "Cricket" },
-    { name: "Gym" },
-    { name: "Golf" },
-    { name: "Hiking" },
-    { name: "Basketball" },
-  ];
 
   return (
     <>
