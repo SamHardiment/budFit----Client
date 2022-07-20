@@ -80,28 +80,12 @@ export const Account = () => {
     navigate("/");
   };
 
-  // Fetch User data
-  // useEffect(() => {
-  //   async function fetchUserDetails(user_id) {
-  //     user_id ||= "1";
-  //     try {
-  //       setError("");
-  //       const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
-  //       const { data } = await axios.get(URL);
-  //       setUser(data[0]);
-  //       setLoading(true);
-  //     } catch (err) {
-  //       setError(err);
-  //       setLoading(true);
-  //     }
-  //   }
-  //   fetchUserDetails("1");
-  // }, []);
-
   const getUserData = async () => {
-    const { data } = await axios.get(`https://budfit.herokuapp.com/users/${currentUser.user_id}/`);
+    const { data } = await axios.get(
+      `https://budfit.herokuapp.com/users/${currentUser.user_id}/`
+    );
     dispatch(changeCurrentUser(data[0]));
-  }
+  };
 
   useEffect(() => {
     getUserData();
@@ -125,9 +109,9 @@ export const Account = () => {
     };
     if (
       (updateObj.name == "" || updateObj.username == "",
-        updateObj.email == "",
-        updateObj.dob == "",
-        updateObj.preferences == "")
+      updateObj.email == "",
+      updateObj.dob == "",
+      updateObj.preferences == "")
     ) {
       setInputErr(false);
       return;
@@ -139,15 +123,6 @@ export const Account = () => {
       // setOpen(false);
     }
   };
-
-  // Handle Patch request
-  // const uusert = async (id, obj) => {
-  //   console.log("send Patch", obj);
-  //   const { res } = await axios.patch(
-  //     `https://budfit.herokuapp.com/users/${id}/`
-  //   );
-  //   console.log(res);
-  // };
 
   async function updateUser(id, obj) {
     const config = {
@@ -168,7 +143,7 @@ export const Account = () => {
           picture: obj.picture,
         }),
         headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+          "Content-type": "application/json; charset=UTF-8",
         },
       })
         .then((response) => response.json())
