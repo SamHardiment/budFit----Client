@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Fab } from "@mui/material";
@@ -9,30 +11,33 @@ import { TopBar, EventPreview } from "../../components";
 import "./index.css";
 
 export const UserEvents = () => {
+  const currentUser = useSelector((state) => state.currentUser);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [totalEvents, setTotalEvents] = useState(0);
-  const [events, setEvents] = useState([
-    {
-      activity: "Football",
-      time: "1997-07-16T19:20:15",
-      lastMessage: "This is the football message",
-    },
-    {
-      activity: "Golf",
-      time: "1997-07-16T19:20:15",
-      lastMessage: "This is the golf message",
-    },
-  ]);
+  const [events, setEvents] = useState([]);
 
   // Get user events
   useEffect(() => {
-    getUserEvents("2");
+    getUserEvents();
   }, []);
 
-  async function getUserEvents(id) {
-    const data = axios.get(`https://budfit.herokuapp.com/events/${id}/`);
-    console.log(data);
+  async function getUserEvents() {
+    try {
+      const { data } = await axios.get(`https://budfit.herokuapp.com/matches`);
+      let matches = data.filter((m) => m.match_id == currentUser.user_id);
+      for (let i = 0; i < matches.length; i++) {
+        let event = matches[i];
+        const { data } = await axios.get(
+          `https://budfit.herokuapp.com/events/${event.event_id}/`
+        );
+        setEvents(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
   // Handle naviagtion
 
