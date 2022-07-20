@@ -33,7 +33,10 @@ export const UserEvents = () => {
         const { data } = await axios.get(
           `https://budfit.herokuapp.com/events/${event.event_id}/`
         );
+        console.log(data);
+
         setEvents(data);
+        setTotalEvents(events.length);
       }
     } catch (err) {
       console.log(err);
@@ -59,9 +62,12 @@ export const UserEvents = () => {
           {events.map((event) => (
             <EventPreview
               key={Math.random()}
+              event_id={event.event_id}
+              dateTime={event.date}
+              title={event.title}
               activity={event.activity}
-              dateTime={event.time}
-              lastMessage={event.lastMessage}
+
+              // lastMessage={event.lastMessage}
             />
           ))}
         </div>

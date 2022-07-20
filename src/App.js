@@ -2,14 +2,11 @@ import React from "react";
 import * as pages from "./pages";
 import { Routes, Route } from "react-router-dom";
 
-import { useAuthContext } from "./auth/index.js"
-
-
-
+import { useAuthContext } from "./auth/index.js";
 
 import { NavBar } from "./components";
 
-import './App.css'
+import "./App.css";
 
 export const App = () => {
   const { user } = useAuthContext();
@@ -18,7 +15,7 @@ export const App = () => {
     <div id="app">
       <Routes>
         <Route path="/" element={<pages.Landing />} />
-{/* 
+        {/* 
         {!user ? (
           <> */}
         <Route path="/Login" element={<pages.Login />} />
@@ -32,7 +29,6 @@ export const App = () => {
         {/* </>
         )} */}
 
-
         <Route path="/Account" element={<pages.Account />} />
         <Route path="/Chat" element={<pages.ChatRoom />} />
         <Route path="/Events" element={<pages.UserEvents />} />
@@ -40,10 +36,9 @@ export const App = () => {
         <Route path="/Safety" element={<pages.UserSafety />} />
         <Route path="/Success" element={<pages.CreateEventSuccess />} />
         <Route path="/u/:id" element={<pages.UserDetails />} />
+        <Route path="/EventDetails/:id" element={<pages.EventDetails />} />
 
         <Route path="*" element={<pages.Error404 />} />
-
-
       </Routes>
       <NavBar />
     </div>
