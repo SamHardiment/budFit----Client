@@ -9,10 +9,11 @@ import { FormField, TopBar, LocationFormField } from "../../components";
 export const CreateEvent = () => {
   const navigate = useNavigate();
   
-  const handleSubmit = async (e) => {
+  const handleEventSubmit = async (e) => {
     e.preventDefault()
-    console.log(e.value[11].value);
-    // post it
+
+    console.log(e);
+
     let req = {
       title:e.target[0].value,
       descr:e.target[2].value,
@@ -46,7 +47,7 @@ export const CreateEvent = () => {
       <form
         role="form"
         id="createEventForm"
-        onSubmit={handleSubmit}
+        onSubmit={handleEventSubmit}
         >
         <h1>New Event</h1>
         <FormField label='Event Title' />

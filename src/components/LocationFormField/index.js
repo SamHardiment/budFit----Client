@@ -31,7 +31,7 @@ function LocationFormField() {
                         </Select>
                     </FormControl>
                 </Box>
-        <FormField label='County' myFieldType='dropdown' options={Counties[countryID]} disabled={disabled} />
+        <FormField id="countySelector" label='County' myFieldType='dropdown' options={Counties[countryID]} disabled={disabled} />
     </div>
   )
 }

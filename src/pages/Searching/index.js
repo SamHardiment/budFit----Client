@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Alert, Button } from "@mui/material";
 
 import { changeSearchResults } from "../../redux/action";
 import './index.css'
@@ -32,7 +31,8 @@ function Searching() {
       const { data } = await axios.get(`https://budfit.herokuapp.com/events`);
 
       console.log(data);
-
+      console.log(currentUser.preferences);
+      
       let events = data.filter(v => v.location == currentUser.preferences);
 
       console.log(events);
@@ -59,16 +59,7 @@ function Searching() {
       setUsers(events);
 
     } catch (error) {
-      <Alert
-        severity="error"
-        action={
-          <Button color="inherit" size="small" onClick={fetchUsers()}>
-            Retry
-          </Button>
-        }
-      >
-        {error}
-      </Alert>;
+      console.log(error);
     }
   }
 
