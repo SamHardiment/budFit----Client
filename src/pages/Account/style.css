@@ -40,3 +40,19 @@
   width: 26px;
   height: 26px;
 }
+
+.heading4 {
+  margin-bottom: 85px;
+}
+
+.scrollable-form {
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.edit-button-container {
+  margin-top: 10px;
+}

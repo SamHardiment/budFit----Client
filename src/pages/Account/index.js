@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   Avatar,
   Box,
   Button,
-  Checkbox,
+  Alert,
   Container,
   CssBaseline,
-  FormControlLabel,
-  Grid,
-  Link,
-  TextField,
   Typography,
 } from "@mui/material";
 import { purple, grey } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { BackButton } from "../../components";
+import { BackButton, LocationFormField, FormField } from "../../components";
+
 import testimage from "../../assets/images/bgbball.jpg";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -41,37 +39,119 @@ const theme = createTheme({
   },
 });
 export const Account = () => {
+  const currentUser = useSelector((state) => state.currentUser);
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
+  const [inputErr, setInputErr] = useState(false);
 
-  useEffect(() => {
-    async function fetchUserDetails(user_id) {
-      user_id ||= "1";
-      try {
-        setError("");
-        const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
-        const { data } = await axios.get(URL);
-        setUser(data[0]);
-        setLoading(false);
-      } catch (err) {
-        setError(err);
-        setLoading(false);
-      }
-    }
-    fetchUserDetails("1");
-  }, []);
+  // handle form open and close
+  const handleFormOpen = () => {
+    setOpen(true);
+  };
+
+  const handleFormClose = () => {
+    setOpen(false);
+  };
+
+  console.log(currentUser);
+
+  // Fetch User data
+  // useEffect(() => {
+  //   async function fetchUserDetails(user_id) {
+  //     user_id ||= "1";
+  //     try {
+  //       setError("");
+  //       const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
+  //       const { data } = await axios.get(URL);
+  //       setUser(data[0]);
+  //       setLoading(true);
+  //     } catch (err) {
+  //       setError(err);
+  //       setLoading(true);
+  //     }
+  //   }
+  //   fetchUserDetails("1");
+  // }, []);
 
   useEffect(() => {
     setTimeout(function () {
-      setLoading(true);
+      setLoading(false);
     }, 2000);
-    console.log(user);
-  }, [user]);
+  }, []);
+
+  //Handle form submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+
+    const updateObj = {
+      name: e.target[0].value,
+      username: e.target[2].value,
+      email: e.target[4].value,
+      dob: e.target[6].value,
+      preferences: e.target[10].value,
+      picture: "test",
+    };
+    if (
+      (updateObj.name == "" || updateObj.username == "",
+      updateObj.email == "",
+      updateObj.dob == "",
+      updateObj.preferences == "")
+    ) {
+      setInputErr(false);
+      return;
+    } else {
+      console.log(updateObj);
+      updateUser(currentUser.user_id, updateObj);
+      setInputErr(false);
+      // setOpen(false);
+    }
+  };
+
+  // Handle Patch request
+  async function updateUser(id, obj) {
+    try {
+      const res = await axios.patch(
+        `https://budfit.herokuapp.com/users/${id}/`,
+        obj
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
       {loading ? (
+        <div>
+          {error ? (
+            ""
+          ) : (
+            <div className="account-container">
+              <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                  sx={{
+                    marginTop: 4,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <h4 className="heading4" id="searchingH4">
+                    Loading Account
+                  </h4>
+
+                  <div className="rays" />
+                </Box>
+              </Container>
+            </div>
+          )}
+        </div>
+      ) : (
         <ThemeProvider theme={theme}>
           <div className="account-container">
             <div className="account-top">
@@ -83,7 +163,7 @@ export const Account = () => {
               <CssBaseline />
               <Box
                 sx={{
-                  marginTop: 6,
+                  marginTop: 4,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -102,7 +182,7 @@ export const Account = () => {
                   <img className="avatar" src={testimage} alt="logo" />
                 </Avatar>
                 <Typography variant="h5">
-                  {user.name} || {user.username}
+                  {currentUser.name} || {currentUser.username}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -112,111 +192,186 @@ export const Account = () => {
                   Review or adjust your details
                 </Typography>
               </Box>
-              <div className="account-details">
-                <div className="detail-container">
-                  <div className="detail-box">
-                    <FontAwesomeIcon icon="fa-solid fa-signature" />
-                    <Typography variant="subTitle2">Name:</Typography>
-                    <Typography variant="subTitle2">{user.name}</Typography>
-                  </div>
-                  <div className="detail-box">
-                    <FontAwesomeIcon icon="fa-solid fa-dice-d6" />
-                    <Typography variant="subTitle2">Username:</Typography>
-                    <Typography variant="subTitle2">{user.username}</Typography>
-                  </div>
-                  <div className="detail-box">
-                    <FontAwesomeIcon icon="fa-solid fa-envelope" />
-                    <Typography variant="subTitle2">Email Address:</Typography>
-                    <Typography variant="subTitle2">{user.email}</Typography>
-                  </div>
-                  <div className="detail-box">
-                    <FontAwesomeIcon icon="fa-solid fa-list-ol" />
-                    <Typography variant="subTitle2">Age:</Typography>
-                    <Typography variant="subTitle2">{user.dob}</Typography>
-                  </div>
-                  <div className="detail-box">
-                    <FontAwesomeIcon icon="fa-solid fa-location-dot" />
-                    <Typography variant="subTitle2">Location:</Typography>
-                    <Typography variant="subTitle2">
-                      {user.preferences}
-                    </Typography>
-                  </div>
-                  <div className="detail-box">
-                    <FontAwesomeIcon icon="fa-solid fa-image" />
+              {open ? (
+                <div>
+                  <form
+                    noValidate
+                    autoComplete="off"
+                    onSubmit={handleSubmit}
+                    className="reg-form"
+                    aria-label="form"
+                  >
+                    <div className="scrollable-form">
+                      <div className="input-container">
+                        <FormField label="Name" />
+                        {/* <TextField
+                          aria-label="name textfield"
+                          name="name"
+                          id="name"
+                          label="Name"
+                          variant="filled"
+                          value={formData.name}
+                          onChange={onInputChange}
+                          error={inputErr}
+                          helperText={inputErr ? "All fields are required" : ""}
+                          fullWidth
+                        /> */}
+                      </div>
+                      <div className="input-container">
+                        <FormField label="Username" />
+                        {/* <TextField
+                          aria-label="textfield"
+                          name="username"
+                          id="username"
+                          label="Username"
+                          variant="filled"
+                          value={formData.username}
+                          onChange={onInputChange}
+                          fullWidth
+                        /> */}
+                      </div>
+                      <div className="input-container">
+                        <FormField label="Email" />
+                        {/* <TextField
+                          aria-label="textfield"
+                          name="email"
+                          id="email"
+                          label="Email"
+                          variant="filled"
+                          value={formData.email}
+                          onChange={onInputChange}
+                          type="email"
+                          fullWidth
+                        /> */}
+                      </div>
+                      <div className="input-container">
+                        <FormField label="Start Time" myFieldType="date" />
+                        {/* <TextField
+                          aria-label="textfield"
+                          name="dob"
+                          id="dob"
+                          label="Date of Birth"
+                          variant="filled"
+                          value={formData.dob}
+                          onChange={onInputChange}
+                          fullWidth
+                        /> */}
+                      </div>
 
-                    <Typography variant="subTitle2">
-                      Profile Picture:
-                    </Typography>
-                    <Typography variant="subTitle2">{user.picture}</Typography>
+                      <div className="input-container">
+                        {/* <TextField
+                          aria-label="textfield"
+                          name="preferences"
+                          id="preferences"
+                          label="Location"
+                          variant="filled"
+                          value={formData.preference}
+                          onChange={onInputChange}
+                          fullWidth
+                        /> */}
+                        <LocationFormField />
+                      </div>
+                      <div className="input-container">
+                        <FormField label="Picture" />
+                        {/* <TextField
+                          aria-label="textfield"
+                          name="picture"
+                          id="picture"
+                          label="Picture"
+                          variant="filled"
+                          value={formData.picture}
+                          onChange={onInputChange}
+                          // error={passError}
+                          // helperText={
+                          //   passError
+                          //     ? "Your password must be atleast 6 characters long"
+                          //     : ""
+                          // }
+                          fullWidth
+                        /> */}
+                      </div>
+                    </div>
+                    <div className="register-form-buttons">
+                      <Button
+                        aria-label="Edit button"
+                        variant="login"
+                        className="edit-button"
+                        type="submit"
+                        size="medium"
+                        fullWidth
+                      >
+                        Update
+                      </Button>
+                    </div>
+                  </form>
+                </div>
+              ) : (
+                <div className="account-details">
+                  <div className="detail-container">
+                    <div className="detail-box">
+                      <FontAwesomeIcon icon="fa-solid fa-signature" />
+                      <Typography variant="subTitle2">Name:</Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.name}
+                      </Typography>
+                    </div>
+                    <div className="detail-box">
+                      <FontAwesomeIcon icon="fa-solid fa-dice-d6" />
+                      <Typography variant="subTitle2">Username:</Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.username}
+                      </Typography>
+                    </div>
+                    <div className="detail-box">
+                      <FontAwesomeIcon icon="fa-solid fa-envelope" />
+                      <Typography variant="subTitle2">Email:</Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.email}
+                      </Typography>
+                    </div>
+                    <div className="detail-box">
+                      <FontAwesomeIcon icon="fa-solid fa-list-ol" />
+                      <Typography variant="subTitle2">Age:</Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.dob}
+                      </Typography>
+                    </div>
+                    <div className="detail-box">
+                      <FontAwesomeIcon icon="fa-solid fa-location-dot" />
+                      <Typography variant="subTitle2">Location:</Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.preferences}
+                      </Typography>
+                    </div>
+                    <div className="detail-box">
+                      <FontAwesomeIcon icon="fa-solid fa-image" />
+
+                      <Typography variant="subTitle2">
+                        Profile Picture:
+                      </Typography>
+                      <Typography variant="subTitle2">
+                        {currentUser.picture}
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className="edit-button-container">
+                    <Button
+                      aria-label="Edit button"
+                      variant="login"
+                      className="edit-button"
+                      onClick={handleFormOpen}
+                      size="medium"
+                      fullWidth
+                    >
+                      Edit Details
+                    </Button>
                   </div>
                 </div>
-              </div>
+              )}
             </Container>
           </div>
         </ThemeProvider>
-      ) : (
-        <div>
-          {error ? (
-            ""
-          ) : (
-            <div>
-              <div className="account-top">
-                <BackButton />
-                <Typography variant="h6">Account</Typography>
-              </div>
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                  sx={{
-                    marginTop: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <div className="rays" />
-                </Box>
-              </Container>
-            </div>
-          )}
-        </div>
       )}
     </>
   );
 };
-
-// {loading ? (
-//   <ThemeProvider theme={theme}>
-//     <BackButton />
-//     <h1>Account</h1>
-//     <Container component="main" maxWidth="xs">
-//       <CssBaseline />
-//       <Box
-//         sx={{
-//           marginTop: 8,
-//           display: "flex",
-//           flexDirection: "column",
-//           alignItems: "center",
-//         }}
-//       >
-//         <Avatar sx={{ p: 4, m: 1, bgcolor: "pink" }}>
-//           <img src="" alt="logo" />
-//         </Avatar>
-//         <Typography component="h1" variant="h5">
-//           Username
-//         </Typography>
-//       </Box>
-//     </Container>
-//   </ThemeProvider>
-// ) : (
-//   <div>
-//     {error ? (
-//       <h1>error</h1>
-//     ) : (
-//       <div>
-//         <BackButton />
-//         <div className="rays" />
-//       </div>
-//     )}
-//   </div>
-// )}
