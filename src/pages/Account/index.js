@@ -114,7 +114,7 @@ export const Account = () => {
   async function updateUser(id, obj) {
     try {
       const res = await axios.patch(
-        `https://budfit.herokuapp.com/users/${id}/`,
+        `https://budfit.herokuapp.com/users/${id}`,
         obj
       );
       console.log(res);
