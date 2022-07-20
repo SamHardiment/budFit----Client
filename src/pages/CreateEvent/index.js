@@ -21,37 +21,17 @@ export const CreateEvent = () => {
     let req = {
       title: e.target[0].value,
       descr: e.target[2].value,
-      time: e.target[5].value,
+      date: e.target[5].value,
       activity: e.target[7].value,
       location: e.target[11].value,
       spaces: e.target[13].value,
     };
 
-    // console.log(req);
-    // const options = {
-    //   headers: {
-    //     "Access-Control-Allow-Headers": "*",
-    //     "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-    //     "Content-Type": "application/json",
-    //     Authorization: localStorage.getItem("token")
-    //       ? localStorage.getItem("token")
-    //       : null,
-    //   },
-    // };
-
-    // try {
-    //   const options = {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       // "Access-Control-Allow-Headers": "*",
-    //       // "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-    //     },
-    //   };
+    console.log(req);
 
     //   const { data } = await axios.post(
     //     `https://budfit.herokuapp.com/events`,
-    //     req,
-    //     options
+    //     req
     //   );
     //   if (data.err) {
     //     throw Error(data.err);
@@ -60,13 +40,13 @@ export const CreateEvent = () => {
     //   return err.message;
     // }
 
-    // let resp = await axios.post(
-    // "https://budfit.herokuapp.com/events",
-    //   req,
-    //   options
-    // );
-    // console.log(resp);
-    // navigate("/success");
+    let resp = await axios.post(
+    "https://budfit.herokuapp.com/events",
+      req
+    );
+    console.log(resp);
+    navigate("/success");
+
   };
 
   const Categories = [
