@@ -20,8 +20,8 @@ const WrapProviders = ({ children }) => {
 const renderWithProviders = (ui, options) =>
   render(ui, { wrapper: WrapProviders, ...options });
 
-const reduxProviders = ({ initState }) => {
-  initState ||= { searchResults: [] };
+const reduxProviders = () => {
+  let initState = { searchResults: [], currentUser:{} };
   const testStore = createStore(
     () => Reducer(initState, { type: "@@INIT" }),
     applyMiddleware(thunk)
@@ -35,8 +35,8 @@ const reduxProviders = ({ initState }) => {
 };
 
 const renderWithReduxProviders = (ui, options) => {
-  let TestWrapper = reduxProviders(options);
-  render(ui, { wrapper: TestWrapper, ...options });
+  let TestWrapper = reduxProviders();
+  render(ui, { wrapper: TestWrapper });
 };
 
 global.renderWithProviders = renderWithProviders;

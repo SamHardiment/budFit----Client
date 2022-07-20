@@ -4,9 +4,15 @@
 import { screen } from "@testing-library/react";
 import { Login } from ".";
 
+let mockedAuth = jest.fn();
+
+jest.mock("../../auth/index.js", () => ({
+  useAuthContext: () => mockedAuth
+}));
+
 describe("Login", () => {
   beforeEach(() => {
-    renderWithProviders(<Login />);
+    renderWithReduxProviders(<Login />);
   });
 
   it("Expect there to be a header on the page", () => {

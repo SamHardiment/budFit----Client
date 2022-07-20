@@ -12,7 +12,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("UserEvents", () => {
   beforeEach(() => {
-    renderWithProviders(<UserEvents />);
+    renderWithReduxProviders(<UserEvents />);
   });
 
   it("Expect there to be a header on the page", () => {
