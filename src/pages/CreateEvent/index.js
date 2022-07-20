@@ -2,17 +2,30 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from '@mui/system';
 import { Button } from "@mui/material";
+import axios from "axios";
 
 import { FormField, TopBar, LocationFormField } from "../../components";
 
 export const CreateEvent = () => {
   const navigate = useNavigate();
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(e);
+    console.log(e.value[11].value);
     // post it
+    let req = {
+      title:e.target[0].value,
+      descr:e.target[2].value,
+      time:e.target[5].value,
+      activity:e.target[7].value,
+      location:e.value[11].value,
+      spaces:e.value[13].value,
+    }
 
+    console.log(req);
+
+    let resp = await axios.post('https://budfit.herokuapp.com/events', req)
+    console.log(resp);
     // navigate("/success");
   }
 

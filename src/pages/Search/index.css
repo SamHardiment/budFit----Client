@@ -46,7 +46,7 @@ h2 {
   height: 100%;
 }
 
-.card h3 {
+.card .innerCardContainer {
   position: absolute;
   bottom: 0;
   margin: 10px;
