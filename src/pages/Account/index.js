@@ -12,14 +12,14 @@ import {
   CssBaseline,
   Typography,
 } from "@mui/material";
-import { purple, grey, red } from "@mui/material/colors";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BackButton, LocationFormField, FormField } from "../../components";
 
 import { changeCurrentUser } from "../../redux/action";
 import testimage from "../../assets/images/bgbball.jpg";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { purple, grey, red } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -234,91 +234,22 @@ export const Account = () => {
                     <div className="scrollable-form">
                       <div className="input-container">
                         <FormField label="Name" />
-                        {/* <TextField
-                          aria-label="name textfield"
-                          name="name"
-                          id="name"
-                          label="Name"
-                          variant="filled"
-                          value={formData.name}
-                          onChange={onInputChange}
-                          error={inputErr}
-                          helperText={inputErr ? "All fields are required" : ""}
-                          fullWidth
-                        /> */}
                       </div>
                       <div className="input-container">
                         <FormField label="Username" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="username"
-                          id="username"
-                          label="Username"
-                          variant="filled"
-                          value={formData.username}
-                          onChange={onInputChange}
-                          fullWidth
-                        /> */}
                       </div>
                       <div className="input-container">
                         <FormField label="Email" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="email"
-                          id="email"
-                          label="Email"
-                          variant="filled"
-                          value={formData.email}
-                          onChange={onInputChange}
-                          type="email"
-                          fullWidth
-                        /> */}
                       </div>
                       <div className="input-container">
                         <FormField label="Date of Birth" myFieldType="date" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="dob"
-                          id="dob"
-                          label="Date of Birth"
-                          variant="filled"
-                          value={formData.dob}
-                          onChange={onInputChange}
-                          fullWidth
-                        /> */}
                       </div>
 
                       <div className="input-container">
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="preferences"
-                          id="preferences"
-                          label="Location"
-                          variant="filled"
-                          value={formData.preference}
-                          onChange={onInputChange}
-                          fullWidth
-                        /> */}
                         <LocationFormField />
                       </div>
                       <div className="input-container">
                         <FormField label="Picture" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="picture"
-                          id="picture"
-                          label="Picture"
-                          variant="filled"
-                          value={formData.picture}
-                          onChange={onInputChange}
-                          // error={passError}
-                          // helperText={
-                          //   passError
-                          //     ? "Your password must be atleast 6 characters long"
-                          //     : ""
-                          // }
-                          fullWidth
-                        /> */}
                       </div>
                     </div>
                     <div className="register-form-buttons">
