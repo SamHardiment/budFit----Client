@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { useAuthContext } from "../../auth/index";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ import { purple, grey, red } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BackButton, LocationFormField, FormField } from "../../components";
 
+import { changeCurrentUser } from "../../redux/action";
 import testimage from "../../assets/images/bgbball.jpg";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -54,6 +55,7 @@ const theme = createTheme({
   },
 });
 export const Account = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser);
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
@@ -78,25 +80,15 @@ export const Account = () => {
     navigate("/");
   };
 
-  // Fetch User data
-  // useEffect(() => {
-  //   async function fetchUserDetails(user_id) {
-  //     user_id ||= "1";
-  //     try {
-  //       setError("");
-  //       const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
-  //       const { data } = await axios.get(URL);
-  //       setUser(data[0]);
-  //       setLoading(true);
-  //     } catch (err) {
-  //       setError(err);
-  //       setLoading(true);
-  //     }
-  //   }
-  //   fetchUserDetails("1");
-  // }, []);
+  const getUserData = async () => {
+    const { data } = await axios.get(
+      `https://budfit.herokuapp.com/users/${currentUser.user_id}/`
+    );
+    dispatch(changeCurrentUser(data[0]));
+  };
 
   useEffect(() => {
+    getUserData();
     setTimeout(function () {
       setLoading(false);
     }, 2000);
@@ -132,15 +124,6 @@ export const Account = () => {
     }
   };
 
-  // Handle Patch request
-  // const uusert = async (id, obj) => {
-  //   console.log("send Patch", obj);
-  //   const { res } = await axios.patch(
-  //     `https://budfit.herokuapp.com/users/${id}/`
-  //   );
-  //   console.log(res);
-  // };
-
   async function updateUser(id, obj) {
     const config = {
       headers: {
@@ -149,12 +132,22 @@ export const Account = () => {
       },
     };
     try {
-      const res = await axios.patch(
-        `https://budfit.herokuapp.com/users/${id}/`,
-        obj,
-        config
-      );
-      console.log(res);
+      fetch(`http://localhost:5000/users/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          name: obj.name,
+          username: obj.username,
+          email: obj.email,
+          dob: 12,
+          preferences: obj.preferences,
+          picture: obj.picture,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
     } catch (error) {
       console.log(error);
     }
