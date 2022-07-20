@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
@@ -40,7 +41,7 @@ function Search() {
   const users = useSelector((state) => state.searchResults);
   const currentUser = useSelector((state) => state.currentUser);
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
-  const [lastDirection, setLastDirection] = useState();
+  const [lastDirection, setLastDirection] = useState('');
 
   const currentIndexRef = useRef(currentIndex);
 
@@ -61,13 +62,29 @@ function Search() {
 
   const canSwipe = currentIndex >= 0;
 
-  const swiped = (direction, index) => {
+  const swiped = async (direction, index, id) => {
+    if (direction == "right") {
+      console.log("The user:");
+      console.log(currentUser.user_id);
+      console.log("Going to event:");
+      console.log(id);
+      await match(id)
+    }
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
   };
 
-  const outOfFrame = (name, idx) => {
+  const match = async (event_id) => {
+    let resp = await axios.post("http://localhost:5000/matches", {
+      user_id: currentUser.user_id,
+      event_id: event_id
+    });
+    console.log(resp);
+  }
+
+  const outOfFrame = (idx) => {
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
+    console.log(lastDirection);
   };
 
   const swipe = async (dir) => {
@@ -87,24 +104,28 @@ function Search() {
     <>
       <TopBar />
       <div className="cardContainer">
+        <h4>No more events!</h4>
+        <br />
+        <br />
+        <h4>Search again by clicking<br /> search at the bottom.</h4>
         {users.map((thisEvent, index) => (
           <TinderCard
             ref={childRefs[index]}
             className="swipe"
             key={index}
-            onSwipe={(dir) => swiped(dir, index)}
-            onCardLeftScreen={() => outOfFrame(thisEvent.title, index)}
+            onSwipe={(dir) => swiped(dir, index, thisEvent.event_id)}
+            onCardLeftScreen={() => outOfFrame(index)}
           >
-              <div
+            <div
               style={{ backgroundImage: 'url(' + thisEvent.img + ')' }}
               className="card">
-                <div className="innerCardContainer">
-                  <h3>{thisEvent.title}</h3>
-                  <p>{thisEvent.descr}</p>
-                  <p>Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}</p>
-                </div>
+              <div className="innerCardContainer">
+                <h3>{thisEvent.title}</h3>
+                <p>{thisEvent.descr}</p>
+                <p>Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}</p>
               </div>
-              
+            </div>
+
           </TinderCard>
         ))}
       </div>

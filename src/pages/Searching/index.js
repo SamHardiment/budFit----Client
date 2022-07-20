@@ -29,33 +29,32 @@ function Searching() {
   async function fetchUsers() {
     try {
       const { data } = await axios.get(`https://budfit.herokuapp.com/events`);
-
-      console.log(data);
-      console.log(currentUser.preferences);
       
       let events = data.filter(v => v.location == currentUser.preferences);
 
-      console.log(events);
-
+      let matches = await axios.get(`https://budfit.herokuapp.com/matches`);
+      
+      matches = matches.data
+      matches = matches.filter(v => v.user_id == currentUser.user_id);
+      matches = matches.map((e)=>e.event_id)
+      
+      events = events.filter(v => !matches.includes(v.event_id));
+      
       events.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
 
       for (let i = 0; i < events.length; i++) {
         let event = events[i];
-        const { data } = await axios.get(`https://budfit.herokuapp.com/matches`);
 
-        let attendees = data.filter(v => v.event_id == event.event_id);
+        let attendees = matches.filter(v => v.event_id == event.event_id);
         let attending = attendees.map((e)=>e.user_id)
-
-        console.log(event.activity);
 
         let source = images.filter(image => image.name.toLowerCase() == event.activity.toLowerCase());
 
         events[i] = {...events[i], attending: attending, img: source[0].src}
       }
 
-      console.log(events);
       setUsers(events);
 
     } catch (error) {

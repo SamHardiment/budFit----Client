@@ -132,8 +132,8 @@ export const Account = () => {
       },
     };
     try {
-      fetch(`http://localhost:5000/users/${id}`, {
-        method: "PATCH",
+      fetch(`https://budfit.herokuapp.com/users/${id}/`, {
+        method: 'PATCH',
         body: JSON.stringify({
           name: obj.name,
           username: obj.username,
