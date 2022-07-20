@@ -105,17 +105,33 @@ export const Account = () => {
     } else {
       console.log(updateObj);
       updateUser(currentUser.user_id, updateObj);
+      // uusert(currentUser.user_id, updateObj);
       setInputErr(false);
       // setOpen(false);
     }
   };
 
   // Handle Patch request
+  // const uusert = async (id, obj) => {
+  //   console.log("send Patch", obj);
+  //   const { res } = await axios.patch(
+  //     `https://budfit.herokuapp.com/users/${id}/`
+  //   );
+  //   console.log(res);
+  // };
+
   async function updateUser(id, obj) {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
+      },
+    };
     try {
       const res = await axios.patch(
-        `https://budfit.herokuapp.com/users/${id}`,
-        obj
+        `https://budfit.herokuapp.com/users/${id}/`,
+        obj,
+        config
       );
       console.log(res);
     } catch (error) {
@@ -245,7 +261,7 @@ export const Account = () => {
                         /> */}
                       </div>
                       <div className="input-container">
-                        <FormField label="Start Time" myFieldType="date" />
+                        <FormField label="Date of Birth" myFieldType="date" />
                         {/* <TextField
                           aria-label="textfield"
                           name="dob"
