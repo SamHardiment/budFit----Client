@@ -2,15 +2,6 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import { useSelector } from "react-redux";
 
-import basketball from "./EventImages/basketball.jpg";
-import cricket from "./EventImages/cricket.jpg";
-import cycling from "./EventImages/cycling.jpg";
-import football from "./EventImages/football.jpg";
-import golf from "./EventImages/golf.jpg";
-// import gym from './EventImages/gym.jpg'
-import hiking from "./EventImages/hiking.jpg";
-import running from "./EventImages/running.jpg";
-
 import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,17 +35,6 @@ const UndoButton = styled(IconButton)({
   width: "100%",
   height: "100%",
 });
-
-const images = [
-  { name: "Running", img: running },
-  { name: "Cycling", img: cycling },
-  { name: "Football", img: football },
-  { name: "Cricket", img: cricket },
-  // { name: "Gym", img: gym },
-  { name: "Golf", img: golf },
-  { name: "Hiking", img: hiking },
-  { name: "Basketball", img: basketball },
-];
 
 function Search() {
   const users = useSelector((state) => state.searchResults);
@@ -106,33 +86,25 @@ function Search() {
   return (
     <>
       <TopBar />
-      <p>Welcome, {currentUser.name}!</p>
       <div className="cardContainer">
-        {users.map((user, index) => (
+        {users.map((thisEvent, index) => (
           <TinderCard
             ref={childRefs[index]}
             className="swipe"
             key={index}
             onSwipe={(dir) => swiped(dir, index)}
-            onCardLeftScreen={() => outOfFrame(user.name.first, index)}
+            onCardLeftScreen={() => outOfFrame(thisEvent.title, index)}
           >
-            {/* {images.filter(image => image.name == thisEvent.activity).map(ele => {
               <div
-                style={{ backgroundImage: `url(${ele.img})` }}
-                className="card">
+              style={{ backgroundImage: 'url(' + thisEvent.img + ')' }}
+              className="card">
                 <div className="innerCardContainer">
                   <h3>{thisEvent.title}</h3>
                   <p>{thisEvent.descr}</p>
-                  <p>Spaces: {thisEvent.attending.length()}/{thisEvent.spaces}</p>
+                  <p>Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}</p>
                 </div>
               </div>
-            })} */}
-            <div
-              style={{ backgroundImage: "url(" + user.picture.large + ")" }}
-              className="card"
-            >
-              <h3>{user.name.first}</h3>
-            </div>
+              
           </TinderCard>
         ))}
       </div>

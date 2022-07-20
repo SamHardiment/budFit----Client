@@ -91,7 +91,6 @@ export const Login = () => {
 
   const getUserData = async () => {
     const { data } = await axios.get(`https://budfit.herokuapp.com/users/${formData.username}/`);
-    console.log(data);
     dispatch(changeCurrentUser(data[0]));
   }
 
