@@ -54,5 +54,15 @@
 }
 
 .edit-button-container {
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+
+  margin: 20px 0 10px 0;
+}
+
+.detail-container {
+  height: 350px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }

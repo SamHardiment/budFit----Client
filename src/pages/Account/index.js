@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { useAuthContext } from "../../auth/index";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -10,7 +12,7 @@ import {
   CssBaseline,
   Typography,
 } from "@mui/material";
-import { purple, grey } from "@mui/material/colors";
+import { purple, grey, red } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BackButton, LocationFormField, FormField } from "../../components";
 
@@ -35,6 +37,19 @@ const theme = createTheme({
             border: `2px none ${purple[500]}`,
           },
         },
+        {
+          props: { variant: "logout" },
+          style: {
+            textTransform: "none",
+            color: grey[100],
+            fontSize: "1.1rem",
+            backgroundColor: red[400],
+            "&:hover": {
+              backgroundColor: red[600],
+            },
+            border: `2px none ${red[500]}`,
+          },
+        },
       ],
     },
   },
@@ -57,7 +72,13 @@ export const Account = () => {
     setOpen(false);
   };
 
-  console.log(currentUser);
+  const { logout } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   // Fetch User data
   // useEffect(() => {
@@ -113,13 +134,28 @@ export const Account = () => {
     } else {
       console.log(updateObj);
       updateUser(currentUser.user_id, updateObj);
+      // uusert(currentUser.user_id, updateObj);
       setInputErr(false);
       // setOpen(false);
     }
   };
 
   // Handle Patch request
+  // const uusert = async (id, obj) => {
+  //   console.log("send Patch", obj);
+  //   const { res } = await axios.patch(
+  //     `https://budfit.herokuapp.com/users/${id}/`
+  //   );
+  //   console.log(res);
+  // };
+
   async function updateUser(id, obj) {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
+      },
+    };
     try {
       fetch(`http://localhost:5000/users/${id}`, {
         method: 'PATCH',
@@ -137,11 +173,6 @@ export const Account = () => {
       })
         .then((response) => response.json())
         .then((json) => console.log(json));
-      // const res = await axios.patch(
-      //   `http://localhost:5000/users/${id}/`,
-      //   obj
-      // );
-      // console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -269,7 +300,7 @@ export const Account = () => {
                         /> */}
                       </div>
                       <div className="input-container">
-                        <FormField label="Start Time" myFieldType="date" />
+                        <FormField label="Date of Birth" myFieldType="date" />
                         {/* <TextField
                           aria-label="textfield"
                           name="dob"
@@ -388,6 +419,15 @@ export const Account = () => {
                       fullWidth
                     >
                       Edit Details
+                    </Button>
+                    <Button
+                      variant="logout"
+                      className="edit-button"
+                      type="submit"
+                      onClick={handleLogout}
+                      value="Logout"
+                    >
+                      Logout
                     </Button>
                   </div>
                 </div>
