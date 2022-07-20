@@ -41,7 +41,7 @@ function Search() {
   const users = useSelector((state) => state.searchResults);
   const currentUser = useSelector((state) => state.currentUser);
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
-  const [lastDirection, setLastDirection] = useState('');
+  const [lastDirection, setLastDirection] = useState("");
 
   const currentIndexRef = useRef(currentIndex);
 
@@ -68,19 +68,19 @@ function Search() {
       console.log(currentUser.user_id);
       console.log("Going to event:");
       console.log(id);
-      await match(id)
+      await match(id);
     }
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
   };
 
   const match = async (event_id) => {
-    let resp = await axios.post("http://localhost:5000/matches", {
+    let resp = await axios.post("https://budfit.herokuapp.com/matches", {
       user_id: currentUser.user_id,
-      event_id: event_id
+      event_id: event_id,
     });
     console.log(resp);
-  }
+  };
 
   const outOfFrame = (idx) => {
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
@@ -107,7 +107,10 @@ function Search() {
         <h4>No more events!</h4>
         <br />
         <br />
-        <h4>Search again by clicking<br /> search at the bottom.</h4>
+        <h4>
+          Search again by clicking
+          <br /> search at the bottom.
+        </h4>
         {users.map((thisEvent, index) => (
           <TinderCard
             ref={childRefs[index]}
@@ -117,15 +120,17 @@ function Search() {
             onCardLeftScreen={() => outOfFrame(index)}
           >
             <div
-              style={{ backgroundImage: 'url(' + thisEvent.img + ')' }}
-              className="card">
+              style={{ backgroundImage: "url(" + thisEvent.img + ")" }}
+              className="card"
+            >
               <div className="innerCardContainer">
                 <h3>{thisEvent.title}</h3>
                 <p>{thisEvent.descr}</p>
-                <p>Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}</p>
+                <p>
+                  Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}
+                </p>
               </div>
             </div>
-
           </TinderCard>
         ))}
       </div>
