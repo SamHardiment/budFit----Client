@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { changeSearchResults } from "../../redux/action";
-import './index.css'
+import "./index.css";
 
 const images = [
   { name: "basketball", src: "https://i.imgur.com/60iRW40.jpg" },
@@ -29,17 +29,17 @@ function Searching() {
   async function fetchUsers() {
     try {
       const { data } = await axios.get(`https://budfit.herokuapp.com/events`);
-      
-      let events = data.filter(v => v.location == currentUser.preferences);
+
+      let events = data.filter((v) => v.location == currentUser.preferences);
 
       let matches = await axios.get(`https://budfit.herokuapp.com/matches`);
-      
-      matches = matches.data
-      matches = matches.filter(v => v.user_id == currentUser.user_id);
-      matches = matches.map((e)=>e.event_id)
-      
-      events = events.filter(v => !matches.includes(v.event_id));
-      
+
+      matches = matches.data;
+      matches = matches.filter((v) => v.user_id == currentUser.user_id);
+      matches = matches.map((e) => e.event_id);
+
+      events = events.filter((v) => !matches.includes(v.event_id));
+
       events.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
@@ -47,16 +47,17 @@ function Searching() {
       for (let i = 0; i < events.length; i++) {
         let event = events[i];
 
-        let attendees = matches.filter(v => v.event_id == event.event_id);
-        let attending = attendees.map((e)=>e.user_id)
+        let attendees = matches.filter((v) => v.event_id == event.event_id);
+        let attending = attendees.map((e) => e.user_id);
 
-        let source = images.filter(image => image.name.toLowerCase() == event.activity.toLowerCase());
+        let source = images.filter(
+          (image) => image.name.toLowerCase() == event.activity.toLowerCase()
+        );
 
-        events[i] = {...events[i], attending: attending, img: source[0].src}
+        events[i] = { ...events[i], attending: attending, img: source[0].src };
       }
 
       setUsers(events);
-
     } catch (error) {
       console.log(error);
     }

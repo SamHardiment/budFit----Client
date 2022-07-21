@@ -6,6 +6,7 @@ import { Button, Typography } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./style.css";
+import { useSelector, useDispatch } from "react-redux";
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -30,6 +31,7 @@ const theme = createTheme({
 function EventDetails() {
   const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(true);
+  const currentUser = useSelector((state) => state.currentUser);
 
   useEffect(() => {
     setLoading(true);
@@ -40,7 +42,6 @@ function EventDetails() {
       async function getEventDetails() {
         try {
           const { data } = await axios.get(`${url}`);
-          console.log(data);
           setEvent(data);
           setLoading(false);
         } catch (err) {
@@ -52,9 +53,37 @@ function EventDetails() {
   }, []);
 
   const handleUnmatch = () => {
-    console.log("unmatch");
+    deleteEvent();
   };
 
+  async function deleteEvent() {
+    try {
+      const currentURL = window.location.href;
+      const eventID = currentURL.substring(currentURL.indexOf("#") + 1);
+      const url = `https://budfit.herokuapp.com/events/${eventID}/`;
+      const { data } = await axios.get(`${url}`);
+      console.log(data);
+      let matchData = await axios.get(`https://budfit.herokuapp.com/matches`);
+      matchData = matchData.data;
+      // All the matches the currrent user is matched with
+
+      matchData = matchData.filter((m) => m.match_id == currentUser.user_id);
+      for (let i = 0; i < matchData.length; i++) {
+        let event = matchData[i];
+        console.log(event);
+        let eventToDelete = matchData.filter(
+          (m) => m.event_id == event.event_id
+        );
+        const deleteID = eventToDelete[0].event_id;
+        const { response } = await axios.delete(
+          `https://budfit.herokuapp.com/matches/${deleteID}/`
+        );
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       {loading ? (
