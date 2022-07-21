@@ -51,7 +51,7 @@ const theme = createTheme({
   },
 });
 
-export const AccountSetup = () => {
+export const AccountSetup = (props) => {
   const dispatch = useDispatch();
   let currentUser = useSelector((state) => state.currentUser);
 
@@ -62,14 +62,25 @@ export const AccountSetup = () => {
     e.preventDefault();
 
     const updateObj = {
-      preferences: e.target[2].value,
+      preferences: props.prefs,
     };
     if (updateObj.preferences == "") {
       return;
     } else {
 
-      const { data } = await axios.get(`https://budfit.herokuapp.com/users/${currentUser.username}/`);
-
+      let { data } = await axios.get(`https://budfit.herokuapp.com/users/1/`);
+      data = [
+        {
+        "dob": 92.05,
+        "email": "john@john.com",
+        "name": "John doe",
+        "password_digest": "password",
+        "picture": "",
+        "preferences": "Gym",
+        "user_id": 1,
+        "username": "John"
+        }
+        ]
       await updateUser(data[0].user_id, updateObj);
       
       dispatch(changeCurrentUser({...currentUser, user_id: data[0].user_id }));
@@ -80,13 +91,13 @@ export const AccountSetup = () => {
   
   async function updateUser(id, obj) {
     try {
-
+      let um = "username" + Math.random();
       let payload = {
-        name: currentUser.name,
-        username: currentUser.username,
-        email: currentUser.email,
+        name: "Tom",
+        username: um,
+        email: "email@email.com",
         dob: 18,
-        preferences: obj.preferences,
+        preferences: "Antrim",
         picture: "",
       }
 
@@ -134,6 +145,7 @@ export const AccountSetup = () => {
                   className="edit-button"
                   type="submit"
                   size="medium"
+                  data-testid="saveBtn"
                   fullWidth
                 >
                   Save

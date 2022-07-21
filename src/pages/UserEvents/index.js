@@ -12,63 +12,63 @@ import "./index.css";
 
 export const UserEvents = () => {
   const currentUser = useSelector((state) => state.currentUser);
-
+  console.log("currentUser:");
+  console.log(currentUser);
   const navigate = useNavigate();
 
   const [totalEvents, setTotalEvents] = useState(0);
+  console.log("totalEvents:");
+  console.log(totalEvents);
   const [events, setEvents] = useState([]);
-
+  console.log("events:")
+  console.log(events)
   // Get user events
   useEffect(() => {
-    getMatches();
-  }, []);
-
-  async function getUserEvents() {
-    try {
-      const { data } = await axios.get(`https://budfit.herokuapp.com/matches`);
-
-      let matches = data.filter((m) => m.match_id == currentUser.user_id);
-
-      let filterEvents = []
-
-      for (let i = 0; i < matches.length; i++) {
-        let event = matches[i];
-        const { data } = await axios.get(
-          `https://budfit.herokuapp.com/events/${event.event_id}/`
-        );
-
+    let { data } = axios.get(`https://budfit.herokuapp.com/matches`);
+    data = [
+      {
+      "event_id": 1,
+      "match_id": 1,
+      "user_id": 1
+      },
+      {
+      "event_id": 10,
+      "match_id": 2,
+      "user_id": 4
       }
-      setEvents(data);
-      setTotalEvents(events.length);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async function getMatches() {
-    const { data } = await axios.get(`https://budfit.herokuapp.com/matches`);
+      ]
     let events = data.filter(function (el) {
       return el.user_id == currentUser.user_id;
     });
-
+  
     for (let i = 0; i < events.length; i++) {
       let event = events[i];
-      const { data } = await axios.get(`https://budfit.herokuapp.com/events/${event.event_id}/`);
+      let { data } = axios.get(`https://budfit.herokuapp.com/events/1/`);
+      data = [
+        {
+        "activity": "Football",
+        "date": "Sat, 23 Jul 2022 00:00:00 GMT",
+        "descr": "Big event!! Need 11 people to join for a football match this Saturday,  Waterloo Road, Wolverhampton",
+        "event_id": 1,
+        "location": "West Midlands",
+        "spaces": "3",
+        "title": "11 A-side Football Match"
+        }
+        ]
       events[i] = data[0]
     }
-
+  
     events.sort(function (a, b) {
       return new Date(a.date) - new Date(b.date);
     });
-
+  
     if (events.length) {
       setEvents(events);
       setTotalEvents(events.length);
     }
-  }
+  }, []);
 
   // Handle naviagtion
-
   const handleCreateClick = () => {
     navigate("/create");
   };

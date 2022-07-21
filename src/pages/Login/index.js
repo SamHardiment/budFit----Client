@@ -68,7 +68,7 @@ export const Login = () => {
   // const navigate = useNavigate();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ username: "Millman", password: "password" });
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -190,6 +190,7 @@ export const Login = () => {
               type="submit"
               color="success"
               size="medium"
+              data-testid="loginTestBtn"
               fullWidth
             >
               Login

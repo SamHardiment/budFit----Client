@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
 
 import { Button, Typography } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
 import { TopBar, EventView, BackButton } from "../../components";
 import "./style.css";
-
 
 const theme = createTheme({
   components: {
@@ -36,15 +31,46 @@ const theme = createTheme({
 });
 
 function EventDetails() {
-  const [event, setEvent] = useState({});
   const [myAttendees, setMyAttendees] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const currentUser = useSelector((state) => state.currentUser);
+  const [event, setEvent] = useState([{
+    "activity": "Football",
+    "date": "Sat, 23 Jul 2022 00:00:00 GMT",
+    "descr": "Big event!! Need 11 people to join for a football match this Saturday,  Waterloo Road, Wolverhampton",
+    "event_id": 1,
+    "location": "West Midlands",
+    "spaces": "3",
+    "title": "11 A-side Football Match"
+    },
+    {
+    "activity": "Golf",
+    "date": "Sat, 23 Jul 2022 00:00:00 GMT",
+    "descr": "Wolverhampton Adventure Golf, maximum of 15 spaces, first come first serve basis",
+    "event_id": 2,
+    "location": "West Midlands",
+    "spaces": "2",
+    "title": "Golf "
+    },
+    {
+    "activity": "Running",
+    "date": "Sun, 24 Jul 2022 00:00:00 GMT",
+    "descr": "Charity event, Running for Cancer Research, spaces unlimited Wolverhampton park",
+    "event_id": 3,
+    "location": "West Midlands",
+    "spaces": "N/A",
+    "title": "Charity running event"
+    }]);
 
-  const eventID = useParams().id;
+  const eventID = 1;
 
   async function getAttendees() {
     let matches = await axios.get(`https://budfit.herokuapp.com/matches`);
+    matches = {data:[
+      {
+      "event_id": 1,
+      "match_id": 1,
+      "user_id": 1
+      }
+      ]}
     matches = matches.data
 
     let attendees = matches.filter(function (el) {
@@ -53,7 +79,19 @@ function EventDetails() {
 
     for (let i = 0; i < attendees.length; i++) {
       let attendee = attendees[i];
-      const { data } = await axios.get(`https://budfit.herokuapp.com/users/${attendee.user_id}/`);
+      let { data } = await axios.get(`https://budfit.herokuapp.com/users/1/`);
+      data = [
+        {
+        "dob": 92.05,
+        "email": "john@john.com",
+        "name": "John doe",
+        "password_digest": "password",
+        "picture": "",
+        "preferences": "Gym",
+        "user_id": 1,
+        "username": "John"
+        }
+        ]
       attendees[i] = data[0]
     }
     setMyAttendees(attendees);
@@ -65,16 +103,24 @@ function EventDetails() {
   
 
   useEffect(() => {
-    setLoading(true);
     setTimeout(() => {
-      const url = `https://budfit.herokuapp.com/events/${eventID}/`;
+      const url = `https://budfit.herokuapp.com/events/1/`;
       async function getEventDetails() {
         try {
           let { data } = await axios.get(`${url}`);
-
+          data = [
+            {
+            "activity": "Football",
+            "date": "Sat, 23 Jul 2022 00:00:00 GMT",
+            "descr": "Big event!! Need 11 people to join for a football match this Saturday,  Waterloo Road, Wolverhampton",
+            "event_id": 1,
+            "location": "West Midlands",
+            "spaces": "3",
+            "title": "11 A-side Football Match"
+            }
+            ]
           setEvent(data);
 
-          setLoading(false);
         } catch (err) {
           console.log(err);
         }
@@ -88,36 +134,10 @@ function EventDetails() {
   };
 
   async function deleteEvent() {
-    try {
-      const url = `https://budfit.herokuapp.com/events/${eventID}/`;
-      const { data } = await axios.get(`${url}`);
-      let matchData = await axios.get(`https://budfit.herokuapp.com/matches`);
-      matchData = matchData.data;
-      // All the matches the currrent user is matched with
-
-      matchData = matchData.filter((m) => m.match_id == currentUser.user_id);
-      for (let i = 0; i < matchData.length; i++) {
-        let event = matchData[i];
-        let eventToDelete = matchData.filter(
-          (m) => m.event_id == event.event_id
-        );
-        const deleteID = eventToDelete[0].event_id;
-        const { response } = await axios.delete(
-          `https://budfit.herokuapp.com/matches/${deleteID}/`
-        );
-      }
-    } catch (err) {
-      console.log(err);
-    }
+      console.log("Deleting event");
   }
   return (
     <>
-      {loading ? (
-        <>
-          <TopBar />
-          <div className="rays" />
-        </>
-      ) : (
         <div className="eventPage">
           <div className="account-top">
             <BackButton />
@@ -147,6 +167,7 @@ function EventDetails() {
                   onClick={handleUnmatch}
                   size="medium"
                   fullWidth
+                  data-testid="leaveBtn"
                 >
                   Leave Event
                 </Button>
@@ -154,7 +175,6 @@ function EventDetails() {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 }

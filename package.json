@@ -17,7 +17,8 @@
     },
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/actions/"
+      "/actions/",
+      "/src/auth"
     ]
   },
   "repository": {

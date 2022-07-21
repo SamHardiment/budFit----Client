@@ -26,16 +26,45 @@ function Searching() {
 
   const navigate = useNavigate();
 
-  async function fetchUsers() {
+  useEffect(() => {
     try {
-      const { data } = await axios.get(`https://budfit.herokuapp.com/events`);
+      let { data } = axios.get(`https://budfit.herokuapp.com/events`);
+      data = [
+        {
+          "activity": "Football",
+          "date": "Sat, 23 Jul 2022 00:00:00 GMT",
+          "descr": "Big event!! Need 11 people to join for a football match this Saturday,  Waterloo Road, Wolverhampton",
+          "event_id": 1,
+          "location": "West Midlands",
+          "spaces": "3",
+          "title": "11 A-side Football Match"
+        },
+        {
+          "activity": "Golf",
+          "date": "Sat, 23 Jul 2022 00:00:00 GMT",
+          "descr": "Wolverhampton Adventure Golf, maximum of 15 spaces, first come first serve basis",
+          "event_id": 2,
+          "location": "West Midlands",
+          "spaces": "2",
+          "title": "Golf "
+        }
+      ]
+      let events = data.filter((v) => v.location == "West Midlands");
 
-      let events = data.filter((v) => v.location == currentUser.preferences);
-
-      let matches = await axios.get(`https://budfit.herokuapp.com/matches`);
-
-      matches = matches.data;
-      matches = matches.filter((v) => v.user_id == currentUser.user_id);
+      let matches = axios.get(`https://budfit.herokuapp.com/matches`);
+      matches = [
+        {
+          "event_id": 1,
+          "match_id": 1,
+          "user_id": 1
+        },
+        {
+          "event_id": 10,
+          "match_id": 2,
+          "user_id": 4
+        }
+      ]
+      matches = matches.filter((v) => v.user_id == 1);
       matches = matches.map((e) => e.event_id);
 
       events = events.filter((v) => !matches.includes(v.event_id));
@@ -61,10 +90,6 @@ function Searching() {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  useEffect(() => {
-    fetchUsers();
   }, []);
 
   useEffect(() => {

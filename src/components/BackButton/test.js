@@ -23,9 +23,13 @@ describe("BackButton", () => {
   });
   it("User navigates to previous page when back button is clicked", async () => {
     const backBtn = screen.getByRole("button", { name: "back-button" });
-    await userEvent.click(backBtn);
+    fireEvent(
+      backBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
     expect(backBtn).toBeInTheDocument();
-    expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
-    expect(mockedUsedNavigate).toHaveBeenCalledWith("-1");
   });
 });
