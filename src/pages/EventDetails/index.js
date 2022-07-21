@@ -76,7 +76,7 @@ function EventDetails() {
       let event = matches.filter((e) => e.match_id == eventID);
       console.log(event);
       const { response } = await axios.delete(
-        `https://budfit.herokuapp.com/matches/${event.event_id}`
+        `https://budfit.herokuapp.com/matches/${event.event_id}/`
       );
       console.log(response);
     } catch (err) {
