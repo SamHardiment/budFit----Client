@@ -37,7 +37,24 @@ function RegForm() {
 
   const handleSubmitt = async (e) => {
     e.preventDefault();
-    const regResult = await register(formData);
+    if (
+      formData.name == "" ||
+      formData.username == "" ||
+      formData.email == "" ||
+      formData.password == "" ||
+      formData.password.length < 6
+    ) {
+      console.log("errors");
+    } else {
+      const regResult = await register(formData);
+      if (regResult === "Registration successful") {
+        console.log("it worked");
+        setFormData({ name: "", username: "", email: "", password: "" });
+        navigate("/searching");
+      } else {
+        throw new Error("Unsuccessful registration");
+      }
+    }
     if (formData.name == "") {
       setNameError(true);
     } else {
@@ -57,14 +74,6 @@ function RegForm() {
       setPassError(true);
     } else {
       setPassError(false);
-    }
-
-    if (regResult === "Registration successful") {
-      console.log("it worked");
-      setFormData({ name: "", username: "", email: "", password: "" });
-      navigate("/searching");
-    } else {
-      throw new Error("Unsuccessful registration");
     }
   };
 
