@@ -99,18 +99,6 @@ function EventDetails() {
           </div>
         </div>
       )}
-      {/* <p>{props.description}</p>
-      <p>Where? {props.location}</p>
-      <p>When? {props.time}</p>
-      <p>
-        Spaces: {thisEvent.attending.length()}/{thisEvent.spaces}
-      </p>
-      <p>Attendees:</p>
-      <ul>
-        {props.attending.map((user, index) => (
-          <li key={index}>{user.name}</li>
-        ))}
-      </ul> */}
     </>
   );
 }
