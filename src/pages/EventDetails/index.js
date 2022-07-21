@@ -7,6 +7,7 @@ import { grey, red } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./style.css";
 import { useSelector, useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -31,6 +32,7 @@ const theme = createTheme({
 function EventDetails() {
   const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.currentUser);
 
   useEffect(() => {
@@ -80,6 +82,7 @@ function EventDetails() {
         );
         console.log(response);
       }
+      navigate("/Events");
     } catch (err) {
       console.log(err);
     }
