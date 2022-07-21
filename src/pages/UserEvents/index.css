@@ -1,6 +1,6 @@
 #chatsPageContainer {
   position: absolute;
-  top: 10vh;
+  top: 7vh;
   /* left: 5vw; */
   width: 90vw;
   max-width: 360px;
@@ -10,6 +10,7 @@
 
 #chatsContainer {
   margin-top: 10px;
+
   height: 80%;
   overflow-y: scroll;
 }
@@ -58,12 +59,12 @@
 
 #chatsPageContainer > button:first-of-type {
   position: absolute;
-  bottom: 25px;
+  bottom: -20px;
   right: 25px;
 }
 #chatsPageContainer > button:nth-of-type(2) {
   position: absolute;
-  bottom: 25px;
+  bottom: -20px;
   left: 25px;
 }
 

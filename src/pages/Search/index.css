@@ -68,7 +68,7 @@ h2 {
 
 .searchButtonContainer {
   position: absolute;
-  bottom: 5vh;
+  bottom: 4.6vh;
   max-width: 398px;
   margin-bottom: 7px;
   width: 98vw;
@@ -100,7 +100,7 @@ h2 {
 }
 
 #topBarLogo {
-  margin-top: 5px;
+  margin-top: 20px;
   height: 8vh;
 }
 
@@ -121,6 +121,6 @@ h2 {
 
   #topBarLogo {
     height: 64px;
-    margin-top: 8px;
+    margin-top: 20px;
   }
 }

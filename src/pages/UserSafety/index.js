@@ -1,11 +1,15 @@
 import React from "react";
 
-import { TopBar } from "../../components";
+import { BackButton } from "../../components";
+import { Typography } from "@mui/material";
 
 function UserSafety() {
   return (
-    <>
-      <TopBar />
+    <div className="reg-container">
+      <div className="account-top">
+        <BackButton />
+        <Typography variant="h6">Saftey</Typography>
+      </div>
       <div id="chatsPageContainer">
         <h4>User Safety Advice</h4>
         <div id="safety-container">
@@ -39,7 +43,7 @@ function UserSafety() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

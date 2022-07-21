@@ -1,6 +1,6 @@
 .bg-container {
   max-width: 400px;
-  max-height: 800px;
+  max-height: 830px;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -8,11 +8,11 @@
   row-gap: 300px;
   align-items: center;
   flex-direction: column;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 .overlay {
   max-width: 400px;
-  max-height: 800px;
+  max-height: 830px;
   height: 100vh;
   width: 100vw;
   background-image: linear-gradient(
@@ -26,7 +26,7 @@
   row-gap: 300px;
   align-items: center;
   flex-direction: column;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .btn-container {

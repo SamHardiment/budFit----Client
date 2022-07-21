@@ -3,12 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
-import {
-  Button,
-  Container,
-  CssBaseline,
-  Typography,
-} from "@mui/material";
+import { Button, Container, CssBaseline, Typography } from "@mui/material";
 import { BackButton, LocationFormField } from "../../components";
 
 import { changeCurrentUser } from "../../redux/action";
@@ -67,20 +62,20 @@ export const AccountSetup = () => {
     if (updateObj.preferences == "") {
       return;
     } else {
-
-      const { data } = await axios.get(`https://budfit.herokuapp.com/users/${currentUser.username}/`);
+      const { data } = await axios.get(
+        `https://budfit.herokuapp.com/users/${currentUser.username}/`
+      );
 
       await updateUser(data[0].user_id, updateObj);
-      
-      dispatch(changeCurrentUser({...currentUser, user_id: data[0].user_id }));
 
-      navigate('/searching')
+      dispatch(changeCurrentUser({ ...currentUser, user_id: data[0].user_id }));
+
+      navigate("/searching");
     }
   };
-  
+
   async function updateUser(id, obj) {
     try {
-
       let payload = {
         name: currentUser.name,
         username: currentUser.username,
@@ -88,17 +83,18 @@ export const AccountSetup = () => {
         dob: 12,
         preferences: obj.preferences,
         picture: "",
-      }
+      };
 
       fetch(`https://budfit.herokuapp.com/users/${id}/`, {
-        method: 'PATCH',
+        method: "PATCH",
         body: JSON.stringify(payload),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-      })
-      dispatch(changeCurrentUser({...currentUser, preferences: obj.preferences }));
-
+      });
+      dispatch(
+        changeCurrentUser({ ...currentUser, preferences: obj.preferences })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +136,6 @@ export const AccountSetup = () => {
                 </Button>
               </form>
             </div>
-
           </Container>
         </div>
       </ThemeProvider>
