@@ -64,10 +64,6 @@ function Search() {
 
   const swiped = async (direction, index, id) => {
     if (direction == "right") {
-      console.log("The user:");
-      console.log(currentUser.user_id);
-      console.log("Going to event:");
-      console.log(id);
       await match(id);
     }
     setLastDirection(direction);
@@ -75,16 +71,14 @@ function Search() {
   };
 
   const match = async (event_id) => {
-    let resp = await axios.post("https://budfit.herokuapp.com/matches", {
+    await axios.post("https://budfit.herokuapp.com/matches", {
       user_id: currentUser.user_id,
       event_id: event_id,
     });
-    console.log(resp);
   };
 
   const outOfFrame = (idx) => {
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
-    console.log(lastDirection);
   };
 
   const swipe = async (dir) => {

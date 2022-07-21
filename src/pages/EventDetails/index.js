@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { TopBar, EventView, BackButton } from "../../components";
+
 import { Button, Typography } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+
+import { TopBar, EventView, BackButton } from "../../components";
 import "./style.css";
-import { useSelector, useDispatch } from "react-redux";
+
+
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -28,21 +34,46 @@ const theme = createTheme({
     },
   },
 });
+
 function EventDetails() {
   const [event, setEvent] = useState({});
+  const [myAttendees, setMyAttendees] = useState([]);
   const [loading, setLoading] = useState(true);
   const currentUser = useSelector((state) => state.currentUser);
+
+  const eventID = useParams().id;
+
+  async function getAttendees() {
+    let matches = await axios.get(`https://budfit.herokuapp.com/matches`);
+    matches = matches.data
+
+    let attendees = matches.filter(function (el) {
+      return el.event_id == eventID;
+    });
+
+    for (let i = 0; i < attendees.length; i++) {
+      let attendee = attendees[i];
+      const { data } = await axios.get(`https://budfit.herokuapp.com/users/${attendee.user_id}/`);
+      attendees[i] = data[0]
+    }
+    setMyAttendees(attendees);
+  }
+
+  useEffect(() => {
+    getAttendees()
+  }, [])
+  
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      const currentURL = window.location.href;
-      const eventID = currentURL.substring(currentURL.indexOf("#") + 1);
       const url = `https://budfit.herokuapp.com/events/${eventID}/`;
       async function getEventDetails() {
         try {
-          const { data } = await axios.get(`${url}`);
+          let { data } = await axios.get(`${url}`);
+
           setEvent(data);
+
           setLoading(false);
         } catch (err) {
           console.log(err);
@@ -58,11 +89,8 @@ function EventDetails() {
 
   async function deleteEvent() {
     try {
-      const currentURL = window.location.href;
-      const eventID = currentURL.substring(currentURL.indexOf("#") + 1);
       const url = `https://budfit.herokuapp.com/events/${eventID}/`;
       const { data } = await axios.get(`${url}`);
-      console.log(data);
       let matchData = await axios.get(`https://budfit.herokuapp.com/matches`);
       matchData = matchData.data;
       // All the matches the currrent user is matched with
@@ -70,7 +98,6 @@ function EventDetails() {
       matchData = matchData.filter((m) => m.match_id == currentUser.user_id);
       for (let i = 0; i < matchData.length; i++) {
         let event = matchData[i];
-        console.log(event);
         let eventToDelete = matchData.filter(
           (m) => m.event_id == event.event_id
         );
@@ -78,7 +105,6 @@ function EventDetails() {
         const { response } = await axios.delete(
           `https://budfit.herokuapp.com/matches/${deleteID}/`
         );
-        console.log(response);
       }
     } catch (err) {
       console.log(err);
@@ -108,6 +134,7 @@ function EventDetails() {
                   description={event.descr}
                   location={event.location}
                   spaces={event.spaces}
+                  attendees={myAttendees}
                 />
               ))}
             </div>
@@ -128,18 +155,6 @@ function EventDetails() {
           </div>
         </div>
       )}
-      {/* <p>{props.description}</p>
-      <p>Where? {props.location}</p>
-      <p>When? {props.time}</p>
-      <p>
-        Spaces: {thisEvent.attending.length()}/{thisEvent.spaces}
-      </p>
-      <p>Attendees:</p>
-      <ul>
-        {props.attending.map((user, index) => (
-          <li key={index}>{user.name}</li>
-        ))}
-      </ul> */}
     </>
   );
 }

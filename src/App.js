@@ -20,6 +20,7 @@ export const App = () => {
           <> */}
         <Route path="/Login" element={<pages.Login />} />
         <Route path="/Register" element={<pages.Register />} />
+        <Route path="/Setup" element={<pages.AccountSetup />} />
         {/* </>
         ) : (
           <> */}
@@ -36,7 +37,7 @@ export const App = () => {
         <Route path="/Safety" element={<pages.UserSafety />} />
         <Route path="/Success" element={<pages.CreateEventSuccess />} />
         <Route path="/u/:id" element={<pages.UserDetails />} />
-        <Route path="/EventDetails/:id" element={<pages.EventDetails />} />
+        <Route path="/events/:id" element={<pages.EventDetails />} />
 
         <Route path="*" element={<pages.Error404 />} />
       </Routes>

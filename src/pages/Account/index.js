@@ -7,7 +7,6 @@ import {
   Avatar,
   Box,
   Button,
-  Alert,
   Container,
   CssBaseline,
   Typography,
@@ -97,7 +96,6 @@ export const Account = () => {
   //Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
 
     const updateObj = {
       name: e.target[0].value,
@@ -116,21 +114,12 @@ export const Account = () => {
       setInputErr(false);
       return;
     } else {
-      console.log(updateObj);
       updateUser(currentUser.user_id, updateObj);
-      // uusert(currentUser.user_id, updateObj);
       setInputErr(false);
-      // setOpen(false);
     }
   };
 
   async function updateUser(id, obj) {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-      },
-    };
     try {
       fetch(`https://budfit.herokuapp.com/users/${id}/`, {
         method: 'PATCH',
@@ -146,8 +135,6 @@ export const Account = () => {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
     } catch (error) {
       console.log(error);
     }

@@ -29,8 +29,6 @@ function LogForm() {
         password: user.password,
       })
       .then((res) => {
-        console.log(res, "res");
-        console.log(res.data, "res data");
         navigate("/");
       });
     // checkUser(userData); // Post request to check if user exists

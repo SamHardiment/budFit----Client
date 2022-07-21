@@ -13,7 +13,6 @@ import "./index.css";
 export const UserEvents = () => {
   const currentUser = useSelector((state) => state.currentUser);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [totalEvents, setTotalEvents] = useState(0);
@@ -21,25 +20,53 @@ export const UserEvents = () => {
 
   // Get user events
   useEffect(() => {
-    getUserEvents();
+    getMatches();
   }, []);
 
   async function getUserEvents() {
     try {
       const { data } = await axios.get(`https://budfit.herokuapp.com/matches`);
+
       let matches = data.filter((m) => m.match_id == currentUser.user_id);
+
+      let filterEvents = []
+
       for (let i = 0; i < matches.length; i++) {
         let event = matches[i];
         const { data } = await axios.get(
           `https://budfit.herokuapp.com/events/${event.event_id}/`
         );
-        setEvents(data);
-        setTotalEvents(events.length);
+
       }
+      setEvents(data);
+      setTotalEvents(events.length);
     } catch (err) {
       console.log(err);
     }
   }
+
+  async function getMatches() {
+    const { data } = await axios.get(`https://budfit.herokuapp.com/matches`);
+    let events = data.filter(function (el) {
+      return el.user_id == currentUser.user_id;
+    });
+
+    for (let i = 0; i < events.length; i++) {
+      let event = events[i];
+      const { data } = await axios.get(`https://budfit.herokuapp.com/events/${event.event_id}/`);
+      events[i] = data[0]
+    }
+
+    events.sort(function (a, b) {
+      return new Date(a.date) - new Date(b.date);
+    });
+
+    if (events.length) {
+      setEvents(events);
+      setTotalEvents(events.length);
+    }
+  }
+
   // Handle naviagtion
 
   const handleCreateClick = () => {
@@ -65,7 +92,7 @@ export const UserEvents = () => {
               title={event.title}
               activity={event.activity}
 
-              // lastMessage={event.lastMessage}
+            // lastMessage={event.lastMessage}
             />
           ))}
         </div>
