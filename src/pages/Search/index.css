@@ -69,7 +69,7 @@ h2 {
 
 .searchButtonContainer {
   position: absolute;
-  bottom: 4.6vh;
+  bottom: 6.5vh;
   max-width: 398px;
   margin-bottom: 7px;
   width: 98vw;
@@ -101,8 +101,8 @@ h2 {
 }
 
 #topBarLogo {
+  height: 64px;
   margin-top: 20px;
-  height: 8vh;
 }
 
 /* @media only screen and (min-width: 401px) {
@@ -110,18 +110,18 @@ h2 {
     left: calc(50vw - 180px);
   }
 } */
-
+/* 
 @media only screen and (min-height: 801px) {
   /* .searchButtonContainer {
     bottom: calc(100vh + 64px - 800px);
   } */
 
-  .swipe {
+/* .swipe {
     top: 80px;
-  }
+  } */
 
-  #topBarLogo {
+/* #topBarLogo {
     height: 64px;
     margin-top: 20px;
   }
-}
+} */

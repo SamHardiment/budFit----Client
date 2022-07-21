@@ -8,15 +8,20 @@
   height: 50px;
 }
 
-.account-container {
-  width: 100%;
+.account-setup-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  width: 90%;
   margin-top: 10px;
 }
 
 .avatar {
   object-fit: contain;
 }
-
+.setup-title {
+  text-align: center;
+}
 .detail-box {
   width: 300px;
   display: flex;

@@ -3,16 +3,19 @@
 }
 
 .create-event-container {
-  width: 100%;
+  max-width: 400px;
+  width: 100vw;
+  margin-top: 20px;
+  padding: 0 20px;
   display: flex;
   row-gap: 40px;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   justify-content: flex-start;
 }
 
 .create-event-container > form {
-  width: 100%;
+  width: 90%;
 }
 
 .create-scroll {

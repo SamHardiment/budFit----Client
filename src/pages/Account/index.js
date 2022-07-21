@@ -150,7 +150,7 @@ export const Account = () => {
             ""
           ) : (
             <div className="loading-account-container">
-              <Typography variant="h5">Pulling search results.</Typography>
+              <Typography variant="h5">Loading Account</Typography>
 
               <div className="rays" />
             </div>
@@ -206,7 +206,7 @@ export const Account = () => {
                     className="reg-form"
                     aria-label="form"
                   >
-                    <div className="scrollable-form">
+                    <div className="scrollable-form-account">
                       <div className="input-container">
                         <FormField label="Name" />
                       </div>
@@ -247,37 +247,47 @@ export const Account = () => {
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-signature" />
                       <Typography variant="subTitle2">Name:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.name}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.name}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-dice-d6" />
                       <Typography variant="subTitle2">Username:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.username}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.username}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-envelope" />
                       <Typography variant="subTitle2">Email:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.email}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.email}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-list-ol" />
                       <Typography variant="subTitle2">Age:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.dob}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.dob}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-location-dot" />
                       <Typography variant="subTitle2">Location:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.preferences}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.preferences}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-image" />
@@ -285,9 +295,11 @@ export const Account = () => {
                       <Typography variant="subTitle2">
                         Profile Picture:
                       </Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.picture}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.picture}
+                        </Typography>
+                      </div>
                     </div>
                   </div>
                   <div className="edit-button-container">

@@ -103,9 +103,8 @@ export const AccountSetup = () => {
 
   return (
     <>
-
       <ThemeProvider theme={theme}>
-        <div className="account-container">
+        <div className="account-setup-container">
           <div className="account-top">
             <BackButton />
 
@@ -113,6 +112,11 @@ export const AccountSetup = () => {
           </div>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
+            <div className="setup-title">
+              <Typography variant="h5">
+                Where are you looking for events?
+              </Typography>
+            </div>
 
             <div>
               <form
@@ -140,7 +144,6 @@ export const AccountSetup = () => {
           </Container>
         </div>
       </ThemeProvider>
-
     </>
   );
 };

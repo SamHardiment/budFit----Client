@@ -6,10 +6,24 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Fab } from "@mui/material";
 import { Add, Warning } from "@mui/icons-material";
-import { Typography, Box, Container } from "@material-ui/core";
+import { Typography, Box, Container, Card } from "@material-ui/core";
 import { BackButton, EventPreview } from "../../components";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "./index.css";
-
+const theme = createTheme({
+  palette: {
+    background: {
+      paper: "#fffcf9",
+    },
+    text: {
+      primary: "#ab47bc",
+      secondary: "#ce93d8",
+    },
+    action: {
+      active: "#4caf50",
+    },
+  },
+});
 export const UserEvents = () => {
   const currentUser = useSelector((state) => state.currentUser);
 
@@ -132,17 +146,21 @@ export const UserEvents = () => {
       ) : (
         <div id="chatsPageContainer">
           <div id="chatsContainer">
-            {events.map((event) => (
-              <EventPreview
-                key={Math.random()}
-                event_id={event.event_id}
-                dateTime={event.date}
-                title={event.title}
-                activity={event.activity}
+            <ThemeProvider theme={theme}>
+              {events.map((event) => (
+                <Card sx={{ bgcolor: "#ab47bc" }}>
+                  <EventPreview
+                    key={Math.random()}
+                    event_id={event.event_id}
+                    dateTime={event.date}
+                    title={event.title}
+                    activity={event.activity}
 
-                // lastMessage={event.lastMessage}
-              />
-            ))}
+                    // lastMessage={event.lastMessage}
+                  />
+                </Card>
+              ))}
+            </ThemeProvider>
           </div>
           <Fab
             color="secondary"
