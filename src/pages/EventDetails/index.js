@@ -9,7 +9,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { TopBar, EventView, BackButton } from "../../components";
 import "./style.css";
-import { useSelector, useDispatch } from "react-redux";
+
 import { Navigate, useNavigate } from "react-router-dom";
 const theme = createTheme({
   components: {
