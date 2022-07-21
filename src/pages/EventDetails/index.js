@@ -53,32 +53,33 @@ function EventDetails() {
   }, []);
 
   const handleUnmatch = () => {
-    getEvent();
+    deleteEvent();
   };
 
-  async function getEvent() {
+  async function deleteEvent() {
     try {
       const currentURL = window.location.href;
       const eventID = currentURL.substring(currentURL.indexOf("#") + 1);
       const url = `https://budfit.herokuapp.com/events/${eventID}/`;
       const { data } = await axios.get(`${url}`);
       console.log(data);
-      console.log(currentUser);
-      const { matchData } = await axios.get(
-        `https://budfit.herokuapp.com/matches`
-      );
-      console.log(matchData);
+      let matchData = await axios.get(`https://budfit.herokuapp.com/matches`);
+      matchData = matchData.data;
+      // All the matches the currrent user is matched with
 
-      let matches = matchData.filter((m) => m.match_id == currentUser.user_id);
-      console.log(matches);
-      console.log(eventID);
-
-      let event = matches.filter((e) => e.match_id == eventID);
-      console.log(event);
-      const { response } = await axios.delete(
-        `https://budfit.herokuapp.com/matches/${event.event_id}/`
-      );
-      console.log(response);
+      matchData = matchData.filter((m) => m.match_id == currentUser.user_id);
+      for (let i = 0; i < matchData.length; i++) {
+        let event = matchData[i];
+        console.log(event);
+        let eventToDelete = matchData.filter(
+          (m) => m.event_id == event.event_id
+        );
+        const deleteID = eventToDelete[0].event_id;
+        const { response } = await axios.delete(
+          `https://budfit.herokuapp.com/matches/${deleteID}/`
+        );
+        console.log(response);
+      }
     } catch (err) {
       console.log(err);
     }
