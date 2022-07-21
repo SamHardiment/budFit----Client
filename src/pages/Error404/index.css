@@ -1,9 +1,9 @@
-.errorPageContainer>*{
-    margin-bottom: 25px;
-  }
-  
-  .errorPageContainer>p{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-  }
-  
+.errorPageContainer > * {
+  margin-bottom: 25px;
+}
+
+.errorPageContainer > p {
+  padding: 0 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+}
