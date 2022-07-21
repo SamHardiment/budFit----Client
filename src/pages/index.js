@@ -1,4 +1,5 @@
 export { Account } from "./Account";
+export { AccountSetup } from "./AccountSetup";
 export { ChatRoom } from "./ChatRoom";
 export { CreateEvent } from "./CreateEvent";
 export { default as CreateEventSuccess } from "./CreateEventSuccess";

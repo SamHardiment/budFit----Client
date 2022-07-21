@@ -11,12 +11,17 @@
 
 #chatsContainer{
     margin-top: 10px;
+    height: 80%;
+    overflow-y: scroll;
 }
 
+.eventPreview:hover{
+    cursor: pointer;
+}
 .eventPreview{
     margin-top: 24px;
     height: fit-content;
-    width:100%;
+    width:90%;
     margin-left: 5%;
     padding:5px;
     border: 1px solid var(--grey);
@@ -26,31 +31,28 @@
     grid-template-columns: 70px 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-        "eventLinkIcon .";
+        "eventLinkIcon eventPreviewDateTime"
+        "eventLinkIcon eventPreviewLastMessage";
 }
 
-.eventPreview>a, .eventPreview>a:active, .eventPreview>a:hover, .eventPreview>a:visited{
-    color: black;
-    align-items: center;
-    width: 100%;
-    text-decoration: none;
-}
-
-.eventPreview>a:first-of-type{
-    grid-area: eventLinkIcon;
-}
-
-.eventPreview>a:nth-of-type(2){
+.eventPreview:first-child{
     padding-top: 5px;
-    margin-top: 5px;
 }
 
-.eventPreviewTime, .eventPreviewLastMessage{
-    padding-top: 5px;
+.eventPreviewDateTime{
+    grid-area: eventPreviewDateTime;
     width:max-content;
 }
 
-.eventPreview>a>svg{
+.eventPreviewLastMessage{
+    grid-area: eventPreviewLastMessage;
+    padding-top: 5px;
+    margin-top: 5px;
+    width:max-content;
+}
+
+.eventPreview>svg{
+    grid-area: eventLinkIcon;
     height: 64px;
     width: 64px;
 }
