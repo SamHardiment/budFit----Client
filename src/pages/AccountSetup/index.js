@@ -68,9 +68,10 @@ export const AccountSetup = () => {
 
       await updateUser(data[0].user_id, updateObj);
 
-      dispatch(changeCurrentUser({ ...currentUser, user_id: data[0].user_id }));
-
-      navigate("/searching");
+      dispatch(changeCurrentUser({ ...currentUser, preferences: updateObj.preferences, user_id: data[0].user_id }));
+      setTimeout(function () {
+        navigate("/searching");
+      }, 500);
     }
   };
 
@@ -102,7 +103,7 @@ export const AccountSetup = () => {
 
   return (
     <>
-      
+
       <ThemeProvider theme={theme}>
         <div className="account-container">
           <div className="account-top">
@@ -139,7 +140,7 @@ export const AccountSetup = () => {
           </Container>
         </div>
       </ThemeProvider>
-      
+
     </>
   );
 };
