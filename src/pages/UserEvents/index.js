@@ -33,8 +33,6 @@ export const UserEvents = () => {
         const { data } = await axios.get(
           `https://budfit.herokuapp.com/events/${event.event_id}/`
         );
-        console.log(data);
-
         setEvents(data);
         setTotalEvents(events.length);
       }
