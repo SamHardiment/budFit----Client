@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -106,23 +106,12 @@ function Search() {
           <br /> search at the bottom.
         </h4>
         {users.map((thisEvent, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            className="swipe"
-            key={index}
-            onSwipe={(dir) => swiped(dir, index, thisEvent.event_id)}
-            onCardLeftScreen={() => outOfFrame(index)}
-          >
-            <div
-              style={{ backgroundImage: "url(" + thisEvent.img + ")" }}
-              className="card"
-            >
+          <TinderCard ref={childRefs[index]} className="swipe" key={index} onSwipe={(dir) => swiped(dir, index, thisEvent.event_id)} onCardLeftScreen={() => outOfFrame(index)} >
+            <div style={{ backgroundImage: "url(" + thisEvent.img + ")" }} className="card" >
               <div className="innerCardContainer">
                 <h3>{thisEvent.title}</h3>
                 <p>{thisEvent.descr}</p>
-                <p>
-                  Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}
-                </p>
+                <p> Users Joined: {thisEvent.attending.length}/{thisEvent.spaces} </p>
               </div>
             </div>
           </TinderCard>

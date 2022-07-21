@@ -127,7 +127,7 @@ export const Account = () => {
           name: obj.name,
           username: obj.username,
           email: obj.email,
-          dob: 12,
+          dob: 18,
           preferences: obj.preferences,
           picture: obj.picture,
         }),
