@@ -12,6 +12,7 @@ import {
   CssBaseline,
   Typography,
 } from "@mui/material";
+
 import { BackButton, LocationFormField, FormField } from "../../components";
 
 import { changeCurrentUser } from "../../redux/action";
@@ -133,7 +134,7 @@ export const Account = () => {
     };
     try {
       fetch(`https://budfit.herokuapp.com/users/${id}/`, {
-        method: 'PATCH',
+        method: "PATCH",
         body: JSON.stringify({
           name: obj.name,
           username: obj.username,

@@ -3,13 +3,21 @@ import TinderCard from "react-tinder-card";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import { styled } from "@mui/material/styles";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 import { TopBar } from "../../components";
 import "./index.css";
-
+const theme = createTheme({
+  typography: {
+    // In Chinese and Japanese the characters are usually larger,
+    // so a smaller fontsize may be appropriate.
+    color: grey[100],
+  },
+});
 const MatchButton = styled(IconButton)({
   marginBottom: "8px",
   color: "var(--green)",
@@ -144,12 +152,19 @@ function Search() {
               style={{ backgroundImage: "url(" + thisEvent.img + ")" }}
               className="card"
             >
-              <div className="innerCardContainer">
-                <h3>{thisEvent.title}</h3>
-                <p>{thisEvent.descr}</p>
-                <p>
-                  Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}
-                </p>
+              <div className="swipe-overlay">
+                <div className="innerCardContainer">
+                  <ThemeProvider theme={theme}>
+                    <Typography variant="h5">{thisEvent.title}</Typography>
+                    <Typography variant="subtitle1">
+                      {thisEvent.descr}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Users Joined: {thisEvent.attending.length}/
+                      {thisEvent.spaces}
+                    </Typography>
+                  </ThemeProvider>
+                </div>
               </div>
             </div>
           </TinderCard>
