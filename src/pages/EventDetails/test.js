@@ -12,7 +12,7 @@ jest.mock("axios", () => ({
 
 describe("EventDetails", () => {
     beforeEach(() => {
-        renderWithProviders(<EventDetails />);
+        renderWithReduxProviders(<EventDetails />);
     });
 
     it("Component renders", async () => {
