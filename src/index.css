@@ -1,29 +1,30 @@
 :root {
   /* Placeholders to be updated */
   --off-white: #fffcf9;
-  --purple: #AB47BC;
-  --grey: #a1a5a7; 
-  --turquoise: #4BC6B9; 
-  --blue-green: #73C1C6; 
-  --sky-blue: #96C3CE;
-  --dull-pink: #A79AB2;
-  --mauve: #B57BA6;
+  --purple: #ab47bc;
+  --grey: #a1a5a7;
+  --turquoise: #4bc6b9;
+  --blue-green: #73c1c6;
+  --sky-blue: #96c3ce;
+  --dull-pink: #a79ab2;
+  --mauve: #b57ba6;
   --large-font: 30px;
 }
 
 *,
 *::after,
 *::before {
-    padding: 0;
-    margin: 0;
-    box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
 }
 
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-#root{
+#root {
+  background-color: var(--sky-blue);
   height: 100vh;
   width: 100vw;
   display: grid;
