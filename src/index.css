@@ -1,9 +1,11 @@
 :root {
   /* Placeholders to be updated */
   --off-white: #fffcf9;
-  --purple: #ab47bc;
+  --purple: #ce93d8;
+  --buttonpurple: #ab47bc;
+  --error: #d32f2f;
   --grey: #a1a5a7;
-  --turquoise: #4bc6b9;
+  --green: #4caf50;
   --blue-green: #73c1c6;
   --sky-blue: #96c3ce;
   --dull-pink: #a79ab2;

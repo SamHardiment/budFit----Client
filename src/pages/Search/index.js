@@ -11,28 +11,49 @@ import { TopBar } from "../../components";
 import "./index.css";
 
 const MatchButton = styled(IconButton)({
-  color: "var(--turquoise)",
+  marginBottom: "8px",
+  color: "var(--green)",
   border: "1px solid",
-  borderColor: "var(--turquoise)",
+  borderColor: "var(--green)",
   backgroundColor: "var(--off-white)",
+  "&:hover": {
+    color: "var(--off-white)",
+    border: "1px solid",
+    borderColor: "var(--green)",
+    backgroundColor: "var(--green)",
+  },
   width: "100%",
   height: "100%",
 });
 
 const RejectButton = styled(IconButton)({
-  color: "var(--mauve)",
+  marginBottom: "8px",
+  color: "var(--error)",
   border: "1px solid",
-  borderColor: "var(--mauve)",
+  borderColor: "var(--error)",
   backgroundColor: "var(--off-white)",
+  "&:hover": {
+    color: "var(--off-white)",
+    border: "1px solid",
+    borderColor: "var(--error)",
+    backgroundColor: "var(--error)",
+  },
   width: "100%",
   height: "100%",
 });
 
 const UndoButton = styled(IconButton)({
+  marginTop: "14px",
   color: "var(--grey)",
   border: "1px solid",
   borderColor: "var(--grey)",
   backgroundColor: "var(--off-white)",
+  "&:hover": {
+    color: "var(--off-white)",
+    border: "1px solid",
+    borderColor: "var(--grey)",
+    backgroundColor: "var(--grey)",
+  },
   width: "100%",
   height: "100%",
 });
