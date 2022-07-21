@@ -54,7 +54,7 @@ function UserDetails() {
             <p>Events Joined:</p>
 
             {attending.map((event) => (
-                <EventPreview key={event.id||Math.random()} activity={event.activity} dateTime={event.date} title={event.title} />
+                <EventPreview key={event.id||Math.random()} activity={event.activity} dateTime={event.date} title={event.title} event_id={event.event_id} />
             ))}
 
         </>

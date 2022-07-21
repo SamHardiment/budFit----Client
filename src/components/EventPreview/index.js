@@ -46,10 +46,10 @@ function EventPreview(props) {
   ];
 
   const handleEventDetailsClick = () => {
-    navigate(`/EventDetails/:id`);
+    navigate(`/events/${event_id}`);
   };
 
-  //   let x = Date.parse(`${dateTime}`).toString().slice(0, 15);
+  let x = Date.parse(`${dateTime}`).toString().slice(0, 15);
 
   if (activity == "invalid") {
     return (
@@ -69,16 +69,12 @@ function EventPreview(props) {
   } else {
     return (
       <div className="eventPreview" onClick={handleEventDetailsClick}>
-        <a href={`#${event_id}`}>
           {icons
             .filter((icon) => icon.name == activity)
             .map((ele) => ele.component)}
-        </a>
-        <a href={`#${event_id}`}>
           <p className="eventPreviewDateTime">{title}</p>
 
-          <p className="eventPreviewLastMessage">{dateTime}</p>
-        </a>
+          <p className="eventPreviewLastMessage">{x}</p>
       </div>
     );
   }
