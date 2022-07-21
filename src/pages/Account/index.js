@@ -161,24 +161,10 @@ export const Account = () => {
           {error ? (
             ""
           ) : (
-            <div className="account-container">
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                  sx={{
-                    marginTop: 4,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <h4 className="heading4" id="searchingH4">
-                    Loading Account
-                  </h4>
+            <div className="loading-account-container">
+              <Typography variant="h5">Pulling search results.</Typography>
 
-                  <div className="rays" />
-                </Box>
-              </Container>
+              <div className="rays" />
             </div>
           )}
         </div>

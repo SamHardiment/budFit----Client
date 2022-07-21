@@ -13,8 +13,6 @@ import { TopBar } from "../../components";
 import "./index.css";
 const theme = createTheme({
   typography: {
-    // In Chinese and Japanese the characters are usually larger,
-    // so a smaller fontsize may be appropriate.
     color: grey[100],
   },
 });

@@ -5,6 +5,9 @@ import axios from "axios";
 
 import { changeSearchResults } from "../../redux/action";
 import "./index.css";
+import { Typography } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
 
 const images = [
   { name: "basketball", src: "https://i.imgur.com/60iRW40.jpg" },
@@ -16,7 +19,12 @@ const images = [
   { name: "hiking", src: "https://i.imgur.com/QZmbEVA.jpg" },
   { name: "running", src: "https://i.imgur.com/xCab1Aw.jpg" },
 ];
-
+const theme = createTheme({
+  typography: {
+    marginTop: "400px",
+    color: grey[100],
+  },
+});
 function Searching() {
   const [users, setUsers] = React.useState([]);
 
@@ -75,10 +83,13 @@ function Searching() {
   }, [users]);
 
   return (
-    <>
-      <h4 id="searchingH4">Pulling search results.</h4>
+    <div className="loading-container">
+      <ThemeProvider theme={theme}>
+        <Typography variant="h5">Pulling search results.</Typography>
+      </ThemeProvider>
+
       <div className="rays" />
-    </>
+    </div>
   );
 }
 

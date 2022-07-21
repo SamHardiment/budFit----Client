@@ -32,12 +32,24 @@
   }
 }
 
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 80px;
+  position: absolute;
+  margin: auto;
+  bottom: 20%;
+  height: 800px;
+  width: 400px;
+  /* transform: translateX(-50%); */
+}
 #searchingH4 {
   margin-top: 35vh;
 }
 
 .rays {
-  margin-top: 40vh;
+  margin-top: 120px;
   border-radius: 100%;
   content: "";
   position: absolute;
@@ -48,7 +60,7 @@
   width: 100px;
 }
 
-@media only screen and (max-height: 400px) {
+/* @media only screen and (max-height: 400px) {
   .rays {
     margin-top: 50vh;
     height: 50px;
@@ -63,4 +75,4 @@
   .rays {
     margin-top: 320px;
   }
-}
+} */

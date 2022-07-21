@@ -46,13 +46,25 @@
 }
 
 .scrollable-form {
-  height: 300px;
+  height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
+
   text-align: center;
   padding: 20px;
 }
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: rgb(202, 202, 202);
+  border-radius: 20px;
+}
 
+*::-webkit-scrollbar-thumb {
+  background-color: var(--buttonpurple);
+  border-radius: 20px;
+}
 .edit-button-container {
   display: flex;
   flex-direction: column;
@@ -65,4 +77,18 @@
   height: 350px;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.loading-account-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 80px;
+  right: 50%;
+  transform: translateX(50%);
+  position: absolute;
+  margin: auto;
+  bottom: 20%;
+  height: 800px;
+  width: 400px;
 }
