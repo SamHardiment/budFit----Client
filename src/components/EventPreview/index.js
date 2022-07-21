@@ -75,7 +75,7 @@ function EventPreview(props) {
           .map((ele) => ele.component)}
 
         <Typography variant="subtitle1">{title}</Typography>
-        <Typography variant="body1">{x}</Typography>
+        <Typography variant="p">{x}</Typography>
       </div>
     );
   }
