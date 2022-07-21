@@ -1,37 +1,65 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
-import { styled } from "@mui/material/styles";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 import { TopBar } from "../../components";
 import "./index.css";
-
+const theme = createTheme({
+  typography: {
+    color: grey[100],
+  },
+});
 const MatchButton = styled(IconButton)({
-  color: "var(--turquoise)",
+  marginBottom: "8px",
+  color: "var(--green)",
   border: "1px solid",
-  borderColor: "var(--turquoise)",
+  borderColor: "var(--green)",
   backgroundColor: "var(--off-white)",
+  "&:hover": {
+    color: "var(--off-white)",
+    border: "1px solid",
+    borderColor: "var(--green)",
+    backgroundColor: "var(--green)",
+  },
   width: "100%",
   height: "100%",
 });
 
 const RejectButton = styled(IconButton)({
-  color: "var(--mauve)",
+  marginBottom: "8px",
+  color: "var(--error)",
   border: "1px solid",
-  borderColor: "var(--mauve)",
+  borderColor: "var(--error)",
   backgroundColor: "var(--off-white)",
+  "&:hover": {
+    color: "var(--off-white)",
+    border: "1px solid",
+    borderColor: "var(--error)",
+    backgroundColor: "var(--error)",
+  },
   width: "100%",
   height: "100%",
 });
 
 const UndoButton = styled(IconButton)({
+  marginTop: "14px",
   color: "var(--grey)",
   border: "1px solid",
   borderColor: "var(--grey)",
   backgroundColor: "var(--off-white)",
+  "&:hover": {
+    color: "var(--off-white)",
+    border: "1px solid",
+    borderColor: "var(--grey)",
+    backgroundColor: "var(--grey)",
+  },
   width: "100%",
   height: "100%",
 });
@@ -40,7 +68,7 @@ function Search() {
   const users = useSelector((state) => state.searchResults);
   const currentUser = useSelector((state) => state.currentUser);
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
-  const [lastDirection, setLastDirection] = useState();
+  const [lastDirection, setLastDirection] = useState("");
 
   const currentIndexRef = useRef(currentIndex);
 
@@ -61,12 +89,22 @@ function Search() {
 
   const canSwipe = currentIndex >= 0;
 
-  const swiped = (direction, index) => {
+  const swiped = async (direction, index, id) => {
+    if (direction == "right") {
+      await match(id);
+    }
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
   };
 
-  const outOfFrame = (name, idx) => {
+  const match = async (event_id) => {
+    await axios.post("https://budfit.herokuapp.com/matches", {
+      user_id: currentUser.user_id,
+      event_id: event_id,
+    });
+  };
+
+  const outOfFrame = (idx) => {
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
   };
 
@@ -87,24 +125,40 @@ function Search() {
     <>
       <TopBar />
       <div className="cardContainer">
+        <h4>No more events!</h4>
+        <br />
+        <br />
+        <h4>
+          Search again by clicking
+          <br /> search at the bottom.
+        </h4>
         {users.map((thisEvent, index) => (
           <TinderCard
             ref={childRefs[index]}
             className="swipe"
             key={index}
-            onSwipe={(dir) => swiped(dir, index)}
-            onCardLeftScreen={() => outOfFrame(thisEvent.title, index)}
+            onSwipe={(dir) => swiped(dir, index, thisEvent.event_id)}
+            onCardLeftScreen={() => outOfFrame(index)}
           >
-              <div
-              style={{ backgroundImage: 'url(' + thisEvent.img + ')' }}
-              className="card">
+            <div
+              style={{ backgroundImage: "url(" + thisEvent.img + ")" }}
+              className="card"
+            >
+              <div className="swipe-overlay">
                 <div className="innerCardContainer">
-                  <h3>{thisEvent.title}</h3>
-                  <p>{thisEvent.descr}</p>
-                  <p>Users Joined: {thisEvent.attending.length}/{thisEvent.spaces}</p>
+                  <ThemeProvider theme={theme}>
+                    <Typography variant="h5">{thisEvent.title}</Typography>
+                    <Typography variant="subtitle1">
+                      {thisEvent.descr}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Users Joined: {thisEvent.attending.length}/
+                      {thisEvent.spaces}
+                    </Typography>
+                  </ThemeProvider>
                 </div>
               </div>
-              
+            </div>
           </TinderCard>
         ))}
       </div>

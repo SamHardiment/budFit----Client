@@ -10,6 +10,14 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
+const mockedGet = jest.fn()
+const mockedPost = jest.fn()
+
+jest.mock("axios", () => ({
+  get: () => mockedGet,
+  post: () => mockedPost,
+}));
+
 describe("CreateEvent", () => {
   beforeEach(() => {
     renderWithProviders(<CreateEvent />);

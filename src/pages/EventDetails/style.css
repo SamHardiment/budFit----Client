@@ -1,0 +1,47 @@
+.eventPage {
+  width: 100vw;
+  padding: 10px 15px;
+  max-width: 400px;
+}
+
+.event-container {
+  margin: 10px 20px;
+}
+
+.event-details {
+  width: 90%;
+  margin-top: 40px;
+  padding: 0 20px;
+  height: 500px;
+  margin-bottom: 60px;
+}
+
+.inv-event-detail {
+  row-gap: 1px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.sub-event-details {
+  margin: 10px auto;
+  padding: 0 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.sub-event-desc {
+  margin-bottom: 10px;
+}
+
+.sub-event-spaces {
+  row-gap: 2px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.sub-event-spaces > ul {
+  list-style-type: none;
+}

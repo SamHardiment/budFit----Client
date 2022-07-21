@@ -1,5 +1,4 @@
 .account-top {
-  margin-top: 20px;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -9,15 +8,20 @@
   height: 50px;
 }
 
-.account-container {
-  width: 100%;
+.account-setup-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  width: 90%;
   margin-top: 10px;
 }
 
 .avatar {
   object-fit: contain;
 }
-
+.setup-title {
+  text-align: center;
+}
 .detail-box {
   width: 300px;
   display: flex;
@@ -35,17 +39,7 @@
 .account-details {
   margin-top: 25px;
 }
-.account-detail-text {
-  flex: 0.9;
-  text-align: right;
-}
-.scrollable-form-account {
-  height: 400px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: center;
-  padding: 20px;
-}
+
 .detail-box > svg {
   margin-right: 14px;
   width: 26px;
@@ -56,18 +50,14 @@
   margin-bottom: 85px;
 }
 
-*::-webkit-scrollbar {
-  width: 8px;
-}
-*::-webkit-scrollbar-track {
-  background: rgb(202, 202, 202);
-  border-radius: 20px;
+.scrollable-form {
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
 }
 
-*::-webkit-scrollbar-thumb {
-  background-color: var(--buttonpurple);
-  border-radius: 20px;
-}
 .edit-button-container {
   display: flex;
   flex-direction: column;
@@ -80,18 +70,4 @@
   height: 350px;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-.loading-account-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  row-gap: 80px;
-  right: 50%;
-  transform: translateX(50%);
-  position: absolute;
-  margin: auto;
-  bottom: 20%;
-  height: 800px;
-  width: 400px;
 }

@@ -1,0 +1,28 @@
+.create-event-text-container {
+  text-align: center;
+}
+
+.create-event-container {
+  max-width: 400px;
+  width: 100vw;
+  margin-top: 20px;
+  padding: 0 20px;
+  display: flex;
+  row-gap: 40px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.create-event-container > form {
+  width: 90%;
+}
+
+.create-scroll {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  text-align: center;
+  padding: 0 20px;
+}

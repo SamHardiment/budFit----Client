@@ -4,7 +4,7 @@ h2 {
   left: 5%;
   display: inline;
   color: #fff;
-  text-shadow: -2px 2px rgba(0, 0, 0, 0.40);
+  text-shadow: -2px 2px rgba(0, 0, 0, 0.4);
 }
 
 .cardTitle {
@@ -13,22 +13,36 @@ h2 {
 
 .swipe {
   position: absolute;
-  top:10vh;
-  left:5vw;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
   width: 90vw;
   max-width: 360px;
   height: 70vh;
   max-height: 560px;
 }
-
+.swipe-overlay {
+  border-radius: 20px;
+  width: 90vw;
+  max-width: 360px;
+  height: 70vh;
+  max-height: 560px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.8)
+  );
+}
 .cardContainer {
+  margin-top: 20px;
   width: 100vw;
   max-width: 400px;
   height: 75vh;
   max-height: 600px;
 }
 
-.card:last-of-type{
+.card:last-of-type {
   box-shadow: 0px 0px 5px 0px rgba(137, 137, 137, 0.1);
 }
 
@@ -53,19 +67,19 @@ h2 {
   color: #fff;
 }
 
-.searchButtonContainer{
+.searchButtonContainer {
   position: absolute;
-  bottom: 8vh;
+  bottom: 6.5vh;
   max-width: 398px;
+  margin-bottom: 7px;
   width: 98vw;
-  
-  display:grid;
+
+  display: grid;
   grid-template-columns: 10% 20% 10% 20% 10% 20% 10%;
-  grid-template-areas:
-    ". rejectButton . undoButton . matchButton .";
+  grid-template-areas: ". rejectButton . undoButton . matchButton .";
 }
 
-.aSearchButtonContainer{
+.aSearchButtonContainer {
   display: inline-block;
   position: relative;
   width: 10vh;
@@ -74,41 +88,40 @@ h2 {
   max-height: 80px;
 }
 
-#matchButton{
+#matchButton {
   grid-area: matchButton;
 }
 
-#undoButton{
+#undoButton {
   grid-area: undoButton;
 }
 
-#rejectButton{
+#rejectButton {
   grid-area: rejectButton;
 }
 
-#topBarLogo{
-  margin-top: 0.5vh;
-  height: 8vh;
+#topBarLogo {
+  height: 64px;
+  margin-top: 20px;
 }
 
-
-@media only screen and (min-width: 401px) {
+/* @media only screen and (min-width: 401px) {
   .swipe {
-    left:calc(50vw - 180px);
+    left: calc(50vw - 180px);
   }
-}
-
+} */
+/* 
 @media only screen and (min-height: 801px) {
-  .searchButtonContainer {
-    bottom:calc(100vh + 64px - 800px);
-  }
+  /* .searchButtonContainer {
+    bottom: calc(100vh + 64px - 800px);
+  } */
 
-  .swipe{
-    top:80px;
-  }
+/* .swipe {
+    top: 80px;
+  } */
 
-  #topBarLogo{
+/* #topBarLogo {
     height: 64px;
-    margin-top: 4px;
+    margin-top: 20px;
   }
-}
+} */

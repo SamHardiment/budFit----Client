@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { changeSearchResults } from "../../redux/action";
-import './index.css'
+import "./index.css";
+import { Typography } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
 
 const images = [
   { name: "basketball", src: "https://i.imgur.com/60iRW40.jpg" },
@@ -16,7 +19,12 @@ const images = [
   { name: "hiking", src: "https://i.imgur.com/QZmbEVA.jpg" },
   { name: "running", src: "https://i.imgur.com/xCab1Aw.jpg" },
 ];
-
+const theme = createTheme({
+  typography: {
+    marginTop: "400px",
+    color: grey[100],
+  },
+});
 function Searching() {
   const [users, setUsers] = React.useState([]);
 
@@ -30,12 +38,15 @@ function Searching() {
     try {
       const { data } = await axios.get(`https://budfit.herokuapp.com/events`);
 
-      console.log(data);
-      console.log(currentUser.preferences);
-      
-      let events = data.filter(v => v.location == currentUser.preferences);
+      let events = data.filter((v) => v.location == currentUser.preferences);
 
-      console.log(events);
+      let matches = await axios.get(`https://budfit.herokuapp.com/matches`);
+
+      matches = matches.data;
+      matches = matches.filter((v) => v.user_id == currentUser.user_id);
+      matches = matches.map((e) => e.event_id);
+
+      events = events.filter((v) => !matches.includes(v.event_id));
 
       events.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
@@ -43,21 +54,18 @@ function Searching() {
 
       for (let i = 0; i < events.length; i++) {
         let event = events[i];
-        const { data } = await axios.get(`https://budfit.herokuapp.com/matches`);
 
-        let attendees = data.filter(v => v.event_id == event.event_id);
-        let attending = attendees.map((e)=>e.user_id)
+        let attendees = matches.filter((v) => v.event_id == event.event_id);
+        let attending = attendees.map((e) => e.user_id);
 
-        console.log(event.activity);
+        let source = images.filter(
+          (image) => image.name.toLowerCase() == event.activity.toLowerCase()
+        );
 
-        let source = images.filter(image => image.name.toLowerCase() == event.activity.toLowerCase());
-
-        events[i] = {...events[i], attending: attending, img: source[0].src}
+        events[i] = { ...events[i], attending: attending, img: source[0].src };
       }
 
-      console.log(events);
       setUsers(events);
-
     } catch (error) {
       console.log(error);
     }
@@ -75,10 +83,13 @@ function Searching() {
   }, [users]);
 
   return (
-    <>
-      <h4 id="searchingH4">Pulling search results.</h4>
+    <div className="loading-container">
+      <ThemeProvider theme={theme}>
+        <Typography variant="h5">Pulling search results.</Typography>
+      </ThemeProvider>
+
       <div className="rays" />
-    </>
+    </div>
   );
 }
 

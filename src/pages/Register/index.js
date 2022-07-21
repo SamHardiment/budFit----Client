@@ -7,8 +7,10 @@ import TopBar from "../../components/TopBar";
 export const Register = () => {
   return (
     <div className="reg-container">
-      <div className="reg-topbar">
+      <div className="account-top">
         <BackButton />
+
+        <Typography variant="h6">Register</Typography>
       </div>
       <CssBaseline />
       <Box

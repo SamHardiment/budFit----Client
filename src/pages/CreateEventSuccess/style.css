@@ -1,0 +1,33 @@
+.event-success {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+.navigate-buttons {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.success-top {
+  margin-top: 30px;
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 20px;
+  align-items: center;
+  border-bottom: 2px solid #bbb;
+  height: 50px;
+}
+
+.success-container {
+  width: 400px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 100px;
+}

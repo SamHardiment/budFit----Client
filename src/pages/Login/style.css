@@ -7,7 +7,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 0 20px;
   row-gap: 40px;
 }

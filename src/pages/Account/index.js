@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { useAuthContext } from "../../auth/index";
 import { useNavigate } from "react-router-dom";
@@ -7,18 +7,19 @@ import {
   Avatar,
   Box,
   Button,
-  Alert,
   Container,
   CssBaseline,
   Typography,
 } from "@mui/material";
-import { purple, grey, red } from "@mui/material/colors";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import { BackButton, LocationFormField, FormField } from "../../components";
 
+import { changeCurrentUser } from "../../redux/action";
 import testimage from "../../assets/images/bgbball.jpg";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { purple, grey, red } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -54,6 +55,7 @@ const theme = createTheme({
   },
 });
 export const Account = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser);
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
@@ -78,25 +80,15 @@ export const Account = () => {
     navigate("/");
   };
 
-  // Fetch User data
-  // useEffect(() => {
-  //   async function fetchUserDetails(user_id) {
-  //     user_id ||= "1";
-  //     try {
-  //       setError("");
-  //       const URL = `https://budfit.herokuapp.com/users/${user_id}/`;
-  //       const { data } = await axios.get(URL);
-  //       setUser(data[0]);
-  //       setLoading(true);
-  //     } catch (err) {
-  //       setError(err);
-  //       setLoading(true);
-  //     }
-  //   }
-  //   fetchUserDetails("1");
-  // }, []);
+  const getUserData = async () => {
+    const { data } = await axios.get(
+      `https://budfit.herokuapp.com/users/${currentUser.user_id}/`
+    );
+    dispatch(changeCurrentUser(data[0]));
+  };
 
   useEffect(() => {
+    getUserData();
     setTimeout(function () {
       setLoading(false);
     }, 2000);
@@ -105,7 +97,6 @@ export const Account = () => {
   //Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
 
     const updateObj = {
       name: e.target[0].value,
@@ -124,37 +115,28 @@ export const Account = () => {
       setInputErr(false);
       return;
     } else {
-      console.log(updateObj);
       updateUser(currentUser.user_id, updateObj);
-      // uusert(currentUser.user_id, updateObj);
       setInputErr(false);
-      // setOpen(false);
     }
   };
 
-  // Handle Patch request
-  // const uusert = async (id, obj) => {
-  //   console.log("send Patch", obj);
-  //   const { res } = await axios.patch(
-  //     `https://budfit.herokuapp.com/users/${id}/`
-  //   );
-  //   console.log(res);
-  // };
-
   async function updateUser(id, obj) {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-      },
-    };
     try {
-      const res = await axios.patch(
-        `https://budfit.herokuapp.com/users/${id}/`,
-        obj,
-        config
-      );
-      console.log(res);
+      fetch(`https://budfit.herokuapp.com/users/${id}/`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          name: obj.name,
+          username: obj.username,
+          email: obj.email,
+          dob: 18,
+          preferences: obj.preferences,
+          picture: obj.picture,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      navigate("/searching");
     } catch (error) {
       console.log(error);
     }
@@ -167,24 +149,10 @@ export const Account = () => {
           {error ? (
             ""
           ) : (
-            <div className="account-container">
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                  sx={{
-                    marginTop: 4,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <h4 className="heading4" id="searchingH4">
-                    Loading Account
-                  </h4>
+            <div className="loading-account-container">
+              <Typography variant="h5">Loading Account</Typography>
 
-                  <div className="rays" />
-                </Box>
-              </Container>
+              <div className="rays" />
             </div>
           )}
         </div>
@@ -238,94 +206,25 @@ export const Account = () => {
                     className="reg-form"
                     aria-label="form"
                   >
-                    <div className="scrollable-form">
+                    <div className="scrollable-form-account">
                       <div className="input-container">
                         <FormField label="Name" />
-                        {/* <TextField
-                          aria-label="name textfield"
-                          name="name"
-                          id="name"
-                          label="Name"
-                          variant="filled"
-                          value={formData.name}
-                          onChange={onInputChange}
-                          error={inputErr}
-                          helperText={inputErr ? "All fields are required" : ""}
-                          fullWidth
-                        /> */}
                       </div>
                       <div className="input-container">
                         <FormField label="Username" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="username"
-                          id="username"
-                          label="Username"
-                          variant="filled"
-                          value={formData.username}
-                          onChange={onInputChange}
-                          fullWidth
-                        /> */}
                       </div>
                       <div className="input-container">
                         <FormField label="Email" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="email"
-                          id="email"
-                          label="Email"
-                          variant="filled"
-                          value={formData.email}
-                          onChange={onInputChange}
-                          type="email"
-                          fullWidth
-                        /> */}
                       </div>
                       <div className="input-container">
                         <FormField label="Date of Birth" myFieldType="date" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="dob"
-                          id="dob"
-                          label="Date of Birth"
-                          variant="filled"
-                          value={formData.dob}
-                          onChange={onInputChange}
-                          fullWidth
-                        /> */}
                       </div>
 
                       <div className="input-container">
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="preferences"
-                          id="preferences"
-                          label="Location"
-                          variant="filled"
-                          value={formData.preference}
-                          onChange={onInputChange}
-                          fullWidth
-                        /> */}
                         <LocationFormField />
                       </div>
                       <div className="input-container">
                         <FormField label="Picture" />
-                        {/* <TextField
-                          aria-label="textfield"
-                          name="picture"
-                          id="picture"
-                          label="Picture"
-                          variant="filled"
-                          value={formData.picture}
-                          onChange={onInputChange}
-                          // error={passError}
-                          // helperText={
-                          //   passError
-                          //     ? "Your password must be atleast 6 characters long"
-                          //     : ""
-                          // }
-                          fullWidth
-                        /> */}
                       </div>
                     </div>
                     <div className="register-form-buttons">
@@ -348,37 +247,47 @@ export const Account = () => {
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-signature" />
                       <Typography variant="subTitle2">Name:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.name}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.name}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-dice-d6" />
                       <Typography variant="subTitle2">Username:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.username}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.username}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-envelope" />
                       <Typography variant="subTitle2">Email:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.email}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.email}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-list-ol" />
                       <Typography variant="subTitle2">Age:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.dob}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.dob}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-location-dot" />
                       <Typography variant="subTitle2">Location:</Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.preferences}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.preferences}
+                        </Typography>
+                      </div>
                     </div>
                     <div className="detail-box">
                       <FontAwesomeIcon icon="fa-solid fa-image" />
@@ -386,9 +295,11 @@ export const Account = () => {
                       <Typography variant="subTitle2">
                         Profile Picture:
                       </Typography>
-                      <Typography variant="subTitle2">
-                        {currentUser.picture}
-                      </Typography>
+                      <div className="account-detail-text">
+                        <Typography variant="subTitle2">
+                          {currentUser.picture}
+                        </Typography>
+                      </div>
                     </div>
                   </div>
                   <div className="edit-button-container">

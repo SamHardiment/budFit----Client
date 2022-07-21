@@ -20,11 +20,14 @@ export const App = () => {
           <>
             <Route path="/Login" element={<pages.Login />} />
             <Route path="/Register" element={<pages.Register />} />
+            <Route path="*" element={<pages.Error404 />} />
           </>
         ) : (
           <>
+            <Route path="/Setup" element={<pages.AccountSetup />} />
             <Route path="/Searching" element={<pages.Searching />} />
             <Route path="/Search" element={<pages.Search />} />
+
             <Route path="/Account" element={<pages.Account />} />
             <Route path="/Chat" element={<pages.ChatRoom />} />
             <Route path="/Events" element={<pages.UserEvents />} />
@@ -32,6 +35,7 @@ export const App = () => {
             <Route path="/Safety" element={<pages.UserSafety />} />
             <Route path="/Success" element={<pages.CreateEventSuccess />} />
             <Route path="/u/:id" element={<pages.UserDetails />} />
+            <Route path="/events/:id" element={<pages.EventDetails />} />
 
             <Route path="*" element={<pages.Error404 />} />
           </>

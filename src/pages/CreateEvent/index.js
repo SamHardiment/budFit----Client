@@ -1,10 +1,45 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box } from "@mui/system";
-import { Button } from "@mui/material";
 import axios from "axios";
 
+import { Box } from "@mui/system";
+import { Button, Typography } from "@mui/material";
 import { FormField, TopBar, LocationFormField } from "../../components";
+import { purple, grey, red } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { BackButton } from "../../components";
+import "./style.css";
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "login" },
+          style: {
+            textTransform: "none",
+            color: grey[100],
+            fontSize: "1.1rem",
+            backgroundColor: purple[400],
+            "&:hover": {
+              backgroundColor: purple[600],
+            },
+            border: `2px none ${purple[500]}`,
+          },
+        },
+      ],
+    },
+  },
+});
+const Categories = [
+  { name: "Running" },
+  { name: "Cycling" },
+  { name: "Football" },
+  { name: "Cricket" },
+  { name: "Gym" },
+  { name: "Golf" },
+  { name: "Hiking" },
+  { name: "Basketball" },
+];
 
 export const CreateEvent = () => {
   const navigate = useNavigate();
@@ -12,95 +47,61 @@ export const CreateEvent = () => {
   const handleEventSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(e);
-    console.log(e.target[12]);
-    console.log(e.target);
-    console.log(e.target[11]);
-    console.log(e.target[13]);
-
     let req = {
       title: e.target[0].value,
       descr: e.target[2].value,
-      time: e.target[5].value,
+      date: e.target[5].value,
       activity: e.target[7].value,
       location: e.target[11].value,
       spaces: e.target[13].value,
     };
 
-    // console.log(req);
-    // const options = {
-    //   headers: {
-    //     "Access-Control-Allow-Headers": "*",
-    //     "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-    //     "Content-Type": "application/json",
-    //     Authorization: localStorage.getItem("token")
-    //       ? localStorage.getItem("token")
-    //       : null,
-    //   },
-    // };
-
-    // try {
-    //   const options = {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       // "Access-Control-Allow-Headers": "*",
-    //       // "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-    //     },
-    //   };
-
-    //   const { data } = await axios.post(
-    //     `https://budfit.herokuapp.com/events`,
-    //     req,
-    //     options
-    //   );
-    //   if (data.err) {
-    //     throw Error(data.err);
-    //   }
-    // } catch (err) {
-    //   return err.message;
-    // }
-
-    // let resp = await axios.post(
-    // "https://budfit.herokuapp.com/events",
-    //   req,
-    //   options
-    // );
-    // console.log(resp);
-    // navigate("/success");
+    await axios.post("https://budfit.herokuapp.com/events", req);
+    navigate("/success");
   };
 
-  const Categories = [
-    { name: "Running" },
-    { name: "Cycling" },
-    { name: "Football" },
-    { name: "Cricket" },
-    { name: "Gym" },
-    { name: "Golf" },
-    { name: "Hiking" },
-    { name: "Basketball" },
-  ];
-
   return (
-    <>
-      <TopBar />
+    <div className="create-event-container">
+      <div className="account-top">
+        <BackButton />
+
+        <Typography variant="h6">New Event</Typography>
+      </div>
+      <div className="create-event-text-container">
+        <Typography variant="h4">Create a new event</Typography>
+        <Typography variant="subtitle1" color="textSecondary">
+          Make a listing to find some budd's!
+        </Typography>
+      </div>
       <form role="form" id="createEventForm" onSubmit={handleEventSubmit}>
-        <h1>New Event</h1>
-        <FormField label="Event Title" />
-        <FormField label="Description" myFieldType="multiline" />
-        <FormField label="Start Time" myFieldType="date" />
-        <FormField
-          label="Category"
-          myFieldType="dropdown"
-          options={Categories}
-        />
-        <LocationFormField />
-        <FormField label="Spaces" myFieldType="number" />
-        <Box mt={3}>
-          <Button variant="contained" type="submit" data-testid="postBtn">
-            Post Event
-          </Button>
+        <div className="create-scroll">
+          <FormField label="Event Title" />
+          <FormField label="Description" myFieldType="multiline" />
+          <FormField label="Start Time" myFieldType="date" />
+          <FormField
+            label="Category"
+            myFieldType="dropdown"
+            options={Categories}
+          />
+          <LocationFormField />
+          <FormField label="Spaces" myFieldType="number" />
+        </div>
+        <Box mt={6}>
+          <ThemeProvider theme={theme}>
+            <Button
+              aria-label="Create event button"
+              variant="login"
+              className="edit-button"
+              type="submit"
+              data-testid="postBtn"
+              size="medium"
+              fullWidth
+            >
+              Post Event
+            </Button>
+          </ThemeProvider>
         </Box>
       </form>
-    </>
+    </div>
   );
 };

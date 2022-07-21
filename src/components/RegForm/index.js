@@ -1,14 +1,10 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
-
-import { TextField, FormHelperText } from "@mui/material";
+import React, { useState } from "react";
+import { TextField } from "@mui/material";
 import { useAuthContext } from "../../auth/index.js";
-
-import jwt_decode from "jwt-decode";
-
-// import { TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { changeCurrentUser } from "../../redux/action";
 import { CreateButton } from "../";
 import "./style.css";
 
@@ -28,6 +24,7 @@ function RegForm() {
   const [passError, setPassError] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Form data input change
   const onInputChange = (e) => {
@@ -37,7 +34,24 @@ function RegForm() {
 
   const handleSubmitt = async (e) => {
     e.preventDefault();
-    const regResult = await register(formData);
+    if (
+      formData.name == "" ||
+      formData.username == "" ||
+      formData.email == "" ||
+      formData.password == "" ||
+      formData.password.length < 6
+    ) {
+      console.log("errors");
+    } else {
+      const regResult = await register(formData);
+      if (regResult === "Registration successful") {
+        console.log("it worked");
+        setFormData({ name: "", username: "", email: "", password: "" });
+        navigate("/setup");
+      } else {
+        throw new Error("Unsuccessful registration");
+      }
+    }
     if (formData.name == "") {
       setNameError(true);
     } else {
@@ -59,13 +73,7 @@ function RegForm() {
       setPassError(false);
     }
 
-    if (regResult === "Registration successful") {
-      console.log("it worked");
-      setFormData({ name: "", username: "", email: "", password: "" });
-      navigate("/searching");
-    } else {
-      throw new Error("Unsuccessful registration");
-    }
+    dispatch(changeCurrentUser(formData));
   };
 
   return (

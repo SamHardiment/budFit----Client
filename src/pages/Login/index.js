@@ -90,9 +90,11 @@ export const Login = () => {
   };
 
   const getUserData = async () => {
-    const { data } = await axios.get(`https://budfit.herokuapp.com/users/${formData.username}/`);
+    const { data } = await axios.get(
+      `https://budfit.herokuapp.com/users/${formData.username}/`
+    );
     dispatch(changeCurrentUser(data[0]));
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -114,8 +116,10 @@ export const Login = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="log-container">
-        <div className="log-topbar">
+        <div className="account-top">
           <BackButton />
+
+          <Typography variant="h6">Login</Typography>
         </div>
         <CssBaseline />
         <Box

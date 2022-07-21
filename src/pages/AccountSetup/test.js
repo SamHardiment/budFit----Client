@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { screen } from "@testing-library/react";
-import { Login } from ".";
+import { AccountSetup } from ".";
 
 let mockedAuth = jest.fn();
 
@@ -10,13 +10,13 @@ jest.mock("../../auth/index.js", () => ({
   useAuthContext: () => mockedAuth
 }));
 
-describe("Login", () => {
+describe("Account", () => {
   beforeEach(() => {
-    renderWithReduxProviders(<Login />);
+    renderWithReduxProviders(<AccountSetup />);
   });
 
   it("Expect there to be a header on the page", () => {
-    const heading = screen.getByText("Login");
+    const heading = screen.getByText("Account Setup");
     expect(heading).toBeInTheDocument();
   });
 });
