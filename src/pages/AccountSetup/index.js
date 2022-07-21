@@ -80,7 +80,7 @@ export const AccountSetup = () => {
         name: currentUser.name,
         username: currentUser.username,
         email: currentUser.email,
-        dob: 12,
+        dob: 18,
         preferences: obj.preferences,
         picture: "",
       };
@@ -102,7 +102,7 @@ export const AccountSetup = () => {
 
   return (
     <>
-      (
+      
       <ThemeProvider theme={theme}>
         <div className="account-container">
           <div className="account-top">
@@ -139,7 +139,7 @@ export const AccountSetup = () => {
           </Container>
         </div>
       </ThemeProvider>
-      )
+      
     </>
   );
 };

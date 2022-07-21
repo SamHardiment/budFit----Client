@@ -12,6 +12,4 @@ export { default as EventDetails } from "./EventDetails";
 export { default as Search } from "./Search";
 export { default as Searching } from "./Searching";
 export { default as Error404 } from "./Error404";
-export { SetupAcc } from "./SetupAcc";
-export { SetupPreferences } from "./SetupPreferences";
 export { UserEvents } from "./UserEvents";

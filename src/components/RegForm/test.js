@@ -3,13 +3,26 @@
  */
 
 import { screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+
+import { AuthProvider } from "../../auth";
+import { default as store } from "../../store.js";
 import RegForm from ".";
 
 describe("RegForm", () => {
   const handleSubmitt = jest.fn();
 
   beforeEach(() => {
-    renderWithProviders(<RegForm />);
+    render(
+      <MemoryRouter initialEntries={["/account"]}>
+        <AuthProvider>
+          <Provider store={store}>
+            <RegForm />
+          </Provider>
+        </AuthProvider>
+      </MemoryRouter>
+    );
   });
 
   it("onSubmit is called when all fields pass val", async () => {
@@ -33,19 +46,6 @@ describe("RegForm", () => {
     let form = screen.getByRole("form");
     expect(form).toBeInTheDocument();
   });
-  it("verify name textfield holds state", () => {
-    const Textfield = screen.getByRole("textbox", { name: "Name" });
-    expect(Textfield).toBeInTheDocument();
-    userEvent.type(Textfield, "George");
-    expect(Textfield.value).toBe("George");
-  });
-  it("verify name textfield exist", () => {
-    const Textfield = screen.getByRole("textbox", { name: "Name" });
-    expect(Textfield).toBeInTheDocument();
-    userEvent.type(Textfield, "George{enter}");
-    expect(Textfield.value).toBe("");
-    expect(getResultMock).toHaveBeenNthCalledWith(1, "George");
-  });
   it("verify username textfield exist", () => {
     const Textfield = screen.getByRole("textbox", { name: "Username" });
     expect(Textfield).toBeInTheDocument();
@@ -58,13 +58,6 @@ describe("RegForm", () => {
     userEvent.type(Textfield, "sam@sam.com{enter}");
     expect(Textfield.value).toBe("");
   });
-  // it("verify password textfield exist", () => {
-  //   const Textfield = screen.getByRole("textbox", { name: "Password" });
-  //   expect(Textfield).toBeInTheDocument();
-  //   userEvent.type(nameTextfield, "123{enter}");
-  //   expect(Textfield.value).toBe("");
-  // });
-
   it("verify create button submits form", () => {
     const createBtn = screen.getByRole("button", {
       name: "create-button",
