@@ -35,12 +35,14 @@
 .account-details {
   margin-top: 25px;
 }
-
-.scrollable-form {
+.account-detail-text {
+  flex: 0.9;
+  text-align: right;
+}
+.scrollable-form-account {
   height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
-
   text-align: center;
   padding: 20px;
 }

@@ -4,6 +4,7 @@ import "datejs";
 import SportsCricketIcon from "@mui/icons-material/SportsCricket";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Warning } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 
 function EventPreview(props) {
   const { activity, dateTime, title, event_id } = props;
@@ -69,12 +70,12 @@ function EventPreview(props) {
   } else {
     return (
       <div className="eventPreview" onClick={handleEventDetailsClick}>
-          {icons
-            .filter((icon) => icon.name == activity)
-            .map((ele) => ele.component)}
-          <p className="eventPreviewDateTime">{title}</p>
+        {icons
+          .filter((icon) => icon.name == activity)
+          .map((ele) => ele.component)}
 
-          <p className="eventPreviewLastMessage">{x}</p>
+        <Typography variant="subtitle1">{title}</Typography>
+        <Typography variant="body1">{x}</Typography>
       </div>
     );
   }
