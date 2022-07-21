@@ -35,6 +35,7 @@ h2 {
   );
 }
 .cardContainer {
+  margin-top: 20px;
   width: 100vw;
   max-width: 400px;
   height: 75vh;

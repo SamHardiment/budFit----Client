@@ -135,7 +135,8 @@ export const Account = () => {
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-      })
+      });
+      navigate("/searching");
     } catch (error) {
       console.log(error);
     }
