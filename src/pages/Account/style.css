@@ -36,6 +36,14 @@
   margin-top: 25px;
 }
 
+.scrollable-form {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  text-align: center;
+  padding: 20px;
+}
 .detail-box > svg {
   margin-right: 14px;
   width: 26px;
@@ -46,14 +54,6 @@
   margin-bottom: 85px;
 }
 
-.scrollable-form {
-  height: 400px;
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  text-align: center;
-  padding: 20px;
-}
 *::-webkit-scrollbar {
   width: 8px;
 }

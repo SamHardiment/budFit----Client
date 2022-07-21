@@ -1,11 +1,35 @@
 #chatsPageContainer {
-  position: absolute;
-  top: 7vh;
+  /* position: absolute; */
+
   /* left: 5vw; */
-  width: 90vw;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   max-width: 360px;
-  height: calc(95vh - 10.5vh - 4vw);
+  height: 600px;
   max-height: 600px;
+}
+
+#safteyPageContainer {
+  /* position: absolute; */
+  text-align: center;
+  margin-top: 20px;
+  /* left: 5vw; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+  height: 600px;
+  max-height: 600px;
+}
+.user-event-container {
+  margin-top: 20px;
+  width: 400px;
+  padding: 0 20px;
+  row-gap: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 #chatsContainer {
@@ -14,7 +38,14 @@
   height: 80%;
   overflow-y: scroll;
 }
-
+.noevents {
+  text-align: center;
+}
+.noevents-text {
+  margin-top: 20px;
+  width: 60%;
+  margin: 20px auto 0 auto;
+}
 .eventPreview:hover {
   cursor: pointer;
 }
@@ -59,13 +90,13 @@
 
 #chatsPageContainer > button:first-of-type {
   position: absolute;
-  bottom: -20px;
-  right: 25px;
+  bottom: 70px;
+  right: 35px;
 }
 #chatsPageContainer > button:nth-of-type(2) {
   position: absolute;
-  bottom: -20px;
-  left: 25px;
+  bottom: 70px;
+  left: 35px;
 }
 
 h4 {
@@ -90,7 +121,9 @@ h4 {
   height: 500px;
   overflow-y: scroll;
 }
-
+.report-button {
+  margin-top: 15px;
+}
 /* @media only screen and (min-width: 401px) {
     #chatsPageContainer {
       left:calc(50vw - 180px);

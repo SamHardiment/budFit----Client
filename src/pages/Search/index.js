@@ -133,7 +133,6 @@ function Search() {
           <br /> search at the bottom.
         </h4>
         {users.map((thisEvent, index) => (
-<<<<<<< HEAD
           <TinderCard
             ref={childRefs[index]}
             className="swipe"
@@ -158,14 +157,6 @@ function Search() {
                     </Typography>
                   </ThemeProvider>
                 </div>
-=======
-          <TinderCard ref={childRefs[index]} className="swipe" key={index} onSwipe={(dir) => swiped(dir, index, thisEvent.event_id)} onCardLeftScreen={() => outOfFrame(index)} >
-            <div style={{ backgroundImage: "url(" + thisEvent.img + ")" }} className="card" >
-              <div className="innerCardContainer">
-                <h3>{thisEvent.title}</h3>
-                <p>{thisEvent.descr}</p>
-                <p> Users Joined: {thisEvent.attending.length}/{thisEvent.spaces} </p>
->>>>>>> db160046926326bfd2996ec3943b2bec2d56b6b5
               </div>
             </div>
           </TinderCard>

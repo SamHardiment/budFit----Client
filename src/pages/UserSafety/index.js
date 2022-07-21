@@ -1,8 +1,27 @@
 import React from "react";
 
 import { BackButton } from "../../components";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
+import { purple, grey } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "newacc" },
+          style: {
+            textTransform: "none",
+            color: purple[600],
+            fontSize: "0.9rem",
+            border: `1px solid ${purple[600]}`,
+          },
+        },
+      ],
+    },
+  },
+});
 function UserSafety() {
   return (
     <div className="reg-container">
@@ -10,8 +29,8 @@ function UserSafety() {
         <BackButton />
         <Typography variant="h6">Saftey</Typography>
       </div>
-      <div id="chatsPageContainer">
-        <h4>User Safety Advice</h4>
+      <div id="safteyPageContainer">
+        <Typography variant="h5">User Safety Advice</Typography>
         <div id="safety-container">
           <p>
             Most of our users are friendly, but it's always best to err on the
@@ -42,6 +61,13 @@ function UserSafety() {
             and make your excuses.
           </p>
         </div>
+      </div>
+      <div className="report-button">
+        <ThemeProvider theme={theme}>
+          <Button variant="newacc" className="register" name="register">
+            Report a user
+          </Button>
+        </ThemeProvider>
       </div>
     </div>
   );

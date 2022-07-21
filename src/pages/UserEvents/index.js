@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Fab } from "@mui/material";
 import { Add, Warning } from "@mui/icons-material";
-
-import { TopBar, EventPreview } from "../../components";
+import { Typography, Box, Container } from "@material-ui/core";
+import { BackButton, EventPreview } from "../../components";
 import "./index.css";
 
 export const UserEvents = () => {
@@ -29,14 +29,13 @@ export const UserEvents = () => {
 
       let matches = data.filter((m) => m.match_id == currentUser.user_id);
 
-      let filterEvents = []
+      let filterEvents = [];
 
       for (let i = 0; i < matches.length; i++) {
         let event = matches[i];
         const { data } = await axios.get(
           `https://budfit.herokuapp.com/events/${event.event_id}/`
         );
-
       }
       setEvents(data);
       setTotalEvents(events.length);
@@ -53,8 +52,10 @@ export const UserEvents = () => {
 
     for (let i = 0; i < events.length; i++) {
       let event = events[i];
-      const { data } = await axios.get(`https://budfit.herokuapp.com/events/${event.event_id}/`);
-      events[i] = data[0]
+      const { data } = await axios.get(
+        `https://budfit.herokuapp.com/events/${event.event_id}/`
+      );
+      events[i] = data[0];
     }
 
     events.sort(function (a, b) {
@@ -78,39 +79,87 @@ export const UserEvents = () => {
   };
 
   return (
-    <>
-      <TopBar />
-      <div id="chatsPageContainer">
-        <h4>Joined Events: {totalEvents}</h4>
+    <div className="user-event-container">
+      <div className="account-top">
+        <BackButton />
 
-        <div id="chatsContainer">
-          {events.map((event) => (
-            <EventPreview
-              key={Math.random()}
-              event_id={event.event_id}
-              dateTime={event.date}
-              title={event.title}
-              activity={event.activity}
-
-            // lastMessage={event.lastMessage}
-            />
-          ))}
-        </div>
-        <Fab
-          color="secondary"
-          aria-label="newEvent"
-          onClick={handleCreateClick}
-        >
-          <Add data-testid="newBtn" />
-        </Fab>
-        <Fab
-          color="warning"
-          aria-label="safetyAdvice"
-          onClick={handleSafetyClick}
-        >
-          <Warning data-testid="warnBtn" />
-        </Fab>
+        <Typography variant="h6">Your Events</Typography>
       </div>
-    </>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            rowGap: "8px",
+          }}
+        >
+          <Typography variant="h5">Upcoming Events: {totalEvents}</Typography>
+          <Typography variant="subtitle1" color="textSecondary" gutterBottom>
+            Click events for more details
+          </Typography>
+        </Box>
+      </Container>
+      {events.length == 0 ? (
+        <>
+          <div className="noevents">
+            <Typography variant="h6">You have no events coming up!</Typography>
+            <div className="noevents-text">
+              <Typography variant="body2">
+                It is time to find a new Bud and start swiping to find events
+                near you
+              </Typography>
+            </div>
+          </div>
+          <div id="chatsPageContainer">
+            <Fab
+              color="secondary"
+              aria-label="newEvent"
+              onClick={handleCreateClick}
+            >
+              <Add data-testid="newBtn" />
+            </Fab>
+            <Fab
+              color="warning"
+              aria-label="safetyAdvice"
+              onClick={handleSafetyClick}
+            >
+              <Warning data-testid="warnBtn" />
+            </Fab>
+          </div>{" "}
+        </>
+      ) : (
+        <div id="chatsPageContainer">
+          <div id="chatsContainer">
+            {events.map((event) => (
+              <EventPreview
+                key={Math.random()}
+                event_id={event.event_id}
+                dateTime={event.date}
+                title={event.title}
+                activity={event.activity}
+
+                // lastMessage={event.lastMessage}
+              />
+            ))}
+          </div>
+          <Fab
+            color="secondary"
+            aria-label="newEvent"
+            onClick={handleCreateClick}
+          >
+            <Add data-testid="newBtn" />
+          </Fab>
+          <Fab
+            color="warning"
+            aria-label="safetyAdvice"
+            onClick={handleSafetyClick}
+          >
+            <Warning data-testid="warnBtn" />
+          </Fab>
+        </div>
+      )}
+    </div>
   );
 };
