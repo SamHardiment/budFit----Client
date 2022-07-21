@@ -9,7 +9,38 @@
 }
 
 .event-details {
+  width: 90%;
   margin-top: 40px;
   padding: 0 20px;
   height: 500px;
+}
+
+.inv-event-detail {
+  row-gap: 1px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.sub-event-details {
+  margin: 10px auto;
+  padding: 0 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.sub-event-desc {
+  margin-bottom: 10px;
+}
+
+.sub-event-spaces {
+  row-gap: 2px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.sub-event-spaces > ul {
+  list-style-type: none;
 }
