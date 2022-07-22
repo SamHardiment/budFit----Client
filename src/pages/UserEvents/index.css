@@ -166,6 +166,32 @@ h4 {
 .account-detail-events > span {
   padding: 5px;
 }
+
+.inv-event-detail > h5 {
+  color: var(--buttonpurple);
+  text-decoration: underline;
+}
+.inv-event-detail > h6 {
+  margin-left: 3px;
+  font-size: 18px;
+}
+.inv-event-detail > p {
+  margin-left: 3px;
+  font-size: 14px;
+}
+
+.sub-event-spaces > h6 {
+  color: var(--purple);
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+.sub-event-desc > h6 {
+  color: var(--purple);
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-decoration: underline;
+}
 /* @media only screen and (min-width: 401px) {
     #chatsPageContainer {
       left:calc(50vw - 180px);

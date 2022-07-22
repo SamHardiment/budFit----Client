@@ -36,6 +36,7 @@
 }
 
 .sub-event-spaces {
+  padding: 0 5px;
   row-gap: 2px;
   display: flex;
   justify-content: flex-start;
@@ -44,4 +45,10 @@
 
 .sub-event-spaces > ul {
   list-style-type: none;
+}
+
+.event-detail-account {
+  flex: 0.8;
+  text-align: right;
+  margin-right: 12px;
 }

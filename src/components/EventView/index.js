@@ -29,28 +29,39 @@ function EventView(props) {
       <Typography variant="body1" color="textSecondary">
         {x}
       </Typography>
+      <Typography variant="body1" color="textSecondary">
+        Location: {location}
+      </Typography>
       <div className="sub-event-details">
         <div className="sub-event-desc">
+          <Typography variant="h6">Event description</Typography>
+
           <Typography variant="body1">{description}</Typography>
         </div>
-        <Typography variant="body1">
-          This event is taking place in: {location}
-        </Typography>
       </div>
 
       <div className="sub-event-spaces">
+        <Typography variant="h6">Attending</Typography>
         <Typography variant="body1">
           Spaces filled: {attendees.length}/{spaces}
         </Typography>
-        <Typography variant="body1">Users attending:</Typography>
+
         <ul>
           {attendees.map((user) => (
-            <li
-              key={user.username}
-              onClick={() => handleUsernameClickInEventView(user.user_id)}
-            >
-              <Typography variant="body1">{user.username}</Typography>
-            </li>
+            <div className="account-details">
+              <div className="detail-container">
+                <div className="detail-box">
+                  <Typography variant="subTitle2">Name:</Typography>
+                  <div
+                    className="event-detail-account"
+                    key={user.username}
+                    onClick={() => handleUsernameClickInEventView(user.user_id)}
+                  >
+                    <Typography variant="body1">{user.username}</Typography>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </ul>
       </div>
